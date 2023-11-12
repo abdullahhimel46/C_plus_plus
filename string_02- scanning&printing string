@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+#include <string>
+int main()
+{
+    int n;
+    cout << "n : ";
+    cin >> n;
+    cout << "n = " << n << endl;
+    getchar();
+
+    char s[100];
+    cout << "enter string: ";
+    cin.getline(s, 100);
+    cout << "entred strig: " << s << endl;
+}
