@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+#include <algorithm>
+int main()
+{
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    int mn = min({a, b, c, d});
+    int mx = max({a, b, c, d});
+    cout << "minimum: " << mn << "\n"
+         << "maximum: " << mx << endl;
+}
