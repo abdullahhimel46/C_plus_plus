@@ -1,0 +1,9 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    char s[100];
+    cout << "enter string: ";
+    cin >> s;
+    cout << "entred strig: " << s << endl;
+}
