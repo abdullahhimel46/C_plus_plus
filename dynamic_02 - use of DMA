@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*Function that dynamically allocates memory for an integer, 
+initializes it to 10, and returns a pointer to it*/
+int *fun()
+{
+    int *a = new int; // Dynamic memory allocation for an integer
+    *a = 10;          // Initializing the allocated integer with the value 10
+    return a;         // Returning the pointer to the allocated integer
+}
+
+int main()
+{
+    int *p = fun(); // Calling the function and storing the returned pointer in 'p'
+
+    cout << *p << endl; // Dereferencing the pointer and printing the value
+
+    return 0;
+}
