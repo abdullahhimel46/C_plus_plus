@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int *p = new int;
+    float *q = new float;
+    *p = 10;
+    *q = 5.555;
+
+    cout << *p << endl;
+    cout << *q << endl;
+}
