@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std; // Use the standard namespace
+
+int *fun(int n)
+{
+    // Dynamically allocate an array of n integers
+    int *a = new int[n];
+
+    // Read n integers from the user and store them in the dynamically allocated array
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    // Return the pointer to the dynamically allocated array
+    return a;
+}
+
+int main()
+{
+    int n;
+    cin >> n; // Read the size of the array from the user
+
+    // Call the 'fun' function to create a dynamic array and get a pointer to it
+    int *a = fun(n);
+
+    // Print the elements of the array
+    for (int i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
+}
