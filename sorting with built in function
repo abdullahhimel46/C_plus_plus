@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin >> n;
+    int a[n];
+
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+
+    // ascending sort
+    // sort(a, a + n);
+    // a = a[0], here;
+
+    // descending sort
+    sort(a, a + n, greater<int>());
+    // a = a[0], here;
+
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+    return 0;
+}
