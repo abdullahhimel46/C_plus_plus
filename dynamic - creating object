@@ -1,3 +1,15 @@
+/*
+Create a C++ code of a Student class with attributes like id, mark, and cgpa, along with a constructor to initialize these attributes.
+It also includes a function named fun() that dynamically allocates memory to create a Student object and returns a pointer to it.Finally, 
+the main() function calls fun() to retrieve the pointer to the Student object and then prints out the student's ID, marks, and CGPA.
+
+Details:
+Class Student: Define a class to represent student information with id, mark, and cgpa attributes.
+Constructor: Create a parameterized constructor named Stedent.
+fun() Function: create a dynamica Student object and return a pointer to it.
+main() Function: Call fun() to obtain the pointer to the Student object and print out the student's details (ID, marks, CGPA).
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
