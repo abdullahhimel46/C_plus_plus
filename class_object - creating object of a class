@@ -1,0 +1,39 @@
+#include <bits/stdc++.h> // Include necessary standard C++ libraries
+
+using namespace std;
+
+class Student // Define a class named Student
+{
+public:
+    char name[100]; // Member variable to store the name of the student
+    int id;         // Member variable to store the ID of the student
+    double cgpa;    // Member variable to store the CGPA of the student
+};
+
+int main()
+{
+    Student a; // Declare an object 'a' of type Student
+
+    a.id = 1622;   // Assign ID 1622 to 'id' member variable of object 'a'
+    a.cgpa = 3.93; // Assign CGPA 3.93 to 'cgpa' member variable of object 'a'
+
+    char tmp[] = "abdullah"; // Declare a character array 'tmp' to store name "abdullah"
+    strcpy(a.name, tmp);     // Copy content of 'tmp' into 'name' member variable of object 'a'
+
+    cout << a.name << " " << a.id << " " << a.cgpa << endl;
+
+    Student b;
+
+    cout << "Name: ";
+    cin >> b.name;
+
+    cout << "ID: ";
+    cin >> b.id;
+
+    cout << "cgpa: ";
+    cin >> b.cgpa;
+
+    cout << b.name << " " << b.id << " " << b.cgpa << endl;
+
+    return 0;
+}
