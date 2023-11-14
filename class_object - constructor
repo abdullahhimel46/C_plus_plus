@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    int id;
+    double mark;
+    double cgpa;
+
+    // creating constructor
+    Student(int id, double mark, double cgpa)
+    {
+        this->id = id;
+        this->mark = mark;
+        this->cgpa = cgpa;
+    }
+};
+
+int main()
+{
+    Student Abdullah(1622, 95.5, 4.01);
+    cout << Abdullah.id << " " << Abdullah.mark << " " << Abdullah.cgpa << endl;
+
+    return 0;
+}
