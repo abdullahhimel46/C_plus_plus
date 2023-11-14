@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    int id;
+    double mark;
+    double cgpa;
+
+    // creating constructor
+    Student(int id, double mark, double cgpa)
+    {
+        this->id = id;
+        this->mark = mark;
+        this->cgpa = cgpa;
+    }
+};
+
+// Function definition to create a Student object and return a pointer to it
+Student *fun()
+{
+    // Creating a new Student object dynamically
+    Student *Abdullah = new Student(1622, 95.5, 4.01);
+    return Abdullah;
+    // Returning a pointer to the created Student object
+}
+
+int main()
+{
+    Student *ans = fun(); // Calling 'fun' function and storing returned pointer in 'ans'
+
+    // Outputting the ID, mark, and CGPA of the Student object pointed to by 'ans'
+    cout << ans->id << " " << ans->mark << " " << ans->cgpa << endl;
+
+    return 0;
+}
