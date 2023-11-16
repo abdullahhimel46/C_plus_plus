@@ -1,0 +1,11 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a = 10; // Normal variable
+    int *p;     // address variable or, pointer
+    p = &a;     // referencing, holding address of a
+    *p = 50;    // dereferencing(hacking)
+    cout << a;
+    return 0;
+}
