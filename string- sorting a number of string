@@ -3,7 +3,11 @@ using namespace std;
 int main()
 {
     string num = "345612";
+    // ascending sort
     sort(num.begin(), num.end());
+    cout << num << endl;
+    // descending sort
+    sort(num.begin(), num.end(), greater<int>());
     cout << num << endl;
 
     return 0;
