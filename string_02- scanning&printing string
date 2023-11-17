@@ -6,11 +6,21 @@ int main()
     int n;
     cout << "n : ";
     cin >> n;
-    cout << "n = " << n << endl;
     getchar();
 
     char s[100];
     cout << "enter string: ";
     cin.getline(s, 100);
+    
+    cout << "n = " << n << endl;
     cout << "entred strig: " << s << endl;
-}
+
+    /* or,
+    string s;
+    getline(cin, s);
+    cout << s;
+    */
+    
+}   
+
+
