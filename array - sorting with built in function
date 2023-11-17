@@ -10,8 +10,12 @@ int main()
         cin >> a[i];
 
     // ascending sort
-    // sort(a, a + n);
+    sort(a, a + n);
     // a = a[0], here;
+
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+    cout << endl;
 
     // descending sort
     sort(a, a + n, greater<int>());
@@ -19,5 +23,6 @@ int main()
 
     for (int i = 0; i < n; i++)
         cout << a[i] << " ";
+
     return 0;
 }
