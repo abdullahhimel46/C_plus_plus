@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to sort the array in descending order and return the sorted array's pointer
+int *sort_it(int n)
+/*: int* indicates that, sort_it returns a pointer to an integer
+(পূর্ণসংখ্যাতে একটি পয়েন্টার return করে).*/
+{
+    int *a;         // a is declared as a pointer to an integer
+    a = new int[n]; // Dynamically allocate memory for an array of size n
+
+    // Input elements into the array
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    // Sort the array in descending order using the sort() function
+    sort(a, a + n, greater<int>());
+
+    // Return the pointer to the sorted array
+    return a;
+}
+
+int main()
+{
+    int n;
+    cin >> n; // Read the size of the array
+
+    int *ans;         // Pointer variable to store the returned sorted array's address
+    ans = sort_it(n); // Call the sort_it function to get the sorted array's pointer
+
+    // Print the sorted array elements
+    for (int i = 0; i < n; i++)
+    {
+        cout << ans[i] << " ";
+    }
+
+    // Deallocate the memory used for the dynamically allocated array
+    free(ans);
+
+    return 0;
+}
