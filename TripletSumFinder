@@ -1,0 +1,44 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+
+    while (t--) // Loop through each test case
+    {
+        int flag = 0;
+        int n, s;
+        cin >> n >> s; // Input the size of the array and the target sum
+        int a[n];
+        for (int i = 0; i < n; i++)
+            cin >> a[i];
+
+        for (int i = 0; i < n - 2; i++) // Loop through the array to find triplets
+        {
+            for (int j = i + 1; j < n - 1; j++)
+            // Nested loop for the second element of the triplet
+            {
+                for (int k = j + 1; k < n; k++)
+                // Nested loop for the third element of the triplet
+                {
+                    if (a[i] + a[j] + a[k] == s)
+                    // Check if the sum of the triplet equals the target sum
+                    {
+                        flag = 1; // If found, set the flag to 1
+                    }
+                }
+            }
+        }
+
+        if (flag == 1)             
+        // Check the flag to determine if a triplet with the target sum was found
+            cout << "YES" << endl; // Output "YES" if a triplet is found
+        else
+            cout << "NO" << endl; // Output "NO" if no such triplet is found
+    }
+
+    return 0; // Return 0 to indicate successful completion of the program
+}
