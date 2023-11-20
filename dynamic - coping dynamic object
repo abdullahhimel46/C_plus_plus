@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+public:
+    string name;
+    int age;
+    Person(string name, int age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    void print()
+    {
+        cout << name << " " << age << endl;
+    }
+};
+
+int main()
+{
+    // creating dynamic objects
+    Person *p1 = new Person("Abdullah", 21);
+    Person *p2 = new Person("Moinul", 20);
+
+    // coping dynamic objects
+    *p2 = *p1;
+    free(p2);
+    p1->print();
+    p2->print();
+
+    return 0;
+}
