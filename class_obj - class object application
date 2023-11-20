@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+public:
+    string name;
+    int age;
+    int mark1, mark2;
+    Person(string name, int age, int mark1, int mark2)
+    {
+        this->name = name;
+        this->age = age;
+        this->mark1 = mark1;
+        this->mark2 = mark2;
+    }
+    void fun()
+    {
+        cout << "I'm in the person class" << endl;
+    }
+    int marks()
+    {
+        return mark1 + mark2;
+    }
+};
+
+int main()
+{
+    Person p("Abdullah Himel", 21, 50, 50);
+    p.fun();
+    cout << p.marks() << endl;
+    return 0;
+}
