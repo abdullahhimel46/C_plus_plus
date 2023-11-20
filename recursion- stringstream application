@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Recursive function to print words in reverse order
+void print(stringstream &ss)
+{
+    // No  base case needed, because of "if (ss >> word)" condition
+
+    string word;
+    // Extracts a word from the stringstream only if possible's
+    if (ss >> word) // Checks if a word can be extracted
+    {
+        print(ss);            // Recursively calls the function until all words are extracted
+        cout << word << endl; // Prints the word after returning from recursion
+    }
+}
+
+int main()
+{
+    string s;
+    // Takes input as a line of text
+    getline(cin, s);
+
+    // Creates a stringstream object using the input string
+    stringstream ss(s);
+
+    // Calls the print function to print words in reverse order
+    print(ss);
+
+    return 0;
+}
