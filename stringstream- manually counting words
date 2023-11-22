@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s = "Shsssssssssh ... I am hunting wabbits. Heh Heh Heh Heh ...";
+
+    int inside_currnt_word = 1; // we're checking the current word
+    int wordCnt = 0;
+    for (char c : s)
+    {
+        if (isalpha(c)) // if isalpha()==true
+        {
+            if (inside_currnt_word == 1)
+            {
+                wordCnt++;              // got a word
+                inside_currnt_word = 0; // moving to next word
+            }
+        }
+        else // if isalpha()==false
+        {
+            inside_currnt_word = 1; // we're checking the current word
+        }
+    }
+
+    cout << wordCnt;
+    return 0;
+}
