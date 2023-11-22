@@ -1,0 +1,52 @@
+/* link:https://www.hackerrank.com/contests/mid-term-a-introduction-to-c-for-dsa-a-batch-04/challenges/who-is-it-4 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    int id;
+    string name;
+    char sec;
+    int mark;
+};
+
+int main()
+{
+    int t;
+    cin >> t; // Input the number of test cases
+    while (t--)
+    {
+        Student s[3]; // Create an array of 3 Student objects
+        for (int i = 0; i < 3; i++)
+        {
+            cin >> s[i].id >> s[i].name >> s[i].sec >> s[i].mark; // Input student details
+        }
+
+        int highest_mark = -1; // Initialize the highest_mark variable to -1
+        int mx_index = 0;      // Initialize the index of the student with the highest mark
+        int cnt = 0;           // Initialize the count of students with the highest mark
+        for (int i = 0; i < 3; i++)
+        {
+            if (s[i].mark > highest_mark) // If the current student's mark is greater than the highest mark
+            {
+                highest_mark = s[i].mark; // Update the highest_mark
+                mx_index = i;             // Update the index of the student with the highest mark
+                cnt = 1;                  // Reset the count to 1
+            }
+            else if (s[i].mark == highest_mark) // If the current student's mark is equal to the highest mark
+            {
+                if (s[i].id < s[mx_index].id) // Compare the IDs of the students
+                {
+                    mx_index = i; // Update the index of the student with the highest mark
+                }
+                cnt++; // Increment the count of students with the highest mark
+            }
+        }
+        // Output the student with the highest mark
+        cout << s[mx_index].id << " " << s[mx_index].name << " " << s[mx_index].sec << " " << s[mx_index].mark << endl;
+    }
+
+    return 0;
+}
