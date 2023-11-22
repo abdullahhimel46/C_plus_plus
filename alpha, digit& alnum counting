@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s = "Code-404";
+    int alpha = 0, num = 0, alphanum = 0;
+    // for (char c : s)
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        char c = s[i];
+        if (isalpha(c))
+        {
+            alpha++;
+        }
+        // checking digits
+        else if (isdigit(c))
+        {
+            num++;
+        }
+        // checking alphabets or digits
+        if (isalpha(c) || isdigit(c))
+        //alphanumaric=alphabet+number
+        {
+            alphanum++;
+        }
+    }
+    cout << alpha << " " << num << " " << alphanum << endl;
+    return 0;
+}
