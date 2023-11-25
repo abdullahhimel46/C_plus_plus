@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int id;
+    float mark;
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    ////normal object creation
+    // int a[n];
+    // Student s[n];
+
+    ////dynamic object creation using 'new'
+    // int *a = new int[n]; // Dynamically allocates memory for an array of integers
+    Student *s = new Student[n]; // Dynamically allocates memory for an array of Student objects
+
+    for (int i = 0; i < n; i++)
+    {
+        getchar(); // Clears the newline character from the input buffer
+        getline(cin, s[i].name);
+        cin >> s[i].id >> s[i].mark;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << s[i].name << " " << s[i].id << " " << s[i].mark << endl;
+        // Displays student details
+    }
+    free(s);
+
+    return 0;
+}
