@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int id;
+    float mark;
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+    Student *s = new Student[n]; // Creating an array of 'n' Student objects
+
+    // Input student details for 'n' students
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s[i].name >> s[i].id >> s[i].mark;
+        // Reading name, id, and mark for each student
+    }
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            //// Sorting students based on marks in descending order
+            if (s[i].mark < s[j].mark) // Sort based on marks
+            {
+                swap(s[i], s[j]); // Swap students if mark of 'i' is less than mark of 'j'
+            }
+
+            //// If marks are equal, sort based on the ID in ascending order
+            if (s[i].mark == s[j].mark) // If marks are equal, sort based on student IDs
+            {
+                if (s[i].id > s[j].id) // Sort IDs in ascending order
+                {
+                    swap(s[i], s[j]); // Swap students if ID of 'i' is greater than ID of 'j'
+                }
+            }
+        }
+    }
+
+    // Display sorted student details
+    for (int i = 0; i < n; i++)
+    {
+        cout << s[i].name << " " << s[i].id << " " << s[i].mark << endl;
+    }
+
+    free(s); // deallocate memory
+
+    return 0;
+}
