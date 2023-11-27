@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int id;
+    float mark;
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+    Student s[n]; // Creating an array of Student objects of size n
+    for (int i = 0; i < n; i++)
+        // Inputting name, id, and mark for each student
+        cin >> s[i].name >> s[i].id >> s[i].mark;
+
+    Student mn, mx;    // Creating two Student objects for storing the minimum and maximum marks
+    mn.mark = INT_MAX; // Initializing mn's mark with the maximum possible integer value
+    mx.mark = INT_MIN; // Initializing mx's mark with the minimum possible integer value
+
+    cout << "Min mark: " << endl;
+    // Finding the student with the minimum mark
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i].mark < mn.mark)
+        // Comparing the mark of the current student with the current minimum mark
+        {
+            mn = s[i];
+            // Updating the object mn with the details of the student having a lower mark
+        }
+    }
+    cout << mn.name << " " << mn.id << " " << mn.mark << endl;
+    // Printing details of the student with the minimum mark
+
+    cout << "Max mark: " << endl;
+    // Finding the student with the maximum mark
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i].mark > mx.mark)
+        // Comparing the mark of the current student with the current maximum mark
+        {
+            mx = s[i];
+            // Updating the object mx with the details of the student having a higher mark
+        }
+    }
+    cout << mx.name << " " << mx.id << " " << mx.mark << endl;
+    // Printing details of the student with the maximum mark
+    return 0;
+}
+/*
+Test case:
+Input:
+4
+Abir 26 90.5
+Babor 27 95.3
+Jodu 28 99.5
+Karim 1 100
+
+Output:
+Min mark: 
+Abir 26 90.5
+Max mark: 
+Karim 1 100
+*/
