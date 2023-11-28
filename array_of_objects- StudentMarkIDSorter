@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Defining a class called Student to hold student details
+class Student
+{
+public:
+    string name;
+    int id;
+    float mark;
+};
+
+// Custom comparison function to sort Students based on marks and IDs
+bool cmp(Student a, Student b)
+{
+    if (a.mark > b.mark)
+    {
+        return true; // Sort by marks in descending order
+    }
+    else if (a.mark == b.mark)
+    {
+        /*
+        if(a.id < b.id)
+            return true;//sort by ID in ascending order
+        */
+        return (a.id < b.id); // If marks are equal, sort by ID in ascending order
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n; // Reading the number of students
+
+    Student *s = new Student[n];
+    // Creating an array of 'n' Student objects using dynamic memory allocation
+
+    // Input student details for 'n' students
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s[i].name >> s[i].id >> s[i].mark;
+        // Reading name, id, and mark for each student
+    }
+
+    // Sorting the array of students based on custom comparison function 'cmp'
+    sort(s, s + n, cmp);
+    // sort(s, s+n, greater<int>());
+    // sort(begin,end,base);
+
+    // Displaying the details of students after sorting
+    for (int i = 0; i < n; i++)
+    {
+        cout << s[i].name << " " << s[i].id << " " << s[i].mark << endl;
+    }
+
+    delete[] s; // Deallocating memory for the dynamically allocated array
+
+    return 0;
+}
