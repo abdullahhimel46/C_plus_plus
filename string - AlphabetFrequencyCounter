@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> // Includes all standard libraries, not a recommended practice for larger projects
+#include <bits/stdc++.h> 
 
 using namespace std;
 
@@ -19,11 +19,11 @@ int main()
     }
 
     // Loop through lowercase alphabets from 'a' to 'z'
-    for (int i = 'a'; i <= 'z'; i++)
+    for (char i = 'a'; i <= 'z'; i++)
     {
         if (freq[i - 'a'] > 0)
             // Check if the frequency count for the current alphabet is positive
-            cout << char(i) << "-" << freq[i - 'a'] << endl; // Print the alphabet and its frequency
+            cout << i << "-" << freq[i - 'a'] << endl; // Print the alphabet and its frequency
     }
 
     return 0;
