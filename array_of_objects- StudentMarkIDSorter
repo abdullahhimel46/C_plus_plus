@@ -13,16 +13,13 @@ public:
 // Custom comparison function to sort Students based on marks and IDs
 bool cmp(Student a, Student b)
 {
-    if (a.mark > b.mark)
+    if (a.mark != b.mark)
     {
-        return true; // Sort by marks in descending order
+        return a.mark > b.mark; // Sort by marks in descending order
     }
+
     else if (a.mark == b.mark)
     {
-        /*
-        if(a.id < b.id)
-            return true;//sort by ID in ascending order
-        */
         return (a.id < b.id); // If marks are equal, sort by ID in ascending order
     }
 }
