@@ -57,3 +57,22 @@ int main()
 
     return 0;
 }
+
+/*
+input:
+6
+Kobir 27 90.5
+Abir 26 90.5
+Babor 10 95.3
+Jodu 28 99.5
+Rahim 2 100
+Karim 1 100
+
+Output:
+Karim 1 100
+Rahim 2 100
+Jodu 28 99.5
+Babor 10 95.3
+Abir 26 90.5
+Kobir 27 90.5
+*/
