@@ -1,4 +1,4 @@
-// Counting Indexes before a Substring and printing it's presence
+// use of 'string::npos' keyword in find()
 #include <bits/stdc++.h>
 using namespace std;
 int main()
