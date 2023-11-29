@@ -1,0 +1,19 @@
+// Counting Indexes before a Substring and printing it's presence
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string str = "Hello, Himel!";
+    string subStr = "Himel";
+
+    auto foundPos = str.find(subStr);
+    cout << "Number of indexes before the substring: " << foundPos << endl;
+    /*'string::npos' is a special constant which is commonly used to denote the absence
+    of a valid position or index within a string.*/
+
+    if (foundPos == string::npos)
+        cout << "Substring not found!" << endl;
+    else if (foundPos != string::npos)
+        cout << "Substring found!" << endl;
+    return 0;
+}
