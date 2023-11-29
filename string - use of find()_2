@@ -1,0 +1,28 @@
+// Finding and Printing Substring Indices
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s = "This is Himel. Himel loves programming. Himel is smart";
+    string subS = "Himel";
+
+    auto idx = 0;
+
+    while ((idx = s.find(subS, idx)) != string::npos)
+    {
+        cout << "Found substring at index " << idx << endl;
+        idx += subS.length();
+    }
+
+    return 0;
+}
+
+/*
+//auto find(sub_str, starting_point_of_the_search(optional parameter));
+
+string sentence = "The quick brown fox jumps over the lazy dog.";
+
+auto firstOccurrence = sentence.find("fox"); // Searches from the beginning
+auto secondOccurrence = sentence.find("fox", firstOccurrence + 1); // Searches after the first occurrence
+
+*/
