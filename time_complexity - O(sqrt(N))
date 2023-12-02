@@ -1,0 +1,15 @@
+// Factorization up to Square Root
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin >> n;
+
+    for (int i = 1; i <= sqrt(n); i++) // O(sqrt(N))
+                // i*i <= n
+    {
+        cout << i << " X " << n / i << " = " << n << endl;
+    }
+    return 0;
+}
