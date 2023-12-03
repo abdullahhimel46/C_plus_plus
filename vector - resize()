@@ -1,0 +1,32 @@
+// Adding elements to a vector and demonstrating resizing
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    vector<int> v = {1, 2, 3, 4, 5}; // Creating a vector v of 5 integers
+
+    // Resizing vector v to contain only 3 elements, discarding elements from the 4th position onwards
+    v.resize(3);
+
+    cout << "size: " << v.size() << endl; // Printing the size of vector v after resizing
+
+    cout << "elements after resizing: " << endl;
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " "; // Printing each element of vector v after resizing
+    }
+    cout << endl;
+
+    // Resizing vector v to contain 5 elements, filling extra positions with the value 10
+    v.resize(5, 10);
+
+    cout << "elements after resizing: " << endl;
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " "; // Printing each element of vector v after the second resizing
+    }
+
+    return 0;
+}
