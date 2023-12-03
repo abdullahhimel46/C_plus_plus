@@ -1,0 +1,29 @@
+//Vector Initialization and Printing
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    // Creating a vector v2 of size 6 with each element initialized to 100
+    vector<int> v2(6, 100);
+
+    // Creating a vector v and initializing it with the elements of v2
+    vector<int> v(v2); // copying elements of v2 in v
+
+    // Creating a vector v3 and initializing it with elements {1, 2, 3}
+    vector<int> v3 = {1, 2, 3};
+
+    // Printing elements of vector v3 using a for loop
+    for (int i = 0; i < v3.size(); i++)
+    {
+        cout << v3[i] << " ";
+    }
+    cout << endl;
+
+    // Printing the size of vector v3
+    cout << v3.size() << endl;
+
+    return 0;
+}
