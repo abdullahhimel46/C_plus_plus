@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // Initializing a vector 'v' with elements
+    vector<int> v = {1, 2, 3, 4, 5, 6};
+
+    // Displaying original elements of vector 'v'
+    cout << "Original elements: " << endl;
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    // Inserting an element '9' at position 1 in vector 'v'
+    cout << "After inserting an element at a certain position: " << endl;
+    v.insert(v.begin() + 1, 9);
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    // Initializing another vector 'v2' with elements
+    vector<int> v2 = {201, 202, 203};
+
+    // Inserting elements from 'v2' at position 1 in vector 'v'
+    cout << "After inserting multiple elements: " << endl;
+    v.insert(v.begin() + 1, v2.begin(), v2.end());
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+    return 0;
+}
