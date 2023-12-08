@@ -1,0 +1,20 @@
+// VectorElementReplacement
+#include <bits/stdc++.h> 
+using namespace std; 
+
+int main()
+{
+    // Initializing a vector 'v' with integer values.
+    vector<int> v = {1, 2, 2, 3, 2, 4, 5, 6, 2}; 
+
+    // Replace all occurrences of the value '2' in the vector 'v' with '200'.
+    replace(v.begin(), v.end(), 2, 200);
+
+    // Output the elements of the modified vector 'v' separated by spaces.
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+
+    return 0; 
+}
