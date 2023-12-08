@@ -1,0 +1,27 @@
+// Taking input and Display Vector Elements
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n; // Taking input for the number of elements in the vector
+
+    vector<int> v(n); // Creating a vector 'v' of integers with size 'n'
+
+    // Loop to input 'n' integers into the vector
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+        // Reading integers from the standard input and storing them in the vector 'v'
+    }
+
+    // Loop to output the elements of the vector 'v'
+    for (int val : v)
+    {
+        cout << val << " ";
+        // Printing each element of the vector followed by a space
+    }
+
+    return 0;
+}
