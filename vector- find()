@@ -1,0 +1,26 @@
+// VectorElementSearch
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<int> v = {0, 1, 2, 3, 4, 5, 6, 7};
+
+    auto it = find(v.begin(), v.end(), 3);
+    /* 'auto' deduces the type of 'it' as an iterator pointing to the position
+    of the element '3' in the vector (if found)*/
+
+    if (it == v.end())
+    {
+        // Checks if 'it' points to the end of the vector (i.e., '3' was not found)
+        cout << "Not found!" << endl;
+        // Displays a message indicating '3' was not found in the vector
+    }
+    else
+    {
+        cout << "found" << endl;
+        // Displays a message indicating '3' was found in the vector
+    }
+
+    return 0;
+}
