@@ -19,12 +19,12 @@ using namespace std;
 
 int main()
 {
-    int n, q;
+    long long n, q;
 
     // Input the number of elements (n) and number of queries (q)
     cin >> n >> q;
 
-    int a[n];
+    long long a[n];
 
     // Input the elements of the array 'a'
     for (int i = 0; i < n; i++)
@@ -33,7 +33,7 @@ int main()
     }
 
     // 'pre' array stores the prefix sum of array 'a'
-    int pre[n];
+    long long pre[n];
     pre[0] = a[0]; //first index of pre_arr = first index of main array
 
     // Calculate prefix sum of array 'a'
@@ -45,7 +45,7 @@ int main()
     // For each query, calculate the sum of elements in a range [l, r]
     while (q--)
     {
-        int l, r;
+        long long l, r;
 
         // Input the range [l, r]
         cin >> l >> r;
@@ -53,7 +53,7 @@ int main()
         // Adjust the indices l and r to fit zero-based indexing
         l--; // Decrementing l by 1 to adjust for zero-based indexing
         r--; // Decrementing r by 1 to adjust for zero-based indexing
-        int sum;
+        long long sum;
 
         // If the starting index of the range is 0, the sum is the prefix sum at index 'r'
         if (l == 0)
