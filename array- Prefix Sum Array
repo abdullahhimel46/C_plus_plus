@@ -1,0 +1,70 @@
+// PrefixSumRangeQuerySolver
+
+/*
+    indices-> 0 1 2  3  4       | if,l=2 & r=4
+    arr[5] = {5,4,2 ,3 ,4 };    |   a[2]+a[3]+a[4] = 9;
+               / /  /  /        | sum = pre[r] - pre[l-1]
+    pre[5] = {5,9,11,14,18};    |     = pre[4] - pre[2-1]
+                |        |      |     =    18  - 9 = 9
+               5+4     14+4     |
+        18 =    4  + 14         |indices-> 0 1 2  3  4
+    pre[4] = arr[4]+pre[4-1];   |arr[5] = {5,4,2 ,3 ,4 }
+    pre[i] = arr[i]+pre[i-1];   |         |``````````|->18
+     //pre[0] = a[0];           |         |``|~~sum~~
+                                |         <9>
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n, q;
+
+    // Input the number of elements (n) and number of queries (q)
+    cin >> n >> q;
+
+    int a[n];
+
+    // Input the elements of the array 'a'
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    // 'pre' array stores the prefix sum of array 'a'
+    int pre[n];
+    pre[0] = a[0]; //first index of pre_arr = first index of main array
+
+    // Calculate prefix sum of array 'a'
+    for (int i = 1; i < n; i++)
+    {
+        pre[i] = a[i] + pre[i - 1];
+    }
+
+    // For each query, calculate the sum of elements in a range [l, r]
+    while (q--)
+    {
+        int l, r;
+
+        // Input the range [l, r]
+        cin >> l >> r;
+
+        // Adjust the indices l and r to fit zero-based indexing
+        l--; // Decrementing l by 1 to adjust for zero-based indexing
+        r--; // Decrementing r by 1 to adjust for zero-based indexing
+        int sum;
+
+        // If the starting index of the range is 0, the sum is the prefix sum at index 'r'
+        if (l == 0)
+            sum = pre[r] - 0; //as, l=0
+        else
+            // Otherwise, the sum is the difference between prefix sums at indices 'r' and 'l - 1'
+            sum = pre[r] - pre[l - 1];
+
+        // Output the sum for the current query
+        cout << sum << endl;
+    }
+
+    return 0;
+}
