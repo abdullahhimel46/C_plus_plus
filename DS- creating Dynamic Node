@@ -19,18 +19,27 @@ public:
 
 int main()
 {
-    // Creating two Node objects dynamically using 'new' keyword and passing data to the constructor
-    Node *head = new Node(10); // Creating a node with data 10 and assigning its address to 'head'
-    Node *a = new Node(20);    // Creating a node with data 20 and assigning its address to 'a'
+    // Creating Node objects dynamically using 'new' keyword and passing data to the constructor
+    Node *head = new Node(10);
+    // Creating a node with data 10 and assigning its address to 'head'
+    Node *a = new Node(20);
+    // Creating a node with data 20 and assigning its address to 'a'
+    Node *b = new Node(30);
+    // Creating a node with data 30 and assigning its address to 'b'
 
-    head->next = a;
     // Linking 'head' node to 'a' node by setting 'head's next pointer to 'a'
+    head->next = a;
+    // Linking 'a' node to 'b' node by setting 'a's next pointer to 'b'
+    a->next = b;
+
+    Node *tmp = head; // storing head's address to tmp
 
     // Printing data of nodes
-    cout << "Data in head node: " << head->data << endl;
-    cout << "Data in 'a' node: " << a->data << endl;
-    cout << "Data in next node of 'head'(a): " << head->next->data << endl;
-                                               // head->next = a, actually
+    while (tmp != NULL)
+    {
+        cout << tmp->data << endl;
+        tmp = tmp->next;
+    }
 
     return 0;
 }
