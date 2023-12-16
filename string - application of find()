@@ -38,3 +38,16 @@ int main()
 
     return 0;
 }
+
+/*
+
+Sample input: 
+2
+rahimisagoodguy good
+canyoutellmewhereicanfindheriwillbegreatefultoyouifyoutellmetheanswer you
+
+Sample output:
+rahimisa#guy
+can#tellmewhereicanfindheriwillbegreatefulto#if#tellmetheanswer
+
+*/
