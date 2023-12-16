@@ -1,0 +1,38 @@
+// Linked List Node Creation and Data Display
+#include <iostream>
+using namespace std;
+
+// Node class representing elements of a linked list
+class Node
+{
+public:
+    int data;   // Data stored in the node
+    Node *next; // Pointer to the next node in the list
+
+    // Constructor to initialize Node with given data
+    Node(int data)
+    {
+        this->data = data; // Assign provided data to the node
+        this->next = NULL; // Initialize next pointer as NULL (no next node yet)
+    }
+};
+
+int main()
+{
+    // Creating two Node objects dynamically using 'new' keyword and passing data to the constructor
+    Node *head = new Node(10); // Creating a node with data 10 and assigning its address to 'head'
+    Node *a = new Node(20);    // Creating a node with data 20 and assigning its address to 'a'
+
+    head->next = a; // Linking 'head' node to 'a' node by setting 'head's next pointer to 'a'
+
+    // Printing data of nodes using 'cout'
+    cout << "Data in head node: " << head->data << endl;                 // Print data of 'head' node
+    cout << "Data in 'a' node: " << a->data << endl;                     // Print data of 'a' node
+    cout << "Data in next node of 'head': " << head->next->data << endl; // Print data of node pointed by 'head's next
+
+    // Attempting to access data through 'a's next pointer, which will cause an issue because 'a'->next is NULL
+    // This line will cause an error because 'a'->next is NULL, and accessing 'data' of a NULL pointer is undefined behavior
+    cout << "Data in next node of 'a': " << a->next->data << endl;
+
+    return 0; // Return 0 to indicate successful execution of the program
+}
