@@ -1,0 +1,40 @@
+// SubstringReplacementInSentence
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int T;    // Variable to store the number of test cases
+    cin >> T; // Taking input for the number of test cases
+
+    getchar(); // Consuming the newline character after taking input
+
+    while (T--) // Loop through each test case
+    {
+        string str;
+        // Taking input of a string separated by spaces
+        getline(cin, str, ' ');
+
+        string subS;
+        // Taking input of a substring
+        getline(cin, subS);
+
+        int pos = str.find(subS);
+        // Find the first occurrence of the substring in the sentence
+
+        // Loop to find and replace all occurrences of the substring in the sentence
+        while (pos != string::npos)
+        {
+            // Replace the found substring with a '#' character in the sentence
+            str.replace(pos, subS.length(), "#");
+
+            // Find the next occurrence of the substring, starting from pos + 1
+            pos = str.find(subS, pos + 1);
+        }
+
+        // Output the modified sentence after replacing all occurrences of the substring
+        cout << str << endl;
+    }
+
+    return 0;
+}
