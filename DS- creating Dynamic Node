@@ -23,16 +23,14 @@ int main()
     Node *head = new Node(10); // Creating a node with data 10 and assigning its address to 'head'
     Node *a = new Node(20);    // Creating a node with data 20 and assigning its address to 'a'
 
-    head->next = a; // Linking 'head' node to 'a' node by setting 'head's next pointer to 'a'
+    head->next = a;
+    // Linking 'head' node to 'a' node by setting 'head's next pointer to 'a'
 
-    // Printing data of nodes using 'cout'
-    cout << "Data in head node: " << head->data << endl;                 // Print data of 'head' node
-    cout << "Data in 'a' node: " << a->data << endl;                     // Print data of 'a' node
-    cout << "Data in next node of 'head': " << head->next->data << endl; // Print data of node pointed by 'head's next
+    // Printing data of nodes
+    cout << "Data in head node: " << head->data << endl;
+    cout << "Data in 'a' node: " << a->data << endl;
+    cout << "Data in next node of 'head'(a): " << head->next->data << endl;
+                                               // head->next = a, actually
 
-    // Attempting to access data through 'a's next pointer, which will cause an issue because 'a'->next is NULL
-    // This line will cause an error because 'a'->next is NULL, and accessing 'data' of a NULL pointer is undefined behavior
-    cout << "Data in next node of 'a': " << a->next->data << endl;
-
-    return 0; // Return 0 to indicate successful execution of the program
+    return 0;
 }
