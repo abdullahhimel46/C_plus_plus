@@ -1,4 +1,4 @@
-// delation of a node from the list
+// deletion of a node from the list
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -53,10 +53,9 @@ void delete_from_position(Node *&head, int pos)
     Node *tmp = head; // Create a temporary pointer to traverse the linked list
     if (pos == 0)
     {
-        // Node *tmp = head;
-        head = head->next;
-        delete tmp; // Delete the node
-        return;
+        head = head->next; // Move the head pointer to the next node
+        delete tmp;        // Delete the node that was the head
+        return;            // Return from the function as deletion is done
     }
 
     // Traverse the list to reach the node just before the position to be deleted
