@@ -1,0 +1,93 @@
+// InsertionAtSpecifiedPosition
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void insert_at_position(Node *&head, int pos, int val)
+{
+    Node *newNode = new Node(val); // Create a new node with the given value
+    // If the list is empty
+    if (head == NULL)
+    {
+        head = newNode;
+        // If the list is empty, make the new node the head
+        return; // terminate the loop
+    }
+
+    Node *tmp = head; // Temporary pointer to traverse the list
+
+    // if tmp isn't NULL
+    // Traverse the list to find the node at the (pos - 1) position or the end of the list
+    for (int i = 0; i < pos - 1 && tmp != NULL; i++)
+    /* tmp != 0 checks if the current node (tmp) is not NULL before
+     continuing the loop */
+    {
+        tmp = tmp->next; // Move to the next node
+    }
+
+    /// if tmp is NULL
+    // Check if position is out of range
+    if (tmp == NULL)
+    {
+        cout << "Position out of range." << endl;
+        return;
+    }
+    // Index:0  1  2  3
+    // List: 10 20 30 40
+    // Let, now data to insert pos[1] =tmp->next= 25
+    // then, tmp->next = 30
+
+    /// Insert the new node at the appropriate position
+    // Initially, newNode->next = NULL;
+    newNode->next = tmp->next; /* Point the new node to the node after tmp. So
+    now, newNode->Next=30. */
+    //  now, tmp->next is NULL
+    tmp->next = newNode; // Point tmp to the newNode
+    // tmp->next = 25
+}
+
+void display_at_position(Node *head)
+{
+    Node *tmp = head;
+    // Traverse the list and print the data of each node
+    while (tmp != NULL)
+    {
+        cout << tmp->data << " ";
+        tmp = tmp->next;
+    }
+}
+
+int main()
+{
+    Node *head = NULL; // Initialize an empty linked list
+    cout << "Enter number of nodes: ";
+    int n;
+    cin >> n;
+
+    int pos;
+    int val;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Enter position: ";
+        cin >> pos;
+        cout << "Enter value: ";
+        cin >> val;
+        insert_at_position(head, pos, val);
+    }
+
+    cout << "Linked list: ";
+    display_at_position(head);
+    return 0;
+}
