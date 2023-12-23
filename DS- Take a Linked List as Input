@@ -1,0 +1,82 @@
+// Take a Linked List as Input
+#include <bits/stdc++.h>
+using namespace std;
+
+// Node class to represent each node in the linked list
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    // Constructor to initialize a node with given data
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Function to insert a new node at the tail of the linked list
+void insertAtTail(Node *&head, int val)
+{
+    // creating a new node
+    Node *newNode = new Node(val);
+
+    ////condition for head(list is empty)
+    // If the list is empty(means head == NULL ), make the new node the head
+    if (head == NULL)
+    {
+        head = newNode; // the newNode is head,now
+        return;         // Return if user inserts a single value
+    }
+
+    ////condition for tail(list isn't empty)
+
+    // Traverse to the end of the list to insert the new node at the tail
+    Node *tmp = head;
+    while (tmp->next != NULL)
+    // Traverse until finding tail(the node having NULL in it's next)
+    {
+        tmp = tmp->next; // Move to the next node
+        // now tmp is on the last node
+    }
+    // Connect the last node to the new node
+    tmp->next = newNode; // changing newNode's address
+}
+
+// Function to display the elements of the linked list
+void display_list(Node *head)
+{
+    Node *tmp = head;
+
+    while (tmp != NULL)
+    // Traverse until reaching the end of the list
+    {
+        cout << tmp->data << " "; // Print the data of the current node
+        tmp = tmp->next;          // Move to the next node
+    }
+}
+
+int main()
+{
+    Node *head = NULL; // Initialize an empty linked list
+
+    // Insert elements at the tail of the linked list
+    while (true)
+    {
+        int val;
+        cout << "enter value: ";
+        cin >> val;
+        if (val == -1)
+            break;
+        insertAtTail(head, val);
+    }
+
+    // Display the elements of the linked list
+
+    cout << "Linked list: ";
+    display_list(head);
+
+    return 0;
+}
