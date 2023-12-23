@@ -50,13 +50,16 @@ void insertAtTail(Node *&head, int val)
 void delete_from_position(Node *&head, int pos)
 {
 
-    Node *tmp = head; // Create a temporary pointer to traverse the linked list
+    //deleting the head
     if (pos == 0)
     {
-        head = head->next; // Move the head pointer to the next node
-        delete tmp;        // Delete the node that was the head
-        return;            // Return from the function as deletion is done
+        Node *delete_node = head; // Create a temporary pointer to the head node to be deleted
+        head = head->next;        // Move the head pointer to the next node in the list
+        delete delete_node;       // Delete the node that was the head
+        return;                   // Return from the function as deletion is done
     }
+
+    Node *tmp = head;
 
     // Traverse the list to reach the node just before the position to be deleted
     for (int i = 0; i < pos - 1; i++)
