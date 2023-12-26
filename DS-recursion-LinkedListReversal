@@ -1,0 +1,74 @@
+// LinkedListReversal
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data; // Assigning data to the node
+        this->next = NULL; // Initializing next pointer to NULL
+    }
+};
+
+// Function to insert a new node at the tail of the linked list
+void insertAtTail(Node *&head, int val)
+{
+    Node *newNode = new Node(val); // Creating a new node with given value
+    if (head == NULL)
+    {
+        head = newNode; // If the list is empty, set the new node as the head
+        return;
+    }
+    Node *tmp = head; // Temporary pointer to traverse the list
+    while (tmp->next != NULL)
+    {
+        tmp = tmp->next; // Traverse to the last node in the list
+    }
+    tmp->next = newNode; // Set the new node as the next node of the last node
+}
+
+// Function to display the elements of the linked list
+void display(Node *head)
+{
+    Node *tmp = head; // Temporary pointer to traverse the list
+    while (tmp != NULL)
+    {
+        cout << tmp->data << "->"; // Displaying node data
+        tmp = tmp->next;           // Move to the next node
+    }
+    cout << "NULL" << endl; // Print NULL indicating end of the list
+}
+
+// Function to reverse the linked list using recursion
+Node *revList(Node *&head)
+//as return type is Node, this function will return a node.
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head; // If the list is empty or has only one node, return head
+    }
+
+    Node *newHead = revList(head->next); // Recursively call to reverse the rest of the list
+    head->next->next = head;             // Reverse the link between nodes
+    head->next = NULL;                   // Set the current node's next to NULL to finalize reversal
+
+    return newHead; // Return the new head of the reversed list
+}
+
+int main()
+{
+    Node *head = NULL;     // Initialize an empty linked list
+    insertAtTail(head, 1); // Insert elements at the tail of the list
+    insertAtTail(head, 2);
+    insertAtTail(head, 3);
+    insertAtTail(head, 4);
+    display(head); // Display the original list: 1->2->3->4->NULL
+
+    head = revList(head); // Reverse the linked list
+    display(head);        // Display the reversed list: 4->3->2->1->NULL
+    return 0;
+}
