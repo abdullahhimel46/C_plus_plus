@@ -1,0 +1,166 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void display(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << tmp->data << "->";
+        tmp = tmp->next; // tmp++
+    }
+    cout << "NULL" << endl;
+}
+
+void insertAtHead(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+    // Initilly, newNode->next=NULL;
+    newNode->next = head; // tmp = a
+    head = newNode;       // a=b
+}
+
+void insertAtTail(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+
+    while (tmp->next != NULL)
+    {
+        tmp = tmp->next;
+    }
+    // now tmp is on the last node
+    tmp->next = newNode;
+    // newNode->next=NULL;
+}
+
+void insertAtAnyPos(Node *&head, int val, int pos)
+{
+    if (pos == 0)
+    {
+        insertAtHead(head, val);
+    }
+
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+    int cur_pos = 0;
+    while (cur_pos != pos - 1)
+    // Traverse the list to reach the node just before the position to be inserted
+    {
+        tmp = tmp->next; // tmp++
+        cur_pos++;
+    }
+    // Index:0  1  2  3
+    // List: 1  2  3  4
+    // Let,data to insert pos[1] =tmp->next= 3
+    // then, cur_pos = 0
+    // newNode->next = NULL
+    newNode->next = tmp->next; // tmp=a
+    tmp->next = newNode;       // a=b
+}
+
+void updateAtPos(Node *head, int val, int k)
+{
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+    int cur_pos = 0;
+    while (cur_pos != k)
+    {
+        tmp = tmp->next;
+        cur_pos++;
+    }
+    // now tmp is pointing the K'th node
+    tmp->data = val;
+}
+
+void deleteAtHead(Node *&head)
+{
+    Node *deleteNode = head;
+    head = head->next;
+    delete deleteNode;
+}
+
+void deleteTail(Node *&head)
+{
+    Node *sndLast = head;
+    while (sndLast->next->next != NULL)
+    {
+        sndLast = sndLast->next;
+    }
+    Node *deleteNode = sndLast->next;
+    sndLast->next = NULL;
+    delete deleteNode;
+}
+
+void deleteAtPos(Node *&head, int pos)
+{
+    Node *tmp = head;
+    int cur_pos = 0;
+    while (cur_pos != pos - 1)
+    {
+        tmp = tmp->next;
+        cur_pos++;
+    }
+    Node *deleteNode = tmp->next;
+    tmp->next = tmp->next->next;
+    delete deleteNode;
+}
+
+int main()
+{
+    // inserting at head
+    Node *head = NULL;
+    insertAtHead(head, 1);
+    display(head);
+    insertAtHead(head, 2);
+    display(head);
+
+    // inserting at tail
+    insertAtTail(head, 4);
+    display(head);
+    insertAtTail(head, 6);
+    display(head);
+
+    // inserting at any position
+    insertAtAnyPos(head, 5, 1);
+    display(head);
+
+    // Updating k'th position
+    updateAtPos(head, 10, 1);
+    cout << "After updating list: ";
+    display(head);
+
+    // deleting the head
+    deleteAtHead(head);
+    cout << "After deleting head: ";
+    display(head);
+
+    // deleting the tail
+    updateAtPos(head, 20, 0);
+    cout << "After updating list: ";
+    display(head);
+    deleteTail(head);
+    cout << "After deleting tail: ";
+    display(head);
+
+    // deleting the k'th position
+    updateAtPos(head, 40, 2);
+    cout << "After updating list: ";
+    display(head);
+    deleteAtPos(head, 1);
+    cout << "After deleting pos : ";
+    display(head);
+}
