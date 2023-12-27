@@ -1,0 +1,90 @@
+// SortedLinkedListDuplicateRemoval
+#include <bits/stdc++.h>
+using namespace std;
+
+// Node class representing each node in the linked list
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    // Constructor to initialize node with given data and next as NULL
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Function to insert a node at the tail of the linked list
+void insertAtTail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val); // Create a new node with given value
+
+    // If the linked list is empty, set both head and tail to the new node
+    if (head == NULL)
+        if (head == NULL)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+
+    tail->next = newNode; // Link the new node after the current tail
+    tail = newNode;       // Update tail to the new node
+}
+
+// Function to display the linked list elements
+void display(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << tmp->data << "->"; // Print the data of the current node
+        tmp = tmp->next;           // Move to the next node
+    }
+    cout << "NULL" << endl; // Print NULL to indicate the end of the list
+}
+
+// Function to delete duplicate nodes from a sorted linked list
+void deleleDuplicate(Node *&head)
+{
+    Node *tmp = head;
+    while (tmp != NULL && tmp->next != NULL)
+    {
+        if (tmp->data == tmp->next->data)
+        {
+            // If duplicates found, remove the duplicate node
+            Node *delNode = tmp->next;
+            tmp->next = tmp->next->next;
+            delete delNode;
+        }
+        tmp = tmp->next; // Move to the next node
+    }
+}
+
+int main()
+{
+    Node *head = NULL; // Initialize head of the linked list
+    Node *tail = NULL; // Initialize tail of the linked list
+
+    // Insert elements at the tail of the linked list
+    insertAtTail(head, tail, 1);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 3);
+    insertAtTail(head, tail, 3);
+
+    // Display the original linked list
+    cout << "Original Linked List: ";
+    display(head);
+
+    // Delete duplicate nodes from the linked list
+    deleleDuplicate(head);
+
+    // Display the modified linked list after removing duplicates
+    cout << "Linked List after removing duplicates: ";
+    display(head);
+
+    return 0;
+}
