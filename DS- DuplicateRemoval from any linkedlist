@@ -1,4 +1,4 @@
-// Duplicate Removal freom SortedLinkedList
+// DuplicateRemoval from any linkedlist
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -46,20 +46,43 @@ void display(Node *head)
     cout << "NULL" << endl; // Print NULL to indicate the end of the list
 }
 
-// Function to delete duplicate nodes from a sorted linked list
-void deleleDuplicate(Node *&head)
+// Function to delete duplicate nodes from linked list
+void removeDuplicate(Node *&head)
 {
-    Node *tmp = head;
-    while (tmp != NULL && tmp->next != NULL)
+    // Initialize a pointer to traverse the linked list
+    Node *curNode = head;
+
+    // Traverse the linked list until the current node is not NULL
+    while (curNode != NULL)
     {
-        if (tmp->data == tmp->next->data)
+        // Temporary pointer to iterate through the list for each node
+        Node *tmp = curNode;
+
+        // Check for duplicates in the remaining part of the list
+        while (tmp->next != NULL)
         {
-            // If duplicates found, remove the duplicate node
-            Node *delNode = tmp->next;
-            tmp->next = tmp->next->next;
-            delete delNode;
+            // If a duplicate is found
+            if (curNode->data == tmp->next->data)
+            {
+                /// remove it from the list
+                // Create a pointer to the duplicate node
+                Node *duplicate = tmp->next;
+
+                // Remove the duplicate node by adjusting pointers
+                tmp->next = tmp->next->next;
+
+                // Delete the duplicate node to free up memory
+                delete duplicate;
+            }
+            else
+            {
+                // Move to the next node if no duplicate is found
+                tmp = tmp->next;
+            }
         }
-        tmp = tmp->next; // Move to the next node
+
+        // Move to the next node in the linked list
+        curNode = curNode->next;
     }
 }
 
@@ -80,7 +103,7 @@ int main()
     display(head);
 
     // Delete duplicate nodes from the linked list
-    deleleDuplicate(head);
+    removeDuplicate(head);
 
     // Display the modified linked list after removing duplicates
     cout << "Linked List after removing duplicates: ";
