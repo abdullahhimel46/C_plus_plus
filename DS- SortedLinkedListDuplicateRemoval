@@ -1,4 +1,4 @@
-// SortedLinkedListDuplicateRemoval
+// Duplicate Removal freom SortedLinkedList
 #include <bits/stdc++.h>
 using namespace std;
 
