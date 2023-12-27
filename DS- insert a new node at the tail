@@ -1,4 +1,4 @@
-//insert a new node at the tail
+// insert a new node at the tail
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -18,31 +18,19 @@ public:
 };
 
 // Function to insert a new node at the tail of the linked list
-void insertAtTail(Node *&head, int val)
-//&head-> '&' denotes that head is a reference to a pointer
+void insertAtTail(Node *&head, Node *&tail, int val)
 {
-    // creating a new node
-    Node *newNode = new Node(val);
+    Node *newNode = new Node(val); // Create a new node with the given value
 
-    ////condition for head
-    // If the list is empty(means head == NULL ), make the new node the head
-    if (head == NULL)
+    if (head == NULL) // Check if the linked list is empty
     {
-        head = newNode; // the newNode is head,now
-        return;         // Return if user inserts a single value
+        head = newNode; // If empty, set both head and tail to the new node
+        tail = newNode;
+        return; // Exit the function as the operation is completed
     }
 
-    ////condition for tail
-
-    // Traverse to the end of the list to insert the new node at the tail
-    Node *tmp = head;
-    while (tmp->next != NULL)
-    // Traverse until finding tail(the node having NULL in it's next)
-    {
-        tmp = tmp->next; // Move to the next node
-        // now tmp is on the last node
-    }
-    tmp->next = newNode; // Connect the last node to the new node
+    tail->next = newNode; // Make the current tail node point to the new node
+    tail = newNode;       // Update the tail to be the newly added node
 }
 
 // Function to display the elements of the linked list
@@ -52,20 +40,22 @@ void display_list(Node *head)
     while (tmp != NULL)
     // Traverse until reaching the end of the list
     {
-        cout << tmp->data << " "; // Print the data of the current node
-        tmp = tmp->next;          // Move to the next node
+        cout << tmp->data << "->"; // Print the data of the current node
+        tmp = tmp->next;           // Move to the next node
     }
+    cout << "NULL" << endl;
 }
 
 int main()
 {
-    Node *head = NULL; // Initialize an empty linked list
+    // Initialize an empty linked list
+    Node *head = NULL;
+    Node *tail = NULL;
 
     // Insert elements at the tail of the linked list
-    insertAtTail(head, 1);
-    insertAtTail(head, 2);
-    insertAtTail(head, 3);
-    insertAtTail(head, 4);
+    insertAtTail(head, tail, 1);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 3);
 
     // Display the elements of the linked list
     cout << "Linked list: ";
