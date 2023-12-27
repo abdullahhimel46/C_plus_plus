@@ -1,0 +1,104 @@
+// delete a node
+#include <bits/stdc++.h>
+using namespace std;
+
+// Node class to represent each node in the linked list
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    // Constructor to initialize a node with given data
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Function to insert a new node at the tail of the linked list
+void insertAtTail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val); // Create a new node with the given value
+
+    if (head == NULL) // Check if the linked list is empty
+    {
+        head = newNode; // If empty, set both head and tail to the new node
+        tail = newNode;
+        return; // Exit the function as the operation is completed
+    }
+
+    tail->next = newNode; // Make the current tail node point to the new node
+    tail = newNode;       // Update the tail to be the newly added node
+}
+
+// Function to display the elements of the linked list
+void display_list(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    // Traverse until reaching the end of the list
+    {
+        cout << tmp->data << "->"; // Print the data of the current node
+        tmp = tmp->next;           // Move to the next node
+    }
+    cout << "NULL" << endl;
+}
+
+void deleteNode(Node *&head, int pos)
+{
+    if (pos == 0)
+    {
+        // Deletaion at the head of the linked list
+        Node *delHead = head; // Create a temporary pointer pointing to the head
+        head = head->next;    // Move the head to the next node
+        delete delHead;       // Delete the original head
+        return;               // Exit the function
+    }
+
+    int curPos = 0;   // Variable to keep track of the current position in linked list
+    Node *tmp = head; // Temporary pointer to traverse linked list starting from head
+
+    // Traverse the list until the position before the node to be deleted
+    // for (int i = 0; i < pos - 1; i++)
+    while (curPos != pos - 1)
+    {
+        tmp = tmp->next; // Move the temporary pointer to the next node
+        curPos++;        // Increment the current position
+    }
+
+    // Once the previous node to the one to be deleted is found:
+    Node *delNode = tmp->next;   // Pointer to the node to be deleted
+    tmp->next = tmp->next->next; // Adjust pointers to skip over the node to be deleted
+    delete delNode;              // Delete the node at the specified position
+}
+
+int main()
+{
+    // Initialize an empty linked list
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    // Insert elements at the tail of the linked list
+    insertAtTail(head, tail, 1);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 3);
+    insertAtTail(head, tail, 4);
+
+    // Display the elements of the linked list
+    cout << "Linked list: ";
+    display_list(head);
+
+    // Delete the head and display the list
+    cout << "Linked list: ";
+    deleteNode(head, 0);
+    display_list(head);
+
+    // Delete node at position 2 and display the list
+    cout << "Linked list: ";
+    deleteNode(head, 2);
+    display_list(head);
+
+    return 0;
+}
