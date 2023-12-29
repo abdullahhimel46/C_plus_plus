@@ -1,0 +1,60 @@
+//"Double Linked List Creation and Printing"
+#include <bits/stdc++.h> // This line includes the C++ standard library headers for input and output operations.
+
+using namespace std;
+
+class Node // Definition of a class named Node to represent elements in a linked list.
+{
+public:
+    int data;      // Data stored in the node.
+    Node *next;    // Pointer to the next node in the linked list.
+    Node *prev;    // Pointer to the previous node in the linked list.
+    Node(int data) // Constructor to initialize a Node with given data.
+    {
+        this->data = data; // Assigning the input data to the node's data attribute.
+        this->next = NULL; // Initializing the next pointer as NULL (no node initially connected).
+        this->prev = NULL; // Initializing the previous pointer as NULL (no node initially connected).
+    }
+};
+
+void printNormal(Node *head)
+{
+    Node *tmp = head;   // Creating a temporary pointer initialized to the head of the linked list.
+    while (tmp != NULL) // Looping through the linked list until reaching the end (NULL).
+    {
+        cout << tmp->data << " "; // Printing the data in the current node.
+        tmp = tmp->next;          // Moving the temporary pointer to the next node in the list.
+    }
+    cout << endl; // Printing a newline after printing the entire list in forward order.
+}
+
+void printRev(Node *tail)
+{
+    Node *tmp = tail;   // Creating a temporary pointer initialized to the tail of the linked list.
+    while (tmp != NULL) // Looping through the linked list until reaching the start (NULL).
+    {
+        cout << tmp->data << " "; // Printing the data in the current node.
+        tmp = tmp->prev;          // Moving the temporary pointer to the previous node in the list.
+    }
+    cout << endl; // Printing a newline after printing the entire list in reverse order.
+}
+
+int main()
+{
+    Node *head = new Node(10); // Creating a new Node with data 10 and assigning it as the head of the list.
+    Node *a = new Node(20);    // Creating a new Node with data 20.
+    Node *b = new Node(30);    // Creating a new Node with data 30.
+    Node *tail = b;            // Assigning 'tail' as the last node in the list (Node with data 30).
+
+    // Connecting nodes to form a linked list.
+    head->next = a; // Linking head node to the next node (20).
+    a->prev = head; // Linking the previous node of node 'a' to the head (10).
+    a->next = b;    // Linking node 'a' to the next node (30).
+    b->prev = a;    // Linking the previous node of node 'b' to node 'a'.
+
+    // Printing the linked list in normal and reverse order.
+    printNormal(head); // Printing the list in the order it was created: 10 -> 20 -> 30
+    printRev(tail);    // Printing the list in reverse order: 30 -> 20 -> 10
+
+    return 0; // Indicating successful completion of the program.
+}
