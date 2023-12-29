@@ -1,4 +1,4 @@
-// insert a new node at the tail
+// insert a new node at the tail- WAY2
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,9 +28,10 @@ void insertAtTail(Node *&head, Node *&tail, int val)
         tail = newNode;
         return; // Exit the function as the operation is completed
     }
-
+    else{
     tail->next = newNode; // Make the current tail node point to the new node
     tail = newNode;       // Update the tail to be the newly added node
+    }
 }
 
 // Function to display the elements of the linked list
