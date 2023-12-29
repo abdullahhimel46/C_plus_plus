@@ -1,6 +1,6 @@
 // insert a new node at the tail- WAY2
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
 // Node class to represent each node in the linked list
 class Node
