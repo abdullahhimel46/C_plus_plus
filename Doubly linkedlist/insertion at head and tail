@@ -1,0 +1,104 @@
+//insertion at head and tail
+#include <bits/stdc++.h> 
+
+using namespace std;
+
+class Node
+{ // Definition of Node class
+public:
+    int data;   // Data stored in the node
+    Node *next; // Pointer to the next node in the linked list
+    Node *prev; // Pointer to the previous node in the linked list
+
+    // Constructor to initialize a Node with given data
+    Node(int data)
+    {
+        this->data = data; // Assigning the input data to the node's data attribute
+        this->next = NULL; // Initializing the next pointer as NULL (no node initially connected)
+        this->prev = NULL; // Initializing the previous pointer as NULL (no node initially connected)
+    }
+};
+
+void printNormal(Node *head)
+{                     // Function to print the linked list in forward order
+    Node *tmp = head; // Creating a temporary pointer initialized to the head of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the end (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->next;          // Moving the temporary pointer to the next node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in forward order
+}
+
+void printRev(Node *tail)
+{                     // Function to print the linked list in reverse order
+    Node *tmp = tail; // Creating a temporary pointer initialized to the tail of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the start (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->prev;          // Moving the temporary pointer to the previous node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in reverse order
+}
+
+void insertAtHead(Node *&head, int val)
+{                                  // Function to insert a node at the head of the linked list
+    Node *newNode = new Node(val); // Create a new node with the given value
+
+    if (head == NULL)
+    {                   // Check if the linked list is empty
+        head = newNode; // If empty, set the new node as the head of the list
+        return;         // Exit the function as the operation is complete
+    }
+
+    newNode->next = head; // Set the 'next' pointer of the new node to the current head
+    head->prev = newNode; // Set the 'prev' pointer of the current head to the new node
+    head = newNode;       // Update the head pointer to point to the new node, making it the new head
+    // At this point, the new node has been inserted at the beginning of the linked list
+}
+
+void insertAtTail(Node *&tail, int val)
+{ // Function to insert a node at the tail of the linked list
+    Node *newNode = new Node(val);
+
+    if (tail == NULL)
+    {                   // Check if the linked list is empty
+        tail = newNode; // If empty, set the new node as the tail of the list
+        return;         // Exit the function as the operation is complete
+    }
+
+    tail->next = newNode; // Link the current tail node to the new node
+    newNode->prev = tail; // Set the previous pointer of the new node to the current tail
+    tail = newNode;       // Update the tail pointer to point to the new node, making it the new tail
+}
+
+int main()
+{ // Main function
+    // Creating nodes and forming a linked list
+    Node *head = new Node(10); // Creating a new Node with data 10 and assigning it as the head of the list
+    Node *a = new Node(20);
+    Node *b = new Node(30);
+    Node *c = new Node(40);
+    Node *tail = c; // Assigning 'tail' as the last node in the list (Node with data 30)
+
+    head->next = a; // Linking head node to the next node (20)
+    a->prev = head; // Linking the previous node of node 'a' to the head (10)
+    a->next = b;    // Linking node 'a' to the next node (30)
+    b->prev = a;    // Linking the previous node of node 'b' to node 'a'
+    b->next = c;
+    c->prev = b;
+
+    // Performing insertions at head and tail, and printing the linked list
+    cout << "Insertion at head: " << endl;
+    insertAtHead(head, 200);
+    printNormal(head);
+    printRev(tail);
+    cout << endl;
+
+    cout << "Insertion at tail: " << endl;
+    insertAtTail(tail, 300);
+    printNormal(head);
+    printRev(tail);
+
+    return 0; // Indicating successful completion of the program
+}
