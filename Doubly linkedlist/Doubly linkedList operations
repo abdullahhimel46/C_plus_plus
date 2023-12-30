@@ -1,0 +1,161 @@
+// Doubly linkedList operations
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{ // Definition of Node class
+public:
+    int data;   // Data stored in the node
+    Node *next; // Pointer to the next node in the linked list
+    Node *prev; // Pointer to the previous node in the linked list
+
+    // Constructor to initialize a Node with given data
+    Node(int data)
+    {
+        this->data = data; // Assigning the input data to the node's data attribute
+        this->next = NULL; // Initializing the next pointer as NULL (no node initially connected)
+        this->prev = NULL; // Initializing the previous pointer as NULL (no node initially connected)
+    }
+};
+
+void printNormal(Node *head)
+{                     // Function to print the linked list in forward order
+    Node *tmp = head; // Creating a temporary pointer initialized to the head of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the end (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->next;          // Moving the temporary pointer to the next node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in forward order
+}
+
+void printRev(Node *tail)
+{                     // Function to print the linked list in reverse order
+    Node *tmp = tail; // Creating a temporary pointer initialized to the tail of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the start (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->prev;          // Moving the temporary pointer to the previous node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in reverse order
+}
+
+void insertAtHead(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+}
+
+void insertAtTail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+
+    if (tail == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+
+    newNode->prev = tail;
+    tail->next = newNode;
+    tail = newNode;
+}
+
+void deleteAtPosition(Node *head, int pos)
+{
+    Node *tmp = head;
+    for (int i = 0; i < pos - 1; i++)
+    {
+        tmp = tmp->next;
+    }
+    Node *delNode = tmp->next;
+    tmp->next = tmp->next->next;
+    tmp->next->prev = tmp;
+
+    delete delNode;
+}
+
+void insertAtPosition(Node *head, int val, int pos)
+{
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+
+    for (int i = 1; i <= pos - 1; i++)
+    {
+        tmp = tmp->next;
+    }
+
+    newNode->next = tmp->next;
+    tmp->next = newNode;
+    newNode->prev = tmp;
+    newNode->next->prev = newNode;
+}
+
+int sizeOfList(Node *head)
+{
+    int cnt = 0;
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cnt++;
+        tmp = tmp->next;
+    }
+    return cnt;
+}
+
+int main()
+{
+    // Creating nodes and establishing connections between them
+    Node *head = new Node(10);
+    Node *a = new Node(20);
+    Node *b = new Node(30);
+    Node *c = new Node(40);
+    Node *tail = c; // Tail pointer initialized to the last node 'c'
+
+    head->next = a; // Linking head to node 'a'
+    a->prev = head; // Linking node 'a' to head
+    a->next = b;    // Linking node 'a' to node 'b'
+    b->prev = a;    // Linking node 'b' to node 'a'
+    b->next = c;    // Linking node 'b' to node 'c'
+    c->prev = b;    // Linking node 'c' to node 'b'
+
+    cout << "Size of the list: " << sizeOfList(head) << endl;
+
+    int pos, val;
+    cout << "Enter value and position: ";
+    cin >> val >> pos;
+
+    if (pos > sizeOfList(head))
+    {
+        cout << "Invaild position" << endl;
+    }
+    else if (pos == 0)
+    {
+        printNormal(head); // Printing the modified list in forward order
+        insertAtHead(head, tail, val);
+    }
+    else if (pos == sizeOfList(head))
+    {
+        printNormal(head); // Printing the modified list in forward order
+        insertAtTail(head, tail, val);
+    }
+    else
+    {
+        printNormal(head); // Printing the modified list in forward order
+        insertAtPosition(head, val, pos);
+    }
+    printNormal(head); // Printing the modified list in forward order
+    printRev(tail);    // Printing the modified list in reverse order
+
+    return 0;
+}
