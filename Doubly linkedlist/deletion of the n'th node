@@ -1,0 +1,97 @@
+#include <bits/stdc++.h> // Standard library headers
+
+using namespace std;
+
+class Node
+{ // Definition of Node class
+public:
+    int data;   // Data stored in the node
+    Node *next; // Pointer to the next node in the linked list
+    Node *prev; // Pointer to the previous node in the linked list
+
+    // Constructor to initialize a Node with given data
+    Node(int data)
+    {
+        this->data = data; // Assigning the input data to the node's data attribute
+        this->next = NULL; // Initializing the next pointer as NULL (no node initially connected)
+        this->prev = NULL; // Initializing the previous pointer as NULL (no node initially connected)
+    }
+};
+
+void printNormal(Node *head)
+{                     // Function to print the linked list in forward order
+    Node *tmp = head; // Creating a temporary pointer initialized to the head of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the end (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->next;          // Moving the temporary pointer to the next node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in forward order
+}
+
+void printRev(Node *tail)
+{                     // Function to print the linked list in reverse order
+    Node *tmp = tail; // Creating a temporary pointer initialized to the tail of the linked list
+    while (tmp != NULL)
+    {                             // Looping through the linked list until reaching the start (NULL)
+        cout << tmp->data << " "; // Printing the data in the current node
+        tmp = tmp->prev;          // Moving the temporary pointer to the previous node in the list
+    }
+    cout << endl; // Printing a newline after printing the entire list in reverse order
+}
+
+void insertAtTail(Node *&tail, int val)
+{ // Function to insert a node at the tail of the linked list
+    Node *newNode = new Node(val);
+
+    if (tail == NULL)
+    {                   // Check if the linked list is empty
+        tail = newNode; // If empty, set the new node as the tail of the list
+        return;         // Exit the function as the operation is complete
+    }
+
+    tail->next = newNode; // Link the current tail node to the new node
+    newNode->prev = tail; // Set the previous pointer of the new node to the current tail
+    tail = newNode;       // Update the tail pointer to point to the new node, making it the new tail
+}
+
+void deleteAtPosition(Node *head, int pos)
+{
+    Node *tmp = head; // Creating a temporary pointer initialized to the head of the linked list
+    for (int i = 0; i < pos - 1; i++)
+    {
+        tmp = tmp->next; // Moving the temporary pointer to the node just before the position to be deleted
+    }
+    // Now, tmp points to the node just before the node to be deleted (at position pos-1)
+
+    Node *delNode = tmp->next;   // Creating a pointer to the node to be deleted (at position pos)
+    tmp->next = tmp->next->next; // Changing the next pointer of the node before the deleted node to skip the deleted node
+    tmp->next->prev = tmp;       // Adjusting the previous pointer of the node after the deleted node to point to the node before it
+    delete delNode;              // Deleting the node at the specified position
+}
+
+int main()
+{
+    // Creating nodes and establishing connections between them
+    Node *head = new Node(10);
+    Node *a = new Node(20);
+    Node *b = new Node(30);
+    Node *c = new Node(40);
+    Node *tail = c; // Tail pointer initialized to the last node 'c'
+
+    head->next = a; // Linking head to node 'a'
+    a->prev = head; // Linking node 'a' to head
+    a->next = b;    // Linking node 'a' to node 'b'
+    b->prev = a;    // Linking node 'b' to node 'a'
+    b->next = c;    // Linking node 'b' to node 'c'
+    c->prev = b;    // Linking node 'c' to node 'b'
+
+    cout << "Before delation: " << endl;
+    printNormal(head); // Printing the modified list in forward order
+    cout << "After deletion: " << endl;
+    deleteAtPosition(head, 1); // Deleting the node at position 1
+    printNormal(head);         // Printing the modified list in forward order
+    printRev(tail);            // Printing the modified list in reverse order
+
+    return 0; // Indicating successful completion of the program
+}
