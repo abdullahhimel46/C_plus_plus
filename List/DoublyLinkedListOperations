@@ -3,7 +3,7 @@
 using namespace std;
 int main()
 {
-    list<int> li = {10, 20, 30, 40};
+    list<int> li = {10, 20, 30, 40, 50, 60, 70};
 
     cout << "List: ";
     for (int val : li)
@@ -57,5 +57,23 @@ int main()
     {
         cout << val << " ";
     }
+    cout << endl;
+
+    // main list
+    cout << "list: ";
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // deleting multiple nodes
+    li.erase(next(li.begin(), 2), next(li.begin(), 6));
+    cout << "Deleting multiple nodes: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+
     return 0;
 }
