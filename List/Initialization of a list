@@ -1,0 +1,19 @@
+// Initialization of a list in different ways.
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    list<int> li_old = {1, 2, 3, 4, 5};
+    // list<int> li(li_old);
+    int a[] = {1, 2, 3, 4};
+    // list<int> li(a, a + 4);
+    vector<int> v = {10, 20, 30, 40, 50};
+    list<int> li(v.begin(), v.end());
+    cout << "size: " << li.size() << endl;
+
+    for (int val : li)
+    {
+        cout << val << endl;
+    }
+    return 0;
+}
