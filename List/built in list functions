@@ -1,0 +1,41 @@
+// built in list functions
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    list<int> li = {20, 10, 30, 10, 50, 10, 40};
+
+    // sorting in ascending order
+    li.sort();
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // sorting in descending order
+    li.sort(greater<int>());
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // removing duplicate nodes
+    li.unique();
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // Reversing the list
+    li.reverse();
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
