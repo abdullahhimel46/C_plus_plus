@@ -1,0 +1,36 @@
+// Use of replace() & find() functions
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    list<int> li = {10, 20, 30, 40, 50, 60, 70};
+
+    cout << "List: ";
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    replace(li.begin(), li.end(), 30, 100);
+    cout << "List: ";
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    auto it = find(li.begin(), li.end(), 100);
+    cout << *it << endl;
+
+    if (it != li.end())
+    {
+        cout << "Found!" << endl;
+    }
+    else
+    {
+        cout << "Not Found!" << endl;
+    }
+
+    return 0;
+}
