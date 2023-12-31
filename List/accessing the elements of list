@@ -1,0 +1,18 @@
+// accessing the elements of list
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    list<int> li = {20, 10, 30, 10, 50, 10, 40};
+
+    // accessing head
+    cout << "Head: " << li.front() << endl;
+
+    // accessing tail
+    cout << "Tail: " << li.back() << endl;
+
+    // accessing n'th element
+    cout << "n'th element: " << *next(li.begin(), 2) << endl;
+
+    return 0;
+}
