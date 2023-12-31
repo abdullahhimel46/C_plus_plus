@@ -1,0 +1,61 @@
+// DoublyLinkedListOperations
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    list<int> li = {10, 20, 30, 40};
+
+    cout << "List: ";
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // Inserting at the tail
+    li.push_back(100);
+    // Inserting at the head
+    li.push_front(0);
+    cout << "After inserting value to head and tail: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // deleting from tail
+    li.pop_back();
+    cout << "After removing value from tail: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // delete from head
+    li.pop_front();
+    cout << "After removing value from head: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // Inserting to any position
+    li.insert(next(li.begin()), {2, 3});
+    cout << "Inserting at n'th position: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    // deleteing node from n'th position
+    li.erase(next(li.begin(), 2));
+    cout << "Deleting node from n'th position: " << endl;
+    for (int val : li)
+    {
+        cout << val << " ";
+    }
+    return 0;
+}
