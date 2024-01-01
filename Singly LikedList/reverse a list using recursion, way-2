@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void display(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << tmp->data << " ";
+        tmp = tmp->next;
+    }
+    cout << endl;
+}
+
+void reverseList(Node *&head, Node *cur)
+{
+    // base case
+    if (cur->next == NULL)
+    // if, lastNode->next == NULL;
+    {
+        head = cur; // update head to lastNode
+        return;
+    }
+
+    // recursive case
+    reverseList(head, cur->next);
+    cur->next->next = cur; // Update cur variable
+    cur->next = NULL;      // Update new cur variable
+}
+
+int main()
+{
+    Node *head = new Node(10);
+    Node *a = new Node(20);
+    Node *b = new Node(30);
+
+    head->next = a;
+    a->next = b;
+
+    display(head);
+    reverseList(head, head);
+    display(head);
+    return 0;
+}
