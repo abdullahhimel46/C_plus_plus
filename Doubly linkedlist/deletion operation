@@ -62,12 +62,22 @@ void deleteTail(Node *&tail)
     tail->next = NULL;
 }
 
-void deleteHead(Node *&head)
+void deleteHead(Node *&head, Node *&tail)
 {
     Node *delNode = head;
     head = head->next; // Updating head
     delete delNode;
-    head->prev = NULL;
+    
+    // if there remains a single node to be deleted
+    if (head == NULL)
+    {
+        tail = NULL;
+        return;
+    }
+    else
+    {
+        head->prev = NULL;
+    }
 }
 
 int sizeOfList(Node *head)
@@ -111,7 +121,7 @@ int main()
     }
     else if (pos == 0)
     {
-        deleteHead(head);
+        deleteHead(head, tail);
     }
     else if (pos == (sizeOfList(head) - 1))
     {
