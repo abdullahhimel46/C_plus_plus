@@ -1,4 +1,4 @@
-// LinkedListReversal
+// reverse a list using recursion, way-1
 #include <bits/stdc++.h>
 using namespace std;
 
