@@ -1,0 +1,117 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void insertAtTail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (tail == NULL)
+    {
+        tail = newNode;
+        head = newNode;
+        return;
+    }
+    tail->next = newNode;
+    tail = newNode;
+}
+
+void revList(Node *&head, Node *cur)
+{
+    // base case
+    if (cur->next == NULL)
+    {
+        head = cur;
+        return;
+    }
+
+    // recursive case
+    revList(head, cur->next);
+    cur->next->next = cur;
+    cur->next = NULL;
+}
+
+bool isPalindrome(Node *head)
+{
+    // Initialize pointers to create a reversed copy of the original list
+    Node *newHead = NULL; // Pointer to the head of the new reversed list
+    Node *newTail = NULL; // Pointer to the tail of the new reversed list
+    Node *tmp = head;     // Temporary pointer to traverse the original list
+
+    // Create a copy of the original list
+    while (tmp != NULL)
+    {
+        // Insert nodes at the tail of the new list
+        insertAtTail(newHead, newTail, tmp->data);
+        tmp = tmp->next; // Move to the next node in the original list
+    }
+
+    // Reverse the newly created list
+    revList(newHead, newHead);
+
+    // Pointers to traverse the original and reversed lists for comparison
+    Node *tmp1 = head;    // Pointer to traverse the original list
+    Node *tmp2 = newHead; // Pointer to traverse the reversed list
+
+    // Compare the values of corresponding nodes in the original and reversed lists
+    while (tmp1 != NULL)
+    {
+        // If values of corresponding nodes are different, the list is not a palindrome
+        if (tmp1->data != tmp2->data)
+        {
+            return false; // Return false indicating that it is not a palindrome
+        }
+        tmp1 = tmp1->next; // Move to the next node in the original list
+        tmp2 = tmp2->next; // Move to the next node in the reversed list
+    }
+
+    // If all values matched, the list is a palindrome
+    return true; // Return true indicating that it is a palindrome
+}
+
+void display(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << tmp->data << " ";
+        tmp = tmp->next;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    Node *head = NULL; // Initializing an empty linked list
+    Node *tail = NULL;
+    // Creating a sample linked list (1 -> 2 -> 3 -> 2 -> 1) as an example of a palindrome
+    insertAtTail(head, tail, 1);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 3);
+    insertAtTail(head, tail, 2);
+    insertAtTail(head, tail, 1);
+
+    display(head);
+    bool flag = isPalindrome(head);
+
+    if (flag)
+    {
+        cout << "The linked list is a palindrome." << endl;
+    }
+    else
+    {
+        cout << "The linked list is not a palindrome." << endl;
+    }
+
+    return 0;
+}
