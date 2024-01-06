@@ -37,8 +37,6 @@ void revList(Node *head, Node *tail)
         i = i->next;
         j = j->prev;
     }
-    // In case of even number of nodes
-    // swap(i->data, j->data);
 }
 
 int main()
