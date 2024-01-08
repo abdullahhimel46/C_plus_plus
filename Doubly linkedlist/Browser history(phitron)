@@ -1,0 +1,171 @@
+//Browser history
+/*https://www.hackerrank.com/contests/mid-term-exam-a-basic-data-structures-a-batch-04/challenges/browser-history-1*/
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    string val;
+    Node *next = NULL;
+    Node *prev = NULL;
+
+    Node(string val)
+    {
+        this->val = val;
+    }
+};
+
+void insertAtTail(Node *&head, Node *&tail, string val)
+{
+    Node *newNode = new Node(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+    }
+    else
+    {
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+}
+
+void visit(Node *head, Node *&cur, string url)
+{
+    // Loop to traverse the linked list starting from the head
+    for (Node *tmp = head; tmp != NULL; tmp = tmp->next)
+    {
+        // Check if the value of the current node matches the given 'url'
+        if (tmp->val == url)
+        {
+            // If a match is found, update the 'cur' pointer to point to this node
+            cur = tmp;
+            // Output the value of the current node (which is the matched URL)
+            cout << cur->val << endl;
+            // Return from the function as the URL is found and processed
+            return;
+        }
+    }
+    // If the 'for' loop completes without finding a match, print "Not Available"
+    cout << "Not Available" << endl;
+}
+
+void movePrev(Node *&cur)
+
+{
+    if (cur == NULL || cur->prev == NULL)
+    // after a whole traversal, cur is on the first node
+    {
+        cout << "Not Available" << endl;
+        return;
+    }
+    cur = cur->prev;//update cur
+    cout << cur->val << endl;
+    // cur->val = url
+}
+
+void moveNext(Node *&cur)
+{
+    if (cur == NULL || cur->next == NULL)
+    // after a whole traversal, cur is on the last node
+    {
+        cout << "Not Available" << endl;
+        return;
+    }
+    cur = cur->next;//update cur
+    cout << cur->val << endl;
+    // cur->val = url
+}
+
+int main()
+{
+    Node *head = NULL;
+    Node *tail = NULL;
+    // Initially cur is pointing to the head
+    Node *cur = head;
+
+    string url;
+    // taking input for the first line
+    while (cin >> url && url != "end")
+    {
+        insertAtTail(head, tail, url);
+    }
+
+    int Q;
+    // taking input for queries
+    cin >> Q;
+
+    string cmnd, addr;
+    getchar(); // consume newline character
+    while (Q--)
+    {
+        // taking input for command(visit,prev,next)
+        cin >> cmnd;
+
+        if (cmnd == "visit")
+        {
+            // taking input for web address
+            cin >> addr;
+            visit(head, cur, addr);
+        }
+        else if (cmnd == "next")
+        {
+            moveNext(cur);
+        }
+        else if (cmnd == "prev")
+        {
+            movePrev(cur);
+        }
+    }
+
+    return 0;
+}
+/*
+Problem Statement
+
+You are given a doubly linked list of unique string values. These strings refer to web addresses without any spaces. You will be given Q queries. In each query you will be given some commands. Type of commands are -
+
+visit address - You need to go to that address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+next - You need to go to the next address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+prev - You need to go to the previous address from where you are in that list and print that address if it is in the list. Otherwise print "Not Available".
+One more thing, if the address isn't available make sure you don't move from your current position. You are at the head initially.
+
+Input Format
+
+First line will contain the values of the doubly linked list, and will terminate with the string "end".
+Second line will contain Q.
+Next Q lines will contain the commands. It is guranteed that you will get "visit address" command at first which will contain a valid address. It will not contain valid address everytime!
+
+Sample Input 0
+
+facebook google phitron youtube twitter end
+12
+visit phitron
+prev
+prev
+prev
+prev
+next
+visit twitter
+next
+next
+prev
+visit django
+prev
+Sample Output 0
+
+phitron
+google
+facebook
+Not Available
+Not Available
+google
+twitter
+Not Available
+Not Available
+youtube
+Not Available
+phitron
+*/
