@@ -104,11 +104,18 @@ void insertAtPosition(Node *head, int val, int pos)
 int sizeOfList(Node *head)
 {
     int cnt = 0;
-    Node *tmp = head;
-    while (tmp != NULL)
+    //* while loop
+    // Node *tmp = head;
+    // while (tmp != NULL)
+    // {
+    //     cnt++;
+    //     tmp = tmp->next;
+    // }
+    
+    //* for loop
+    for (Node *tmp = head; tmp != NULL; tmp = tmp->next)
     {
         cnt++;
-        tmp = tmp->next;
     }
     return cnt;
 }
