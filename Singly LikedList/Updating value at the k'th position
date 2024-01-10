@@ -1,0 +1,80 @@
+// Updating value at the k'th position
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void display(Node *head)
+{
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << tmp->data << "->";
+        tmp = tmp->next; // tmp++
+    }
+    cout << "NULL" << endl;
+}
+
+void insertAtHead(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+    // Initilly, newNode->next=NULL;
+    newNode->next = head; // tmp = a
+    head = newNode;       // a=b
+}
+
+void insertAtTail(Node *&head, int val)
+{
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+
+    while (tmp->next != NULL)
+    {
+        tmp = tmp->next;
+    }
+    // now tmp is on the last node
+    tmp->next = newNode;
+    // newNode->next=NULL;
+}
+
+void updateAtPos(Node *head, int val, int k)
+{
+    Node *newNode = new Node(val);
+    Node *tmp = head;
+    for (int i = 0; i < k; i++)
+    {
+        tmp = tmp->next;
+    }
+    // now tmp is pointing the K'th node
+    tmp->data = val;
+}
+
+int main()
+{
+    // inserting at head
+    Node *head = NULL;
+    insertAtHead(head, 1);
+
+    // inserting at tail
+    insertAtTail(head, 4);
+    insertAtTail(head, 6);
+    insertAtTail(head, 8);
+    insertAtTail(head, 9);
+    display(head);
+
+    // Updating k'th position
+    updateAtPos(head, 10, 1);
+    cout << "After updating list: " << endl;
+    display(head);
+}
