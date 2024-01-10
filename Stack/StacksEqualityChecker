@@ -1,0 +1,108 @@
+// StacksEqualityChecker
+/*
+Take two stacks of size N and M as input and check if both of them are the same or not.
+
+Sample Input
+5
+10 20 30 40 50
+5
+10 20 30 40 50
+Sample Output
+YES
+
+Sample Input
+5
+10 20 30 40 50
+4
+10 20 30 40
+Sample Output
+NO
+
+Sample Input
+5
+10 20 30 40 50
+5
+50 40 30 20 10
+Sample Output
+NO
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class myStack
+{
+public:
+    list<int> li;
+    void push(int val)
+    {
+        li.push_back(val);
+    }
+    void pop()
+    {
+        li.pop_back();
+    }
+    int top()
+    {
+        return li.back();
+    }
+    int size()
+    {
+        return li.size();
+    }
+    bool empty()
+    {
+        if (li.size() == 0)
+            return true;
+        else
+            return false;
+    }
+};
+
+int main()
+{
+    myStack s1;
+    myStack s2;
+    int m, n;
+
+    cin >> m;
+    while (m--)
+    {
+        int x;
+        cin >> x;
+        s1.push(x);
+    }
+
+    cin >> n;
+    while (n--)
+    {
+        int x;
+        cin >> x;
+        s2.push(x);
+    }
+
+    if (s1.size() != s2.size())
+    {
+        cout << "NO" << endl;
+        return 0;
+    }
+    bool flag = true;
+
+    while (!s1.empty() && !s2.empty())
+    {
+        if (s1.top() != s2.top())
+        {
+            flag = false;
+        }
+        s1.pop();
+        s2.pop();
+    }
+
+    if (flag)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
+    return 0;
+}
