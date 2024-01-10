@@ -1,0 +1,46 @@
+// StackElementCopyReverseOrder
+/*
+Take a stack of size N as input and copy those elements to another stack to get the values in the 
+order they were inserted and print them.
+
+Sample input:
+5
+10 20 30 40 50
+Sample output:
+10 20 30 40 50
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    stack<int> s1, s2;
+
+    int n;
+    cin >> n; // Takes input for the number of elements to be inserted into the stack.
+
+    while (n--)
+    // Loop to take 'n' integer inputs and push them into stack s1.
+    {
+        int x;
+        cin >> x;   // Takes input for each element.
+        s1.push(x); // Pushes the input element 'x' onto stack s1.
+    }
+
+    while (!s1.empty())
+    // Loop to copy elements from stack s1 to stack s2 in reverse order.
+    {
+        s2.push(s1.top()); // Pushes the top element of s1 onto s2.
+        s1.pop();          // Removes the top element from s1.
+    }
+
+    while (!s2.empty())
+    // Loop to print elements of stack s2 (which are in the original order).
+    {
+        cout << s2.top() << " "; // Prints the top element of s2.
+        s2.pop();                // Removes the top element from s2.
+    }
+
+    return 0;
+}
