@@ -1,0 +1,51 @@
+// reverse stack using recursion
+#include <bits/stdc++.h>
+using namespace std;
+
+void revStack(stack<int> &st)
+{
+    // base case
+    if (st.empty())
+        return;
+
+    // recursive case
+    int x = st.top();
+    st.pop();
+    revStack(st); // recursion done!
+
+    stack<int> s2;
+
+    // push the elements of st into s2
+    while (!st.empty())
+    {
+        s2.push(st.top());
+        st.pop();
+    }
+    // push the top element into s2
+    s2.push(x);
+    // push the elements of s2 into st
+    while (!s2.empty())
+    {
+        st.push(s2.top());
+        s2.pop();
+    }
+}
+
+int main()
+{
+    stack<int> st;
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+
+    revStack(st);
+
+    while (!st.empty())
+    {
+        cout << st.top() << " ";
+        st.pop();
+    }
+
+    return 0;
+}
