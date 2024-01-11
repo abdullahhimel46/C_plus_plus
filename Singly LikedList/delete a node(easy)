@@ -1,4 +1,4 @@
-// delete a node
+// deletion of head,tail and n'th element
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -46,7 +46,19 @@ void display_list(Node *head)
     cout << "NULL" << endl;
 }
 
-void deleteNode(Node *&head, int pos)
+int sizeOfList(Node *head)
+{
+    int cnt = 0;
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        tmp = tmp->next;
+        cnt++;
+    }
+    return cnt;
+}
+
+void deleteNode(Node *&head, Node *&tail, int pos)
 {
     if (pos == 0)
     {
@@ -57,15 +69,20 @@ void deleteNode(Node *&head, int pos)
         return;               // Exit the function
     }
 
-    int curPos = 0;   // Variable to keep track of the current position in linked list
-    Node *tmp = head; // Temporary pointer to traverse linked list starting from head
+    if (pos == sizeOfList(head))
+    {
+        Node *delNode = tail;
+        tail = delNode->next;
+        tail->next = NULL;
+        delete delNode;
+        return;
+    }
 
-    // Traverse the list until the position before the node to be deleted
-    // for (int i = 0; i < pos - 1; i++)
-    while (curPos != pos - 1)
+    Node *tmp = head; // Temporary pointer to traverse linked list starting from head
+                      // Traverse the list until the position before the node to be deleted
+    for (int i = 0; i < pos - 1; i++)
     {
         tmp = tmp->next; // Move the temporary pointer to the next node
-        curPos++;        // Increment the current position
     }
 
     // Once the previous node to the one to be deleted is found:
@@ -85,19 +102,26 @@ int main()
     insertAtTail(head, tail, 2);
     insertAtTail(head, tail, 3);
     insertAtTail(head, tail, 4);
+    insertAtTail(head, tail, 5);
 
     // Display the elements of the linked list
     cout << "Linked list: ";
     display_list(head);
 
+    // Delete the tail
+    cout << "Linked list: ";
+    deleteNode(head, tail, 4);
+    // Size of the list is: 4
+    display_list(head);
+
     // Delete the head and display the list
     cout << "Linked list: ";
-    deleteNode(head, 0);
+    deleteNode(head, tail, 0);
     display_list(head);
 
     // Delete node at position 2 and display the list
     cout << "Linked list: ";
-    deleteNode(head, 2);
+    deleteNode(head, tail, 2);
     display_list(head);
 
     return 0;
