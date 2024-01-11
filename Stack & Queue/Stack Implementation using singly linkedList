@@ -1,0 +1,71 @@
+// Stack Implementation using singly linkedList
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next = NULL;
+
+    // Constructor to initialize a node with given data
+    Node(int data)
+    {
+        this->data = data;
+    }
+};
+
+void push(Node *&top, int val)
+{
+    Node *newNode = new Node(val);
+    newNode->next = top;
+    top = newNode;
+}
+
+void pop(Node *&top)
+{
+    if (top == NULL)
+    {
+        cout << "Empty stack" << endl;
+        return;
+    }
+
+    Node *delNode = top;
+    top = delNode->next;
+    delete delNode;
+}
+
+void displayStack(Node *top)
+{
+    if (top == NULL)
+    {
+        cout << "Stack is empty." << endl;
+        return;
+    }
+
+    cout << "Stack elements:" << endl;
+
+    for (Node *tmp = top; tmp != NULL; tmp = tmp->next)
+    {
+        {
+            cout << tmp->data << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    Node *top = NULL;
+    push(top, 10);
+    push(top, 20);
+    push(top, 30);
+
+    displayStack(top);
+
+    cout << "After poping: " << endl;
+    pop(top);
+    displayStack(top);
+
+    return 0;
+}
