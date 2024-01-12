@@ -1,0 +1,83 @@
+// queue implementation using singly linkedList
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *next = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+class myQueue
+{
+public:
+    Node *head = NULL;
+    Node *tail = NULL;
+    int sz = 0;
+    void push(int val)
+    {
+        // increment sz
+        sz++;
+
+        Node *newNode = new Node(val);
+        // corner case
+        if (head == NULL)
+        // if queue is empty
+        {
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+
+        // insert a new node at tail
+        tail->next = newNode;
+        tail = newNode;
+    }
+
+    void pop()
+    {
+        // remove a node from head
+        Node *delNode = head;
+        head = head->next;
+        delete delNode;
+
+        // in case of a single node
+        if (head == NULL)
+        {
+            tail = NULL;
+        }
+        sz--;
+    }
+
+    int front()
+    {
+        return head->val;
+    }
+
+    bool empty()
+    {
+        return (sz == 0);
+    }
+};
+
+int main()
+{
+    myQueue q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+
+    // cout << "size: " << q.sz << endl;
+    while (!q.empty())
+    {
+        cout << q.front() << " ";
+        q.pop();
+    }
+
+    return 0;
+}
