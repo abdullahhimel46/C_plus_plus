@@ -15,29 +15,60 @@ public:
     }
 };
 
-void push(Node *&top, int val)
+// push means inserting a new node in the head of the list
+void push(Node *&head, int val)
 {
     Node *newNode = new Node(val);
-    newNode->next = top;
-    top = newNode;
+    newNode->next = head; // point newNode to top
+    head = newNode;       // update top
 }
 
-void pop(Node *&top)
+void pop(Node *&head)
 {
-    if (top == NULL)
+    // corner case
+    if (head == NULL)
     {
-        cout << "Empty stack" << endl;
         return;
     }
 
-    Node *delNode = top;
-    top = delNode->next;
+    // pop means removing a node from the head of the list
+    Node *delNode = head;
+    head = delNode->next;
     delete delNode;
 }
 
-void displayStack(Node *top)
+int top(Node *head)
+// top will just return the head data unless the stack is empty
 {
-    if (top == NULL)
+    if (head == NULL)
+    {
+        return -1; // Stack is empty
+    }
+    return head->data;
+}
+
+int sizeOfStack(Node *head)
+{
+    int cnt = 0;
+    // traverse the linked list and count the number of nodes
+    for (Node *tmp = head; tmp != NULL; tmp = tmp->next)
+    {
+        cnt++;
+    }
+    return cnt;
+}
+
+bool empty(Node *head)
+{
+    if (sizeOfStack(head) == 0)
+        return true;
+    else
+        return false;
+}
+
+void displayStack(Node *head)
+{
+    if (head == NULL)
     {
         cout << "Stack is empty." << endl;
         return;
@@ -45,7 +76,8 @@ void displayStack(Node *top)
 
     cout << "Stack elements:" << endl;
 
-    for (Node *tmp = top; tmp != NULL; tmp = tmp->next)
+    // traverse the linkedList and print the data of each node
+    for (Node *tmp = head; tmp != NULL; tmp = tmp->next)
     {
         {
             cout << tmp->data << " ";
@@ -56,16 +88,25 @@ void displayStack(Node *top)
 
 int main()
 {
-    Node *top = NULL;
-    push(top, 10);
-    push(top, 20);
-    push(top, 30);
+    Node *head = NULL;
+    push(head, 10);
+    push(head, 20);
+    push(head, 30);
 
-    displayStack(top);
+    // printing the size of the stack
+    cout << "Size: " << sizeOfStack(head) << endl;
 
-    cout << "After poping: " << endl;
-    pop(top);
-    displayStack(top);
+    // printing the elements of the stack, way-1
+    displayStack(head);
+    cout << endl;
+
+    // printing the elements of the stack, way-2
+    cout << "Elements of the stack:" << endl;
+    while (!empty(head))
+    {
+        cout << top(head) << endl;
+        pop(head);
+    }
 
     return 0;
 }
