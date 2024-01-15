@@ -20,9 +20,11 @@ Node *inputTree()
     // take input for the root node
     cin >> val;
 
-    Node *root;
+    Node *root; // Declare the node
+
+    // if(val != -1), then create a new node
     if (val == -1)
-        root = NULL; // Empty tree
+        return NULL; // Empty tree
     else
         // create the root node
         root = new Node(val);
@@ -41,25 +43,16 @@ Node *inputTree()
         // 2.kaj sharo(create left & right node)
         int l, r;
         cin >> l >> r;
-        Node *newLeft;
-        Node *newRight;
 
-        // check if the left is empty
-        if (l == -1)
-            newLeft = NULL;
-        else
-            // create a new node
-            newLeft = new Node(l);
+        if (l != -1)
+        {
+            p->left = new Node(l);
+        }
 
-        // check if the right is empty
-        if (r == -1)
-            newRight = NULL;
-        else
-            newRight = new Node(r);
-
-        // connention
-        p->left = newLeft;
-        p->right = newRight;
+        if (r != -1)
+        {
+            p->right = new Node(r);
+        }
 
         // 3.push the child nodes
         if (p->left)
