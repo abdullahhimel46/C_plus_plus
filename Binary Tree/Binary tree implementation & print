@@ -1,4 +1,4 @@
-// Binary tree implementation & depth order traversal
+// Binary tree implementation. Depth & level order traversal
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -62,6 +62,65 @@ void inOrder(Node *root)
     inOrder(root->right);
 }
 
+/*
+Level Order Traversal technique:
+1. push the root node in a queue.
+2. while(!q.empty())->
+    a.stroe the front node
+    b.pop that node
+    c.print front node's data
+    d.push the childs in the queue
+*/
+
+// Level Order Traversal(Left to Right)
+void levelOrderLR(Node *root)
+{
+    queue<Node *> q;
+    // Initially, q is empty.So push root
+    q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ana
+        Node *f = q.front();
+        q.pop();
+
+        // 2.print kora
+        cout << f->val << " ";
+
+        // 3.child gulo queue te rakha
+        if (f->left)
+            // means, if f->left != NULL
+            q.push(f->left);
+        if (f->right)
+            // means, if f->right != NULL
+            q.push(f->right);
+    }
+}
+
+// Level Order Traversal(Right to Left)
+void levelOrderRL(Node *root)
+{
+    queue<Node *> q;
+    // Initially, q is empty.
+    q.push(root);
+
+    while (!q.empty())
+    { // 1. ber kore ana
+        Node *f = q.front();
+        q.pop();
+
+        // 2. print kora
+        cout << f->val << " ";
+
+        // 3. child gulo queue te rakha
+        if (f->right)
+            q.push(f->right);
+        if (f->left)
+            q.push(f->left);
+    }
+}
+
 int main()
 {
     Node *root = new Node(10);
@@ -86,16 +145,28 @@ int main()
     d->right = g;
     h->right = i;
 
-    cout << "Pre : ";
+    cout << "Depth Order->" << endl;
+
+    cout << "PreOrder : ";
     preOrder(root);
 
     cout << endl;
-    cout << "Post: ";
+    cout << "PostOrder: ";
     postOrder(root);
 
     cout << endl;
-    cout << "In  : ";
+    cout << "InOrder  : ";
     inOrder(root);
+
+    cout << endl;
+    cout << "Level Order->" << endl;
+
+    cout << "Left to right: ";
+    levelOrderLR(root);
+
+    cout << endl;
+    cout << "Right to Left: ";
+    levelOrderRL(root);
 
     return 0;
 }
