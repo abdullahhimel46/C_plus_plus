@@ -75,6 +75,12 @@ Level Order Traversal technique:
 // Level Order Traversal(Left to Right)
 void levelOrderLR(Node *root)
 {
+
+    if (root == NULL)
+    {
+        cout << "Empty!" << endl;
+        return;
+    }
     queue<Node *> q;
     // Initially, q is empty.So push root
     q.push(root);
@@ -101,6 +107,11 @@ void levelOrderLR(Node *root)
 // Level Order Traversal(Right to Left)
 void levelOrderRL(Node *root)
 {
+    if (root == NULL)
+    {
+        cout << "Empty!" << endl;
+        return;
+    }
     queue<Node *> q;
     // Initially, q is empty.
     q.push(root);
