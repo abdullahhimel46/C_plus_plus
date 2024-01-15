@@ -1,0 +1,101 @@
+// Binary tree implementation & depth order traversal
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+// Pre Order Traversal
+void preOrder(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        return;
+    }
+
+    // recursive case
+    // preOrder: root->left->right
+    cout << root->val << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+// Post Order Traversal
+void postOrder(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        return;
+    }
+
+    // recursive case
+    // postOrder: left->right->root
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->val << " ";
+}
+
+// In Order Traversal
+void inOrder(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        return;
+    }
+
+    // recursive case
+    // inOrder: left->root->right
+    inOrder(root->left);
+    cout << root->val << " ";
+    inOrder(root->right);
+}
+
+int main()
+{
+    Node *root = new Node(10);
+    Node *a = new Node(20);
+    Node *b = new Node(30);
+    Node *c = new Node(40);
+    Node *d = new Node(50);
+    Node *e = new Node(60);
+    Node *f = new Node(70);
+    Node *g = new Node(80);
+    Node *h = new Node(90);
+    Node *i = new Node(100);
+
+    // connection
+    root->left = a;
+    root->right = b;
+    a->left = c;
+    a->right = h;
+    c->right = e;
+    b->right = d;
+    d->left = f;
+    d->right = g;
+    h->right = i;
+
+    cout << "Pre : ";
+    preOrder(root);
+
+    cout << endl;
+    cout << "Post: ";
+    postOrder(root);
+
+    cout << endl;
+    cout << "In  : ";
+    inOrder(root);
+
+    return 0;
+}
