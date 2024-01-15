@@ -1,0 +1,109 @@
+// taking input of a binary tree
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    // take input for the root node
+    cin >> val;
+
+    Node *root;
+    if (val == -1)
+        root = NULL; // Empty tree
+    else
+        // create the root node
+        root = new Node(val);
+
+    queue<Node *> q;
+    // if root != NULL
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo(create left & right node)
+        int l, r;
+        cin >> l >> r;
+        Node *newLeft;
+        Node *newRight;
+
+        // check if the left is empty
+        if (l == -1)
+            newLeft = NULL;
+        else
+            // create a new node
+            newLeft = new Node(l);
+
+        // check if the right is empty
+        if (r == -1)
+            newRight = NULL;
+        else
+            newRight = new Node(r);
+
+        // connention
+        p->left = newLeft;
+        p->right = newRight;
+
+        // 3.push the child nodes
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+    return root;
+}
+
+void levelOrderLR(Node *root)
+{
+    if (root == NULL)
+    {
+        cout << "Empty!" << endl;
+        return;
+    }
+
+    queue<Node *> q;
+    // Initially, q is empty.So push root
+    q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ana
+        Node *f = q.front();
+        q.pop();
+
+        // 2.print kora
+        cout << f->val << " ";
+
+        // 3.child gulo queue te rakha
+        if (f->left)
+            // means, if f->left != NULL
+            q.push(f->left);
+        if (f->right)
+            // means, if f->right != NULL
+            q.push(f->right);
+    }
+}
+
+int main()
+{
+    Node *root = inputTree();
+    levelOrderLR(root);
+    return 0;
+}
