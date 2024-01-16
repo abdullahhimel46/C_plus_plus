@@ -1,4 +1,8 @@
 // Count Number of Nodes in a Binary Tree
+/*
+Input: 10 20 60 30 50 70 -1 -1 40 -1 -1 -1 -1 80 -1 -1
+OUtput: 8
+*/
 #include <bits/stdc++.h>
 using namespace std;
 class Node
