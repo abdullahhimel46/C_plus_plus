@@ -1,0 +1,88 @@
+// Count Number of Leaf Nodes in a Binary Tree
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+    queue<Node *> q;
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+        {
+            p->left = new Node(l);
+        }
+        if (r != -1)
+        {
+            p->right = new Node(r);
+        }
+        // 3.child ke push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+
+    return root;
+}
+
+/*
+leaf node = (root->left == NULL && root->right == NULL)
+*/
+int cnt_leaf(Node *root)
+{
+    // base case
+    if (root == NULL)
+        return 0;
+    // case-1: if the node itself a leaf node
+    if (root->left == NULL && root->right == NULL)
+    {
+        return 1;
+    }
+    // case-2: for a parent node
+    else
+    {
+        int l = cnt_leaf(root->left);
+        int r = cnt_leaf(root->right);
+        return l + r;
+    }
+}
+
+int main()
+{
+    Node *root = inputTree();
+    cout << cnt_leaf(root);
+    return 0;
+}
