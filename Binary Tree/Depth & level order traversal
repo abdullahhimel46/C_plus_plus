@@ -1,4 +1,4 @@
-// Binary tree implementation. Depth & level order traversal
+// Depth & level order traversal
 /*
 Input: 10 20 60 30 50 70 -1 -1 40 -1 -1 -1 -1 80 -1 -1
 */
@@ -71,7 +71,7 @@ Level Order Traversal technique:
 2. while(!q.empty())->
     a.stroe the front node
     b.pop that node
-    c.print front node's data
+    c.kprint front node's data
     d.push the childs in the queue
 */
 
