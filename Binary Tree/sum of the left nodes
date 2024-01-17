@@ -18,7 +18,7 @@ public:
     }
 };
 
-int leftSum(Node *root)
+int leftSum(Node *root, bool isLeft)
 {
     // base case
     if (root == NULL)
@@ -34,9 +34,9 @@ int leftSum(Node *root)
         sum += root->left->val;
     }
 
-    // recursively traverse all of the nodes
-    sum += leftSum(root->left);
-    sum += leftSum(root->right);
+    // recursively traverse all of the parent nodes
+    sum += leftSum(root->left, true);
+    sum += leftSum(root->right, false);
 
     return sum;
 }
@@ -89,7 +89,7 @@ Node *inputTree()
 int main()
 {
     Node *root = inputTree();
-    int s = leftSum(root);
+    int s = leftSum(root, true);
     cout << s << endl;
     return 0;
 }
