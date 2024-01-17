@@ -1,0 +1,95 @@
+// determining the sum of the left nodes of a binary tree
+/*
+Input:5 2 3 8 1 -1 -1 7 9 -1 -1 5 6 -1 -1 -1 -1 -1 -1
+Output:22
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+int leftSum(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        return 0;
+    }
+
+    int sum = 0;
+
+    // if the left child is present, add its value to the sum
+    if (root->left)
+    {
+        sum += root->left->val;
+    }
+
+    // recursively traverse all of the nodes
+    sum += leftSum(root->left);
+    sum += leftSum(root->right);
+
+    return sum;
+}
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+    queue<Node *> q;
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+        {
+            p->left = new Node(l);
+        }
+        if (r != -1)
+        {
+            p->right = new Node(r);
+        }
+
+        // 3.queue te child push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+    return root;
+}
+
+int main()
+{
+    Node *root = inputTree();
+    int s = leftSum(root);
+    cout << s << endl;
+    return 0;
+}
