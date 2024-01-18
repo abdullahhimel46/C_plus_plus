@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+int NodeLevel(Node *root, int seachValue)
+{
+    // Create a queue to perform level-order traversal
+    queue<pair<Node *, int>> q;
+    // q.push(make_pair(root,1));
+    q.push({root, 1});
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        pair<Node *, int> p = q.front();
+        q.pop();
+
+        // 2. kaj sharo
+        Node *node = p.first; // accessing node of the pair
+        int level = p.second; // accessing level of the pair
+
+        if (node->val == seachValue)
+        {
+            return level;
+        }
+        // 3. child ke q te push koro
+        if (node->left)
+            q.push({node->left, level + 1});
+        if (node->right)
+            q.push({node->right, level + 1});
+    }
+    return -1; // the search value is not found
+}
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+
+    queue<Node *> q;
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+        {
+            p->left = new Node(l);
+        }
+        if (r != -1)
+        {
+            p->right = new Node(r);
+        }
+
+        // 3.child ke q te push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+
+    return root;
+}
+
+int main()
+{
+    Node *root = inputTree();
+    int seachValue;
+    cin >> seachValue;
+
+    int result = NodeLevel(root, seachValue);
+    cout << result << endl;
+
+    return 0;
+}
