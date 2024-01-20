@@ -1,5 +1,14 @@
 // determining the sum of the left nodes of a binary tree
+// Link: https://www.codingninjas.com/studio/problems/left-sum_920380
 /*
+  *Example binary tree:
+            10
+           /  \
+          5    15
+         / \     \
+        3   7     20
+*The nodes 5 and 3 are the only nodes that were the left child of any other node.
+    So, LeftSum = 5+3 = 8
 Input:5 2 3 8 1 -1 -1 7 9 -1 -1 5 6 -1 -1 -1 -1 -1 -1
 Output:22
 */
@@ -18,7 +27,7 @@ public:
     }
 };
 
-int leftSum(Node *root, bool isLeft)
+int leftSum(Node *root)
 {
     // base case
     if (root == NULL)
@@ -29,14 +38,16 @@ int leftSum(Node *root, bool isLeft)
     int sum = 0;
 
     // if the left child is present, add its value to the sum
-    if (root->left)
+    if (root->left != NULL)
     {
         sum += root->left->val;
     }
 
     // recursively traverse all of the parent nodes
-    sum += leftSum(root->left, true);
-    sum += leftSum(root->right, false);
+    sum += leftSum(root->left);
+    // calculates the sum of the left child nodes in the left subtree
+    sum += leftSum(root->right);
+    // calculates the sum of the left child nodes in the right subtree
 
     return sum;
 }
@@ -89,7 +100,7 @@ Node *inputTree()
 int main()
 {
     Node *root = inputTree();
-    int s = leftSum(root, true);
+    int s = leftSum(root);
     cout << s << endl;
     return 0;
 }
