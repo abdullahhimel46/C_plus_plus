@@ -1,0 +1,104 @@
+// Prove, both the trees are identical
+#include <bits/stdc++.h>
+using namespace std;
+/*
+Input: p = [1,2,3,-1,-1,-1,-1], q = [1,2,3,-1,-1,-1,-1]
+Output: true
+Input: p = [1,2,1,-1,-1,-1,-1], q = [1,1,2,-1,-1,-1,-1]
+Output: false
+*/
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+
+    // operation for the root node
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+
+    queue<Node *> q;
+    if (root)
+    {
+        q.push(root);
+    }
+
+    // operation for the child nodes
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *node = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+            node->left = new Node(l);
+        if (r != -1)
+            node->right = new Node(r);
+
+        // 3. child ke q te push koro
+        if (node->left)
+            q.push(node->left);
+        if (node->right)
+            q.push(node->right);
+    }
+
+    return root;
+}
+
+bool sameTree(Node *tree1, Node *tree2)
+{
+    // base case
+    if (tree1 == NULL && tree2 == NULL)
+    {
+        return true;
+    }
+    else if (tree1 == NULL || tree2 == NULL)
+    {
+        return false;
+    }
+    else if (tree1->val != tree2->val)
+    {
+        return false;
+    }
+
+    // if p and q isn't null, and (p->val == q->val)
+    // then, traverse the left and right subtree
+    bool l = sameTree(tree1->left, tree2->left);
+    bool r = sameTree(tree1->right, tree2->right);
+
+    return l && r;
+}
+
+int main()
+{
+    Node *root1 = inputTree();
+    Node *root2 = inputTree();
+    bool ans = sameTree(root1, root2);
+    if (ans)
+        cout << "true" << endl;
+    else
+        cout << "false" << endl;
+    return 0;
+}
