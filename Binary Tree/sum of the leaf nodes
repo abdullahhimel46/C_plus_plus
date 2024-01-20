@@ -1,6 +1,97 @@
 // determining the sum of the leaf nodes of a binary tree
 /*
+Input:3 9 20 -1 -1 15 7 -1 -1 -1 -1// determining the sum of the leaf nodes of a binary tree
+/*
 Input:3 9 20 -1 -1 15 7 -1 -1 -1 -1
+Output:31
+Input: 10 20 50 30 40 70 60 -1 -1 -1 -1 -1 80 -1 -1 -1
+Output: 210
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+    queue<Node *> q;
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+        {
+            p->left = new Node(l);
+        }
+        if (r != -1)
+        {
+            p->right = new Node(r);
+        }
+
+        // 3.queue te child push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+    return root;
+}
+
+int leafSum(Node *root)
+{
+    // base case
+    if (root == NULL)
+        return 0;
+    // in case of a leaf node
+    if (root->left == NULL && root->right == NULL)
+    {
+        return root->val;
+    }
+
+    // handle the left and right subtrees
+    int l = leafSum(root->left);
+    int r = leafSum(root->right);
+
+    return l + r;
+}
+
+int main()
+{
+    Node *root = inputTree();
+    int s = leafSum(root);
+    cout << s << endl;
+    return 0;
+}
 Output:24
 */
 #include <bits/stdc++.h>
