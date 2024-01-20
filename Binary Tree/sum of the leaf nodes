@@ -70,17 +70,20 @@ int leafSum(Node *root)
     // base case
     if (root == NULL)
         return 0;
-    // in case of a leaf node
+
+    int sum = 0;
+
+    // If the root of the tree is a leaf node
     if (root->left == NULL && root->right == NULL)
     {
-        return root->val;
+        sum += root->val;
     }
 
-    // handle the left and right subtrees
-    int l = leafSum(root->left);
-    int r = leafSum(root->right);
+    // traverse the parent nodes of the tree
+    sum += leafSum(root->left);
+    sum += leafSum(root->right);
 
-    return l + r;
+    return sum;
 }
 
 int main()
