@@ -1,0 +1,107 @@
+// printing the values of leaf nodes in descending order
+/*
+ Input
+10 20 30 40 50 -1 60 -1 -1 -1 -1 -1 -1
+Here, the leaf nodes are: 40,50,60
+ Output
+60 50 40
+*/
+/*
+Technique:
+1.push_back the leaf nodes in a vector
+2.sort the vector in descending order and print it.
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+
+    // operation for the root node
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+
+    queue<Node *> q;
+    if (root)
+    {
+        q.push(root);
+    }
+
+    // operation for the child nodes
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *node = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+            node->left = new Node(l);
+        if (r != -1)
+            node->right = new Node(r);
+
+        // 3. child ke q te push koro
+        if (node->left)
+            q.push(node->left);
+        if (node->right)
+            q.push(node->right);
+    }
+
+    return root;
+}
+
+void leafNode(Node *root, vector<int> &v)
+{
+    // base case
+    if (root == NULL)
+        return;
+
+    // in case of leaf node
+    if (root->left == NULL && root->right == NULL)
+        v.push_back(root->val);
+
+    // handle the left and right subtrees
+    leafNode(root->left, v);
+    leafNode(root->right, v);
+}
+
+int main()
+{
+    Node *root = inputTree();
+    vector<int> v;
+    leafNode(root, v);
+
+    // sort the vector in descending order
+    sort(v.begin(), v.end(), greater<int>());
+    // print the vector
+    for (int x : v)
+    {
+        cout << x << " ";
+    }
+    return 0;
+}
