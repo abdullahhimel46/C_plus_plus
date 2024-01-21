@@ -88,6 +88,8 @@ Node *inputTree()
 
 void printLevelX(Node *root, int x)
 {
+    // according to the question,
+    // If the level x is not a valid level, the print "Invalid".
     if (root == NULL)
     {
         cout << "Invalid";
@@ -96,7 +98,7 @@ void printLevelX(Node *root, int x)
 
     // Initialize a queue of pair type to perform level-order traversal
     queue<pair<Node *, int>> q;
-    //        <node,level>
+
     q.push({root, 0}); // Push the root node and its level
 
     // Vector to store nodes at level 'x'
@@ -106,28 +108,26 @@ void printLevelX(Node *root, int x)
     while (!q.empty())
     {
         // 1.ber kore ano
-        //  Dequeue a node and its level
-        pair<Node *, int> node = q.front();
-        /* Here,
-                node.first -> accessing nodes
-                node.second -> accessing level
-        */
-        q.pop();
+        pair<Node *, int> p = q.front();
+        q.pop(); //  Dequeue pair(a node and its level)
 
         // 2.kaj sharo
+        Node *node = p.first;
+        int level = p.second;
+
         //  Check if the current node is at level 'x'
-        if (node.second == x)
+        if (level == x)
         {
-            v.push_back(node.first->val);
-            // If yes, add its value to the vector
+            v.push_back(p.first->val);
+            // push the nodes at user inputed levels in the vector
         }
 
         // 3.child ke queue te push koro
-        if (node.first->left)
-            q.push({node.first->left, node.second + 1});
+        if (p.first->left)
+            q.push({p.first->left, level + 1});
 
-        if (node.first->right)
-            q.push({node.first->right, node.second + 1});
+        if (p.first->right)
+            q.push({p.first->right, level + 1});
     }
 
     if (v.empty())
