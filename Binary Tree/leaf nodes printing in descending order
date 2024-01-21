@@ -1,4 +1,4 @@
-// printing the values of leaf nodes in descending order
+//  leaf nodes printing in descending order
 /*
  Input
 10 20 30 40 50 -1 60 -1 -1 -1 -1 -1 -1
