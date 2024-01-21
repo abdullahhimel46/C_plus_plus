@@ -1,0 +1,156 @@
+// Print nodes at given level
+/*
+Link:https://www.hackerrank.com/contests/assignment-03-a-basic-data-structures-a-batch-04-1/challenges/level-nodes-2
+Problem Statement
+You will be given a binary tree as input in level order. Also you will be given
+a level x. You need to print all the node's values in that level from left to right.
+Assume that level starts from 0.
+Note: If the level x is not a valid level, the print "Invalid".
+
+Sample Input
+10 20 30 40 50 -1 60 -1 -1 -1 -1 -1 -1
+0 ->level
+Sample Output
+10
+
+Sample Input
+10 20 30 40 50 -1 60 -1 -1 -1 -1 -1 -1
+1 ->level
+Sample Output
+20 30
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+
+    // operation for the root node
+    Node *root;
+    if (val == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+        root = new Node(val);
+    }
+
+    queue<pair<Node *, int>> q;
+
+    if (root)
+    {
+        q.push({root, 0});
+    }
+
+    // operation for the child nodes
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        pair<Node *, int> node = q.front();
+        q.pop();
+
+        // 2.kaj shesh
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+            node.first->left = new Node(l);
+
+        if (r != -1)
+            node.first->right = new Node(r);
+
+        // 3. child r level ke queue te push koro
+        if (node.first->left)
+            q.push({node.first->left, node.second + 1});
+
+        if (node.first->right)
+            q.push({node.first->right, node.second + 1});
+    }
+
+    return root;
+}
+
+void printLevelX(Node *root, int x)
+{
+    if (root == NULL)
+    {
+        cout << "Invalid";
+        return;
+    }
+
+    // Initialize a queue of pair type to perform level-order traversal
+    queue<pair<Node *, int>> q;
+    //        <node,level>
+    q.push({root, 0}); // Push the root node and its level
+
+    // Vector to store nodes at level 'x'
+    vector<int> v;
+
+    // Perform level-order traversal using the queue
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        //  Dequeue a node and its level
+        pair<Node *, int> node = q.front();
+        /* Here,
+                node.first -> accessing nodes
+                node.second -> accessing level
+        */
+        q.pop();
+
+        // 2.kaj sharo
+        //  Check if the current node is at level 'x'
+        if (node.second == x)
+        {
+            v.push_back(node.first->val);
+            // If yes, add its value to the vector
+        }
+
+        // 3.child ke queue te push koro
+        if (node.first->left)
+            q.push({node.first->left, node.second + 1});
+
+        if (node.first->right)
+            q.push({node.first->right, node.second + 1});
+    }
+
+    if (v.empty())
+    {
+        cout << "Invalid";
+    }
+    else
+    {
+        for (int val : v)
+        {
+            cout << val << " ";
+        }
+    }
+}
+
+int main()
+{
+    Node *root = inputTree();
+
+    int x;
+    cin >> x;
+
+    printLevelX(root, x);
+
+    return 0;
+}
