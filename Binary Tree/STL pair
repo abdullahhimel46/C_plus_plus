@@ -1,0 +1,18 @@
+//STL pair
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    pair<int, char> p;
+    // pushing value in the pair,way-1
+    p.first = 1;
+    p.second = 'a';
+    // printing the pair
+    cout << p.first << " " << p.second << endl;
+
+    // pushing value in the pair,way-2
+    pair<int, int> p2({1, 2});
+    // printing the pair
+    cout << p2.first << " " << p2.second << endl;
+    return 0;
+}
