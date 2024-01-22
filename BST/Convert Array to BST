@@ -1,0 +1,94 @@
+//  Convert Array to BST
+/*
+Input:
+6
+2 5 8 12 15 18
+Output:
+8 2 15 5 12 18
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left;
+    Node *right;
+    Node(int val)
+    {
+        this->val = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+void levelOrderTraversal(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        cout << "Empty" << endl;
+        return;
+    }
+
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        cout << p->val << " ";
+
+        // 3.child ke queue te push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+}
+
+// Function to convert a sorted array to a BST
+Node *arrayToBST(int arr[], int start, int end)
+{
+    // Base case: If the start index is greater than the end index
+    if (start > end)
+    {
+        return NULL;
+    }
+
+    // Calculate the middle index of the array
+    int mid = (start + end) / 2;
+
+    // Create a new node with the value at the middle index
+    Node *root = new Node(arr[mid]);
+
+    // build left subtree using the elements to the left of the middle index
+    root->left = arrayToBST(arr, start, mid - 1);
+
+    // build right subtree using the elements to the right of the middle index
+    root->right = arrayToBST(arr, mid + 1, end);
+
+    // Return the root of the constructed BST
+    return root;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    // Node *root = arrayToBST(arr,start,end);
+    Node *root = arrayToBST(arr, 0, n - 1);
+    levelOrderTraversal(root);
+
+    return 0;
+}
