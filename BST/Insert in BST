@@ -1,0 +1,137 @@
+//  Insert in BST
+/*
+Input:
+20 10 30 -1 15 25 35 -1 -1 -1 -1 -1 -1
+Output: 20 10 30 15 25 35 13 32
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node(int val)
+    {
+        this->val = val;
+    }
+};
+
+Node *inputTree()
+{
+    int val;
+    cin >> val;
+    Node *root;
+    if (val == -1)
+        return NULL;
+    else
+        root = new Node(val);
+    queue<Node *> q;
+    if (root)
+        q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        int l, r;
+        cin >> l >> r;
+
+        if (l != -1)
+            p->left = new Node(l);
+        if (r != -1)
+            p->right = new Node(r);
+
+        // 3.child ke q te push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+    return root;
+}
+
+void insert(Node *&root, int x)
+{
+    // base case
+    if (root == NULL)
+    {
+        // in case of an empty tree
+        root = new Node(x);
+    }
+
+    // Check if the value 'x' is less than the current node's value
+    if (x < root->val)
+    {
+        // If the left child is NULL, means there's space to insert a new node
+        if (root->left == NULL)
+        {
+            // insert a new node with value 'x' in the left
+            root->left = new Node(x);
+        }
+        else
+        {
+            // If the left child is not NULL, traverse left subtree
+            insert(root->left, x);
+        }
+    }
+    else
+    {
+        // If 'x' is greater than or equal to the current node's value
+        if (root->right == NULL)
+        {
+            // insert a new node with value 'x' in the right
+            root->right = new Node(x);
+        }
+        else
+        {
+            // If the left child is not NULL, traverse right subtree
+            insert(root->right, x);
+        }
+    }
+}
+
+void levelOrderTraversal(Node *root)
+{
+    // base case
+    if (root == NULL)
+    {
+        cout << "Empty" << endl;
+        return;
+    }
+
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        // 1.ber kore ano
+        Node *p = q.front();
+        q.pop();
+
+        // 2.kaj sharo
+        cout << p->val << " ";
+
+        // 3.child ke queue te push koro
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+}
+
+int main()
+{
+    Node *root = inputTree();
+    insert(root, 13);
+    insert(root, 32);
+    levelOrderTraversal(root);
+
+    return 0;
+}
