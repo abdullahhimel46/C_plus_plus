@@ -1,0 +1,60 @@
+//  Max Heap Implementation
+/*
+Input:
+5
+10 30 40 50 60
+Output:
+60 50 30 10 40
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // Vector to store elements of the heap
+    vector<int> v;
+
+    // Input: Number of elements in the heap
+    int n;
+    cin >> n;
+
+    // Input: Elements to be inserted into the heap
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        v.push_back(x);
+
+        // A new element will be pushed to the last index of the vector.
+        // So, curIdx will be v.size() - 1
+        int curIdx = v.size() - 1;
+
+        // Heapify: Maintain the max heap property by adjusting the position of the newly added element
+        while (curIdx != 0)
+        // loop will be continued utill curIdx reached at idx 0.
+        {
+            // Calculate the parent index
+            int parentIdx = (curIdx - 1) / 2;
+
+            // If the parent is less than the current element, swap them
+            if (v[parentIdx] < v[curIdx])
+            {
+                swap(v[parentIdx], v[curIdx]);
+            }
+            else
+            {
+                // Break the loop if the max heap property is already satisfied
+                break; // Don't swap
+            }
+
+            // Update curIdx to the parent index for the next iteration
+            curIdx = parentIdx;
+        }
+    }
+
+    // Output: Display the elements in the max heap order
+    for (int val : v)
+        cout << val << " ";
+
+    return 0;
+}
