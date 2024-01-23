@@ -1,0 +1,21 @@
+//  STL max Heap
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    priority_queue<int, vector<int>> pq;
+    pq.push(1);
+    pq.push(3);
+    pq.push(2);
+    pq.push(4);
+
+    cout << "Size: " << pq.size() << endl;
+
+    while (!pq.empty())
+    {
+        int val = pq.top();
+        cout << val << " ";
+        pq.pop();
+    }
+    return 0;
+}
