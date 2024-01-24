@@ -1,0 +1,147 @@
+// Delete From Heap Implementation without STL
+/*
+Input:
+7
+30 20 25 15 5 6 3
+Output:
+Max Heap: 30 20 25 15 5 6 3
+Max Heap after deleting max element: 25 20 6 15 5 3
+*/
+/*
+Explanation:
+Example 1:
+Original Max Heap: 90 80 70 50 60
+Swap the root (90) with the last element (60) and remove the last element:
+
+Max Heap after swap: 60 80 70 50 90
+Max Heap after pop_back: 60 80 70 50
+Start heapifying down from the root (index 0):
+
+left = 1, right = 2, largest = 0
+v[left] > v[largest] is true (80 > 60), so update largest to 1.
+Swap the elements at indices 0 and 1.
+Updated Max Heap: 80 60 70 50
+Continue heapifying down from the new position of the root:
+
+left = 3, right = 4, largest = 1
+No further swaps needed as 70 and 50 are smaller than 80.
+After deleting max element: 80 60 70 50
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void insertHeap(vector<int> &v, int x)
+{
+    v.push_back(x);
+
+    int curIdx = v.size() - 1;
+
+    while (curIdx != 0)
+    {
+        // Calculate the parent index
+        int parentIdx = (curIdx - 1) / 2;
+
+        // If the parent is less than the current element, swap them
+        if (v[parentIdx] < v[curIdx])
+        {
+            swap(v[parentIdx], v[curIdx]);
+        }
+        else
+        {
+            break; // Don't swap
+        }
+
+        curIdx = parentIdx;
+    }
+}
+
+void deleteMax(vector<int> &v)
+{
+    // Check if the heap is empty
+    if (v.empty())
+    {
+        cout << "Heap is empty!" << endl;
+        return;
+    }
+
+    // Swap the root (maximum element) with the last element
+    swap(v[0], v.back());
+    // Remove the last element, which is now the maximum element
+    v.pop_back();
+
+    // Start heapifying down from the root to restore the max heap property
+    int curIdx = 0;
+
+    while (true)
+    {
+        // Calculate the indices of the left and right children
+        int left = 2 * curIdx + 1;
+        int right = 2 * curIdx + 2;
+        int largest = curIdx;
+
+        /*
+        *'left < v.size()' Check if left child index is within the bounds of the vector 'v'
+        *'v[left] > v[largest]' Check if the value at the left child position is
+        greater than the value at the 'largest' index.
+        */
+        if (left < v.size() && v[left] > v[largest])
+        {
+            // If the above condition is true, update the 'largest' index
+            // to the left child index, as it contains a larger element.
+            largest = left;
+        }
+
+        // Compare the right child with the current element to find the larger one
+        if (right < v.size() && v[right] > v[largest])
+        {
+            largest = right;
+        }
+
+        /*
+        largest != curIdx: checks whether the largest index  is different from the
+        current index
+        */
+        if (largest != curIdx)
+        {
+            // Swap the current element with the largest element among itself and its children
+            swap(v[curIdx], v[largest]);
+
+            // Update the current index to the index of the swapped element (largest)
+            curIdx = largest;
+        }
+
+        else
+        {
+            // If the current element is larger than both its children, the heap property is satisfied
+            break;
+        }
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> v;
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        insertHeap(v, x);
+    }
+
+    cout << "Max Heap: ";
+    for (int val : v)
+        cout << val << " ";
+    cout << endl;
+
+    deleteMax(v);
+
+    cout << "Max Heap after deleting max element: ";
+    for (int val : v)
+        cout << val << " ";
+    cout << endl;
+
+    return 0;
+}
