@@ -1,0 +1,66 @@
+// Custom Compare Class for Priority Queue
+/*
+Input:
+4
+Abdullah 9 90
+Musfik 7 75
+Moinul 8 90
+Shanto 11 80
+Output:
+Moinul 8 90
+Abdullah 9 90
+Shanto 11 80
+Musfik 7 75
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int roll, marks;
+    Student(string name, int roll, int marks)
+    {
+        this->name = name;
+        this->roll = roll;
+        this->marks = marks;
+    }
+};
+
+class cmp
+{
+public:
+    bool operator()(Student a, Student b)
+    {
+        if (a.marks != b.marks)
+            return a.marks < b.marks; // Compare based on marks in ascending order
+        else
+            return a.roll > b.roll;
+        // If marks are equal, compare based on roll number in descending order
+    }
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+    priority_queue<Student, vector<Student>, cmp> pq;
+    for (int i = 0; i < n; i++)
+    {
+        string name;
+        int roll, marks;
+        cin >> name >> roll >> marks;
+
+        // Creating a Student object named 'obj' and initializing its parameters
+        Student obj(name, roll, marks);
+        pq.push(obj);
+    }
+    while (!pq.empty())
+    {
+        cout << pq.top().name << " " << pq.top().roll << " " << pq.top().marks << endl;
+        pq.pop();
+    }
+    return 0;
+}
