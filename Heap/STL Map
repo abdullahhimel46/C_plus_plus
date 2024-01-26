@@ -1,0 +1,28 @@
+// STL Map
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    map<string, int> mp;
+    // inserting element in the map
+    mp["Abdullah"] = 90;
+    mp["Moinul"] = 85;
+    mp["Shakib"] = 80;
+
+    // printing an element of map, way-1
+    cout << mp["Abdullah"] << endl;
+
+    // printing an element of map, way-2
+    if (mp.count("Abdullah"))
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
+
+    // printing an element of map, way-3
+    for (auto it = mp.begin(); it != mp.end(); it++)
+    {
+        cout << it->first << " " << it->second << endl;
+    }
+
+    return 0;
+}
