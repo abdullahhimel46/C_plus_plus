@@ -1,4 +1,10 @@
 // Count Words in a String using Map
+/*
+Input:
+I love cricket He loves cricket They love cricket Abdullah loves football
+Output:3
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 int main()
