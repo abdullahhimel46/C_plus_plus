@@ -1,0 +1,18 @@
+// Count Words in a String using Map
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string sentance;
+    getline(cin, sentance);
+    string word;
+    stringstream ss(sentance);
+
+    map<string, int> mp;
+    while (ss >> word)
+    {
+        mp[word]++;
+    }
+    cout << mp["cricket"] << endl;
+    return 0;
+}
