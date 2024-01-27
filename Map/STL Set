@@ -1,0 +1,36 @@
+// STL Set
+//***Set removes any duplicate elements
+/*
+Input:
+7
+10 2 20 3 100 5 7
+Output:
+2 3 5 7 10 20 100
+NO
+*/
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    set<int> s;
+    int n;
+    cin >> n;
+    while (n--)
+    {
+        int x;
+        cin >> x;
+        s.insert(x);
+    }
+
+    for (auto it = s.begin(); it != s.end(); it++)
+    {
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    if (s.count(100))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+    return 0;
+}
