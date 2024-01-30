@@ -1,0 +1,46 @@
+// Adjacency List Implementation for an undirected graph
+/*
+Input: 
+6 6
+0 1
+1 5
+0 4
+0 3
+3 4
+2 4
+Output:
+Adjacency list of vertex 0: 1 4 3
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // Input the number of vertices (n) and edges (e)
+    int n, e;
+    cin >> n >> e;
+
+    // Create an array of vectors to represent the graph with n vertices
+    vector<int> v[n];
+
+    // Input the edges and construct the adjacency list
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+
+        // Add b to the adjacency list of a, and vice versa (for undirected graph)
+        v[a].push_back(b);
+        v[b].push_back(a);
+    }
+
+    // Output the elements in the adjacency list of the first vertex (v[0])
+    cout << "Adjacency list of vertex 0: ";
+    for (int x : v[0])
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
