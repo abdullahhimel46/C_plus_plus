@@ -1,4 +1,21 @@
 // Edge List Input Output
+/*
+Input:
+6 6
+0 1
+1 5
+0 4
+0 3
+3 4
+2 4
+Output:
+0 1
+1 5
+0 4
+0 3
+3 4
+2 4
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -20,9 +37,10 @@ int main()
     }
 
     // Output the edges stored in the vector
-    for (int i = 0; i < v.size(); i++)
+    // for (pair<int, int> p : v)
+    for (auto p : v)
     {
-        cout << v[i].first << " " << v[i].second << endl;
+        cout << p.first << " " << p.second << endl;
     }
 
     return 0;
