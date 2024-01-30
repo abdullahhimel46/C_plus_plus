@@ -1,0 +1,29 @@
+// Edge List Input Output
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // Input the number of vertices (n) and edges (e)
+    int n, e;
+    cin >> n >> e;
+
+    // Vector to store pairs representing edges
+    vector<pair<int, int>> v;
+
+    // Input the edges and store them in the vector
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        v.push_back({a, b});
+    }
+
+    // Output the edges stored in the vector
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i].first << " " << v[i].second << endl;
+    }
+
+    return 0;
+}
