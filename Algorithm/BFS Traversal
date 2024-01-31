@@ -52,19 +52,19 @@ void bfs(int src)
 
     while (!q.empty())
     {
-        int p = q.front(); // Get the front node from the queue
-        q.pop();           // Pop the front node from the queue
-        cout << p << " ";  // Output the current node
+        int curNode = q.front(); // Get the front node from the queue
+        q.pop();                 // Pop the front node from the queue
+        cout << curNode << " ";  // Output the current node
 
         // Explore neighbors of the current node
-        for (int child : v[p])
+        for (int child : v[curNode])
         {
             if (!vis[child])
             // If the neighbor hasn't been visited
             {
                 q.push(child);               // Push the neighbor into the queue
                 vis[child] = true;           // Mark the neighbor as visited
-                level[child] = level[p] + 1; // Set the level of the neighbor
+                level[child] = level[curNode] + 1; // Set the level of the neighbor
             }
         }
     }
