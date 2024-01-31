@@ -1,0 +1,85 @@
+// BFS Traversal
+/*
+Input:
+5 6
+0 1
+1 2
+0 4
+1 3
+2 0
+3 4
+0 ->src
+Output:
+0 1 4 2 3
+Level:
+0: 0
+1: 1
+2: 1
+3: 2
+4: 1
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e5 + 10;
+vector<int> v[N]; // Adjacency list representation of the graph
+bool vis[N];      // Array to mark visited nodes during BFS
+int level[N];     // Array to store the level of each node in the BFS tree
+
+// Function to perform BFS on the graph starting from a given source node
+void bfs(int src)
+{
+    queue<int> q;    // Queue to store nodes during BFS traversal
+    q.push(src);     // Push the source node into the queue
+    vis[src] = true; // Mark the source node as visited
+    level[src] = 0;  // Set the level of the source node to 0
+
+    while (!q.empty())
+    {
+        int p = q.front(); // Get the front node from the queue
+        q.pop();           // Pop the front node from the queue
+        cout << p << " ";  // Output the current node
+
+        // Explore neighbors of the current node
+        for (int child : v[p])
+        {
+            if (!vis[child])
+            // If the neighbor hasn't been visited
+            {
+                q.push(child);               // Push the neighbor into the queue
+                vis[child] = true;           // Mark the neighbor as visited
+                level[child] = level[p] + 1; // Set the level of the neighbor
+            }
+        }
+    }
+    cout << endl;
+}
+
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+
+    // Input the edges of the graph
+    while (e--)
+    {
+        int x, y;
+        cin >> x >> y;
+        //(for undirected graph)
+        v[x].push_back(y); // Add y to the adjacency list of x
+        v[y].push_back(x); // Add x to the adjacency list of y
+    }
+
+    int src;
+    cin >> src;                      // Input the source node for BFS
+    memset(vis, false, sizeof(vis)); // Initialize the visited array
+    bfs(src);                        // Call the BFS function
+
+    cout << "Level: " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << i << ": " << level[i] << endl;
+    }
+
+    return 0;
+}
