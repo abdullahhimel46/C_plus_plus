@@ -1,5 +1,21 @@
 // BFS Traversal
 /*
+Data Structures:
+The algorithm utilizes a queue data structure to keep track of nodes to be visited next.
+An array v[] of vectors is used to represent the adjacency list of the graph.
+vis[] array is used to mark visited nodes.
+level[] array is used to store the level of each node from the source node.
+
+Algorithm Steps:
+Start with a source node src.
+Enqueue the source node into the queue and mark it as visited.
+While the queue is not empty:
+Dequeue a node p from the front of the queue.
+Print or process the node p.
+Enqueue all unvisited adjacent nodes of p into the queue, mark them as visited, and set their level as level[p] + 1.
+Repeat until the queue is empty
+*/
+/*
 Input:
 5 6
 0 1
