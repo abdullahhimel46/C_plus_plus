@@ -1,0 +1,42 @@
+// countDirectlyConnectedNodes
+/*
+Sample Input
+6 5
+0 1
+0 2
+0 3
+2 3
+4 5
+2
+Sample Output
+2
+*/
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> v[10005];
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+
+    // Input the edges of the graph
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        // Connect edges by adding them to the adjacency list
+        v[a].push_back(b);
+        v[b].push_back(a);
+    }
+
+    int x;
+    cin >> x;
+    int cnt = 0;
+    for (int i : v[x])
+    {
+        cnt++;
+    }
+    cout << cnt << endl;
+    // cout<< v[x].size() << endl;
+    return 0;
+}
