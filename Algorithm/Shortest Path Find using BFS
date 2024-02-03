@@ -1,0 +1,121 @@
+// Shortest Path Find using BFS
+/*
+Question: You will be given an undirected graph as input. Then you will be given a
+query Q. For each query, you will be given source S and destination D. You need to
+print the shortest distance between S and D.
+Note: If there is no path from S to D, print -1.
+
+Sample Input
+6 7
+0 1
+0 2
+1 2
+0 3
+4 2
+3 5
+4 3
+6
+0 5
+1 5
+2 5
+2 3
+1 4
+0 0
+Sample Output
+2
+3
+3
+2
+2
+0
+
+Sample Input
+7 5
+0 1
+0 2
+4 5
+4 6
+5 7
+3
+0 4
+5 1
+1 3
+Sample Output
+-1
+-1
+-1
+
+
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int m = 1e5 + 10;
+vector<int> v[m]; // Adjacency list to represent the graph
+
+// Breadth-First Search algorithm to find shortest distance
+int bfs(int src, int des)
+{
+    // If source and destination are the same, distance is 0
+    if (src == des)
+        return 0;
+
+    vector<bool> vis(m, false);
+    vector<int> dist(m, -1);
+
+    queue<int> q;
+    q.push(src);
+    vis[src] = true;
+    dist[src] = 0;
+
+    while (!q.empty())
+    {
+        int p = q.front();
+        q.pop();
+        for (int child : v[p])
+        {
+            if (!vis[child])
+            {
+                q.push(child);
+                vis[child] = true; // Mark the child node as visited
+                // Set the distance of the child node from the source
+                dist[child] = dist[p] + 1;
+
+                // If the child node is the destination, return its distance
+                if (child == des)
+                    return dist[child];
+            }
+        }
+    }
+    return -1; // If destination is not reachable from source
+}
+
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+
+    // Input the edges of the graph
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        // Connect edges by adding them to the adjacency list
+        v[a].push_back(b);
+        v[b].push_back(a);
+    }
+
+    int q;
+    cin >> q;
+    while (q--)
+    {
+        int src, des;
+        cin >> src >> des;
+
+        int distance = bfs(src, des);
+
+        // Output the distance
+        cout << distance << endl;
+    }
+    return 0;
+}
