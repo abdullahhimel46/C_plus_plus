@@ -17,10 +17,12 @@ Output: 0 1 2 5
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5 + 10;
-vector<int> v[N]; // Adjacency list to represent the graph
-bool vis[N];      // Array to mark visited nodes
-int parent[N];    // Array to store the parent of each node in the BFS traversal
+const int m = 1e5 + 10;
+vector<int> v[m]; // Adjacency list to represent the graph
+vector<bool> vis(m, false);
+// memset(vis, false, sizeof(vis));
+vector<int> parent(m, -1);
+// memset(parent, -1, sizeof(parent));
 
 // Breadth-First Search algorithm
 void bfs(int src)
@@ -62,10 +64,6 @@ int main()
 
     int src, des;
     cin >> src >> des;
-
-    // Initialize arrays for visited nodes and parent nodes
-    memset(vis, false, sizeof(vis));
-    memset(parent, -1, sizeof(parent));
 
     // Perform BFS traversal starting from the source node
     bfs(src);
