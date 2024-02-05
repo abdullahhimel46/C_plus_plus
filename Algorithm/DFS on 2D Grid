@@ -1,0 +1,75 @@
+
+// DFS on 2D Grid
+/*
+Input:
+3 4
+....
+....
+....
+1 1
+Output:
+1 1
+1 2
+1 3
+0 3
+0 2
+0 1
+0 0
+1 0
+2 0
+2 1
+2 2
+2 3
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, m;
+char a[20][20];
+bool vis[20][20];
+vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+
+// Check if the given cell coordinates (i, j) are within the grid boundaries
+bool isValid(int i, int j, int n, int m)
+{
+    return i >= 0 && i < n && j >= 0 && j < m;
+}
+
+// DFS function to explore the grid
+void dfs(int si, int sj)
+{
+    cout << si << " " << sj << endl; // Print the current cell coordinates
+    vis[si][sj] = true;              // Mark the current cell as visited
+
+    // Explore all four possible directions (right, left, up, down)
+    for (auto d : dir)
+    {
+        int ci = si + d.first;  // New row coordinate
+        int cj = sj + d.second; // New column coordinate
+
+        // Check if the new cell is within the grid and has not been visited
+        if (isValid(ci, cj, n, m) && !vis[ci][cj])
+        {
+            // Recursive call to DFS for the unvisited neighboring cell
+            dfs(ci, cj);
+        }
+    }
+}
+
+int main()
+{
+    cin >> n >> m; // Input the dimensions of the grid
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j]; // Input the grid values
+        }
+    }
+
+    int si, sj; // Starting cell coordinates
+    cin >> si >> sj;
+    memset(vis, false, sizeof(vis)); // Initialize the visited array to false
+    dfs(si, sj);                     // Start DFS from the specified cell
+    return 0;
+}
