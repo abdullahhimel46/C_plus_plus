@@ -1,13 +1,22 @@
 //BFS on 2D grid
+//find the minimum distance from a given source cell to a destination cell
 /*
 Input:
 3 4
 ....
 ....
 ....
-0 0
+0 0 ->src
 Output:
-5
+Min distance(2,3): 5
+*/
+/*
+Tasks:
+Read the dimensions of the grid (n rows and m columns) and the grid itself.
+Read the starting position (si, sj) for the BFS traversal.
+Initialize arrays vis (to keep track of visited cells), dis (to store the minimum distance from the source), and set initial values.
+Call the bfs function, which performs BFS starting from the source cell (si, sj).
+Output the minimum distance from the source cell to the destination cell (2, 3).
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -67,6 +76,6 @@ int main()
     memset(vis, false, sizeof(vis));
     memset(dis, -1, sizeof(dis));
     bfs(si, sj);
-    cout << dis[2][3];
+    cout <<"Min distance([2][3]): "<< dis[2][3];
     return 0;
 }
