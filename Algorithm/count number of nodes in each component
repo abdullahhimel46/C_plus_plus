@@ -63,9 +63,9 @@ vector<int> findComponent(int n)
     {
         if (!vis[i])
         {
-            int comSz = 0;            // Initialize component size for each component
-            dfs(i, comSz);            // Perform DFS to find the size of the connected component
-            comSize.push_back(comSz); // Store the size of the connected component
+            int sz = 0;            // Initialize component size for each component
+            dfs(i, sz);            // Perform DFS to find the size of the connected component
+            comSize.push_back(sz); // Store the size of the connected component
         }
     }
 
