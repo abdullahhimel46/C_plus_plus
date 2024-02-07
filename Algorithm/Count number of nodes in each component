@@ -1,0 +1,100 @@
+// Count number of nodes in each component in ascending order
+/*
+Question: You will be given an undirected graph as input. You need to tell the number
+of nodes in each component in ascending order.
+Input:
+7 6
+0 1
+1 2
+2 3
+1 3
+4 0
+5 6
+Output:
+2 5
+Explanation:
+The following pairs represent edges between nodes: (0, 1), (1, 2), (2, 3), (1, 3),
+(4, 0), and (5, 6).
+
+Graph representation:
+0---1---2---3
+|
+4
+
+5---6
+
+Connected Components:
+The first connected component includes nodes {0, 1, 2, 3, 4} -> 5
+The second connected component includes nodes {5, 6} -> 2
+That's why, Output: 2 5
+
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int m = 10005;
+vector<int> v[m];           // Adjacency list to represent the graph
+vector<bool> vis(m, false); // Visited array to track visited nodes during DFS
+
+void dfs(int src, int &comSz)
+{
+    vis[src] = true;
+    comSz++;
+
+    // Explore neighbors of the current node using DFS
+    for (int child : v[src])
+    {
+        if (!vis[child])
+        {
+            dfs(child, comSz);
+        }
+    }
+}
+
+vector<int> findComponent(int n)
+{
+    // Reset the visited array for each test case
+    vis.clear();
+    // fill(vis.begin(),vis.end(),false);
+    vector<int> comSize; // Vector to store component sizes
+
+    // Traverse all nodes in the graph
+    for (int i = 0; i < n; i++)
+    {
+        if (!vis[i])
+        {
+            int comSz = 0;            // Initialize component size for each component
+            dfs(i, comSz);            // Perform DFS to find the size of the connected component
+            comSize.push_back(comSz); // Store the size of the connected component
+        }
+    }
+
+    return comSize; // Return the vector containing sizes of connected components
+}
+
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+
+    // Input the edges of the graph
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        v[a].push_back(b);
+        v[b].push_back(a);
+    }
+
+    vector<int> compSizes = findComponent(n); // Find the sizes of connected components
+
+    sort(compSizes.begin(), compSizes.end()); // Sort the sizes in ascending order
+
+    // Output the sizes of connected components
+    for (int size : compSizes)
+    {
+        cout << size << " ";
+    }
+
+    return 0;
+}
