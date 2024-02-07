@@ -1,4 +1,4 @@
-// Count number of nodes in each component in ascending order
+// count number of nodes in each component in ascending order
 /*
 Question: You will be given an undirected graph as input. You need to tell the number
 of nodes in each component in ascending order.
