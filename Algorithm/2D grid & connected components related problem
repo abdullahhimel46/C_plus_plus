@@ -1,0 +1,105 @@
+// Link: https://www.hackerrank.com/contests/assignment-01-a-introduction-to-algorithms-a-batch-04/challenges/count-apartments-ii/problem
+//  2D grid & connected components related problem
+/*
+Problem Statement
+You are given an MxN sized 2D matrix that represents a map of a building. Each cell
+represents a wall or a room. The connected rooms are called apartments. Your task
+is to count the number rooms in each of the apartments in that building. You can
+walk left, right, up, and down through the room cells. You can't pass through walls.
+
+You need to print the count of the rooms in ascending order. If there are no
+apartments available in that building, then you should print 0.
+Note:Each character is .(floor), #(wall)
+
+Output Format
+Output the number of rooms in each of the apartments in ascending order.
+
+Sample Input 0
+5 8
+########
+#..#...#
+####.#.#
+#..#...#
+########
+
+Sample Output 0
+2 2 8
+
+Sample Input
+5 8
+########
+########
+########
+########
+########
+
+Sample Output
+0
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 2000;
+int n, m;
+char grid[N][N];
+bool vis[N][N];
+vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+bool isValid(int i, int j)
+{
+    return i >= 0 && i < n && j >= 0 && j < m;
+}
+
+int dfs(int si, int sj)
+{
+    vis[si][sj] = true;
+    int cnt = 1;
+
+    for (auto d : dir)
+    {
+        int ci = si + d.first;
+        int cj = sj + d.second;
+        if (isValid(ci, cj) && !vis[ci][cj] && grid[ci][cj] == '.')
+        {
+            cnt += dfs(ci, cj);
+        }
+    }
+    return cnt;
+}
+
+int main()
+{
+    cin >> n >> m;
+    vector<int> appartment;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (!vis[i][j] && grid[i][j] == '.')
+            {
+                int roomSz = dfs(i, j);
+                appartment.push_back(roomSz);
+            }
+        }
+    }
+    sort(appartment.begin(), appartment.end());
+    for (int ans : appartment)
+    {
+        cout << ans << " ";
+    }
+
+    // If there are no apartments available in that building, then you should print 0.
+    if (appartment.empty())
+    {
+        cout << 0 << endl;
+    }
+
+    return 0;
+}
