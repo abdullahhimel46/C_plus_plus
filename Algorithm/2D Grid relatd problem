@@ -1,0 +1,101 @@
+// Link: https://www.hackerrank.com/contests/assignment-01-a-introduction-to-algorithms-a-batch-04/challenges/can-go-1/problem
+//  2D Grid relatd problem
+/*
+Problem Statement
+You are given an MxN sized 2D matrix that represents a map of a building.
+Each cell represents a wall, a floor or a room. You will be given two
+rooms A and B. You need to tell if you can go from room A to B by passing
+through the floors. You can walk left, right, up, and down through the floor
+cells. You can't pass through walls.
+Note:Each character is .(floor), #(wall), A or B (rooms)
+
+Output Format
+Output YES if you can go from room A to B, NO otherwise.
+
+Sample Input 0
+5 8
+########
+#.A#...# ->A(ai,aj)
+#.##.#B# ->B(bi,bj)
+#......#
+########
+
+Sample Output 0
+YES
+
+Sample Input 0
+5 8
+########
+##A##### ->A(ai,aj)
+######B# ->B(bi,bj)
+########
+########
+
+Sample Output 0
+NO
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+int n, m;
+char room[20][20];
+bool vis[20][20];
+vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+
+bool isValid(int i, int j)
+{
+    return i >= 0 && i < n && j >= 0 && j < m;
+}
+
+void dfs(int ai, int aj)
+{
+    vis[ai][aj] = true;
+    for (auto d : dir)
+    {
+        int bi = ai + d.first;
+        int bj = aj + d.second;
+        if (isValid(bi, bj) && !vis[bi][bj] && room[bi][bj] != '#')
+        // You can't pass through walls -> room[bi][bj] != '#'
+        {
+            dfs(bi, bj);
+        }
+    }
+}
+
+int main()
+{
+    cin >> n >> m;
+    memset(vis, false, sizeof(vis));
+    int ai = 0, aj = 0, bi = 0, bj = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> room[i][j];
+            if (room[i][j] == 'A')
+            {
+                ai = i;
+                aj = j;
+                cout << "Room A: " << i << " " << j << endl;
+            }
+            if (room[i][j] == 'B')
+            {
+                bi = i;
+                bj = j;
+                cout << "Room B: " << i << " " << j << endl;
+            }
+        }
+    }
+    dfs(ai, aj);
+
+    if (vis[bi][bj])
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
+    return 0;
+}
