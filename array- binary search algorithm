@@ -14,17 +14,17 @@ int main()
     int x;
     cin >> x; // Input the element to be searched
 
-    int l = 0;     // Leftmost index of the search range
-    int r = n - 1; // Rightmost index of the search range
+    int lo = 0;     // Leftmost index of the search range
+    int hi = n - 1; // Rightmost index of the search range
 
     bool flag = false; // Flag to track whether x is found or not
 
     // Binary search algorithm
-    while (l <= r) // as l<r for always
+    while (lo <= hi) // as lo<hi for always
     /*When l becomes greater than r, it means that the search space has become empty
      or invalid, and the loop will exit.*/
     {
-        int mid_index = (l + r) / 2; // Calculate the mid index of the search range
+        int mid_index = (lo + hi) / 2; // Calculate the mid index of the search range
 
         if (x == a[mid_index])
         // If the element is found at mid_index
@@ -33,16 +33,18 @@ int main()
             break;       // Exit the loop as the element is found
         }
         else if (x > a[mid_index])
+        // mane x dane ase, lo ke dane nibo
         {
             // If x is greater, search in the right half
             //>move left
-            l = mid_index + 1; // Move the left boundary to mid_index + 1
+            lo = mid_index + 1; // Move the left boundary to mid_index + 1
         }
         else if (x < a[mid_index])
+        // mane x bame ase, hi ke bame nite hbe
         {
             // If x is smaller, search in the left half
             //<move right
-            r = mid_index - 1; // Move the right boundary to mid_index - 1
+            hi = mid_index - 1; // Move the right boundary to mid_index - 1
         }
     }
 
