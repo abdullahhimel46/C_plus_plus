@@ -1,0 +1,66 @@
+// Cycle Detection Undirected in Undirected graph using dfs
+/*
+Input:
+4 4
+0 1
+1 2
+2 3
+3 1
+Output:
+Yes, cycle dected
+*/
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5 + 5;
+vector<int> adj[N];
+bool vis[N];
+bool ans;
+int directParent[N];
+
+void dfs(int parent)
+{
+    vis[parent] = true;
+    for (int child : adj[parent])
+    {
+        if (vis[child] && directParent[parent] != child)
+        {
+            ans = true;
+        }
+        if (!vis[child])
+        {
+            directParent[child] = parent;
+            // set the direct parent of the child to the current parent node
+            dfs(child);
+        }
+    }
+}
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    memset(vis, false, sizeof(vis));
+    memset(directParent, -1, sizeof(directParent));
+    ans = false;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!vis[i])
+        {
+            dfs(i);
+        }
+    }
+
+    if (ans)
+        cout << "Yes,cycle found" << endl;
+    else
+        cout << "No" << endl;
+
+    return 0;
+}
