@@ -42,9 +42,10 @@ void dfs(int parent)
             dfs(child);
         }
 
+        // on the same path node has to be visited again
         if (pathVis[child])
         {
-            ans = true;
+            ans = true;//cycle dected
         }
     }
     // kaj ses
