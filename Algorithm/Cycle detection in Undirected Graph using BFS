@@ -1,0 +1,116 @@
+// Cycle detection in Undirected Graph using BFS
+/*
+Input:
+1 1
+0 1
+Output: Opps! No cycle found.
+
+Input:
+8 8
+1 2
+2 3
+4 5
+5 6
+6 8
+8 7
+8 9
+7 5
+Output: Cycle detected!
+*/
+
+/*
+Tecnique to detect cycle:
+
+4---5---6
+    |   |
+    7---8
+
+Let's consider the edge (7, 5): vertex 8 is the parent of vertex 7 (parArray[7] == 8)
+and 5 is the child of vertex 7 (child = 5)
+When the algorithm explores vertex 7, it finds that vertex 5 is already visited
+(vis[5] == true). Additionally, the parent of vertex 7 (parArray[7]) is not vertex 5
+(parArray[7] != 5).This implies that vertex 5 is reachable from vertex 7. Therefore,
+this edge (7, 5) contributes to the detection of a cycle.
+
+    //cycle detection
+    if (vis[child] && child != parArray[curNode])
+    if((vis[5] == true) && parArray[7] != 5){
+        detectCycle = true;
+    }
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5 + 10;
+vector<int> adj[N];
+bool vis[N];
+int parArray[N];
+bool detectCycle;
+
+void bfs(int src)
+{
+    queue<int> q;
+    q.push(src);
+    vis[src] = true;
+
+    while (!q.empty())
+    {
+        int curNode = q.front();
+        q.pop();
+
+        for (int child : adj[curNode])
+        {
+            /* condition:the destination vertex is already visited
+            but is not the parent of the source vertex. */
+            if (vis[child] && child != parArray[curNode])
+            // child != parArray[curNode] -> curNode isn't the parent of the curent child
+            {
+                detectCycle = true;
+                // cout << " parArray[curNode]: " << parArray[curNode]
+                //      << " parent: " << curNode
+                //      << " child: " << child
+                //      << "\n";
+            }
+
+            else if (!vis[child])
+            {
+                q.push(child);
+                // update parArray
+                parArray[child] = curNode;
+                vis[child] = true;
+            }
+        }
+    }
+}
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    memset(vis, false, sizeof(vis));
+    memset(parArray, -1, sizeof(parArray));
+    detectCycle = false;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!vis[i])
+        {
+            bfs(i);
+        }
+    }
+
+    if (detectCycle)
+    {
+        cout << "Cycle detected!" << endl;
+    }
+    else
+        cout << "Opps! No cycle found.\n";
+    return 0;
+}
