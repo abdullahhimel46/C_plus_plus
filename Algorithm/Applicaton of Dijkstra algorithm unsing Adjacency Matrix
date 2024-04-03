@@ -1,0 +1,99 @@
+// Applicaton of Dijkstra algorithm unsing Adjacency Matrix
+// Link: https://www.eolymp.com/en/problems/1365
+/*
+The directed weighted graph is given. Find the shortest path from the vertex s to the
+vertex f.
+
+Input data
+The first line contains three numbers n, s and f (1 ≤ n ≤ 100, 1 ≤ s, f ≤ n), where n
+is the number of vertices in a graph. Each of the next n lines contains n numbers -
+the adjacency matrix of the graph, where the number in the i-th line and j-th column
+corresponds to the edge from i to j: -1 means the absence of the edge between the
+vertices, and any non-negative number - the presence of the edge of a given weight.
+The main diagonal of the matrix contains always zeroes.
+
+Output data
+Print the required distance or -1 if the path between the given vertices does not
+exist.
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5 + 10;
+vector<pair<int, int>> adj[N];
+int dist[N];
+
+void dijakstra(int s)
+{
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({s, 0});
+    dist[s] = 0;
+
+    while (!pq.empty())
+    {
+        pair<int, int> curNode = pq.top();
+        pq.pop();
+        int curNodeVal = curNode.first;
+        int curNodeCost = curNode.second;
+
+        for (pair<int, int> newNode : adj[curNodeVal])
+        {
+            int newNodeVal = newNode.first;
+            int newNodeCost = newNode.second;
+
+            if (curNodeCost + newNodeCost < dist[newNodeVal])
+            {
+                dist[newNodeVal] = curNodeCost + newNodeCost;
+                pq.push({newNodeVal, dist[newNodeVal]});
+            }
+        }
+    }
+}
+
+int main()
+{
+    int n, src, finalDestination;
+    cin >> n >> src >> finalDestination;
+
+    // declaring a 2D adjacency matrix
+    int adjMat[n + 1][n + 1];
+    /*
+    n is the number of vertices in the graph. The additional +1 is because the
+    vertices are numbered from 1 to n, and C++ arrays are zero-indexed
+    */
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            // taking input of adjacency matrix
+            cin >> adjMat[i][j];
+
+            // condition: any non-negative number - the presence of the edge of a given weight
+
+            // if an edge is present, only then push it into the adj list!!
+            if (adjMat[i][j] >= 0)
+            {
+                // directed graph
+                adj[i].push_back({j, adjMat[i][j]});
+                // pushing a pair at i'th index of the adj variable
+                /*
+                 * j represents the destination vertex of the edges
+                 * adjMat[i][j] stores the weight of the edge from vertex i to vertex j
+                 */
+            }
+        }
+    }
+    // memset
+    for (int i = 1; i <= n; i++)
+    {
+        dist[i] = INT_MAX;
+    }
+    dijakstra(src);
+    if (dist[finalDestination] == INT_MAX)
+        cout << "-1" << endl;
+    else
+        cout << dist[finalDestination] << endl;
+
+    return 0;
+}
