@@ -1,4 +1,4 @@
-// Bellmanford algorithm
+// Bellmanford algorithm for directed graph
 /*
 Input:
 4 4
