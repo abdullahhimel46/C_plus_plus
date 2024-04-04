@@ -75,6 +75,7 @@ int main()
             v = ed.v;
             w = ed.w;
 
+            //if path relax is possible, then negative cycle is present
             if (dist[u] < inf && dist[u] + w < dist[v])
             {
                 cycle = true;
