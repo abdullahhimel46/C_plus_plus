@@ -1,0 +1,78 @@
+// Bellmanford algorithm
+/*
+Input:
+4 4
+1 3 -3
+0 3 5
+2 1 1
+0 2 -2
+Output:
+0 => 0
+1 => -1
+2 => -2
+3 => -4
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Edge
+{
+public:
+    int u, v, w;
+    Edge(int u, int v, int w)
+    {
+        this->u = u;
+        this->v = v;
+        this->w = w;
+    }
+};
+
+const int N = 100;
+const int inf = INT_MAX;
+int dist[N];
+
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    vector<Edge> edgeList;
+    while (e--)
+    {
+        int u, v, w;
+        cin >> u >> v >> w;
+        edgeList.push_back(Edge(u, v, w));
+    }
+
+    // memset
+    for (int i = 0; i < n; ++i)
+    {
+        dist[i] = inf;
+    }
+
+    dist[0] = 0;
+
+    // bellman algorithm
+    for (int i = 1; i <= n - 1; ++i)
+    {
+        int u, v, w;
+        for (Edge ed : edgeList)
+        {
+            u = ed.u;
+            v = ed.v;
+            w = ed.w;
+
+            if (dist[u] < inf && dist[u] + w < dist[v])
+            {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    //
+    for (int i = 0; i < n; ++i)
+    {
+        cout << i << " => " << dist[i] << endl;
+    }
+    return 0;
+}
