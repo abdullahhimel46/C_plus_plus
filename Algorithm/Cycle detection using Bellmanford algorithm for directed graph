@@ -1,0 +1,97 @@
+// Cycle detection using Bellmanford algorithm for directed graph
+/*
+Input:
+3 3
+0 1 -1
+1 2 2
+2 0 -3
+Output:
+Cycle detected!
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Edge
+{
+public:
+    int u, v, w;
+    Edge(int u, int v, int w)
+    {
+        this->u = u;
+        this->v = v;
+        this->w = w;
+    }
+};
+
+const int N = 100;
+const int inf = INT_MAX;
+int dist[N];
+
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    vector<Edge> edgeList;
+    while (e--)
+    {
+        int u, v, w;
+        cin >> u >> v >> w;
+        edgeList.push_back(Edge(u, v, w));
+    }
+
+    // memset
+    for (int i = 0; i < n; ++i)
+    {
+        dist[i] = inf;
+    }
+
+    dist[0] = 0;
+
+    // bellman algorithm
+    for (int i = 1; i <= n - 1; ++i)
+    {
+        int u, v, w;
+        for (Edge ed : edgeList)
+        {
+            u = ed.u;
+            v = ed.v;
+            w = ed.w;
+
+            if (dist[u] < inf && dist[u] + w < dist[v])
+            {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    bool cycle = false;
+    for (int i = 1; i <= n - 1; ++i)
+    {
+        int u, v, w;
+        for (Edge ed : edgeList)
+        {
+            u = ed.u;
+            v = ed.v;
+            w = ed.w;
+
+            if (dist[u] < inf && dist[u] + w < dist[v])
+            {
+                cycle = true;
+                break;
+            }
+        }
+    }
+
+    //
+    if (cycle)
+        cout << "Cycle detected!" << endl;
+    else
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            cout << i << " => " << dist[i] << endl;
+        }
+    }
+    return 0;
+}
