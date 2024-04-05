@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t, i;
+    cin >> t;
+    for (i = 1; i <= t; i++)
+    {
+        int n;
+        cin >> n;
+        int tmp = n;
+        int s = 0;
+        while (tmp != 0)
+        {
+            int r = tmp % 10;
+            s = s * 10 + r;
+            tmp = tmp / 10;
+        }
+        if (s == n)
+            cout << "Case " << i << ": Yes" << endl;
+        else
+            cout << "Case " << i << ": No" << endl;
+    }
+    return 0;
+}
