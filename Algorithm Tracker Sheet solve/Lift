@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    for (int i = 1; i <= t; i++)
+    {
+        int myPos, liftPos;
+        cin >> myPos >> liftPos;
+        int lift_moving_time = 4;
+        int door_operation_time = 3;
+        int enter_exit_time = 5;
+
+        // Time for lift to reach person's floor
+        int lift_time_to_person = abs(liftPos - myPos) * lift_moving_time + door_operation_time + enter_exit_time;
+        // Time for lift to go from person's floor to ground floor
+        int lift_time_to_ground = myPos * lift_moving_time + door_operation_time + enter_exit_time;
+        //  Total time for person to reach ground floor
+        int time = lift_time_to_person + lift_time_to_ground + door_operation_time;
+        cout << "Case " << i << ": " << time << endl;
+    }
+    return 0;
+}
