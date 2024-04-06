@@ -1,5 +1,5 @@
-//BFS on 2D grid
-//find the minimum distance from a given source cell to a destination cell
+// BFS on 2D grid
+// find the minimum distance from a given source cell to a destination cell
 /*
 Input:
 3 4
@@ -27,7 +27,7 @@ bool vis[20][20];
 int dis[20][20];
 vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
-bool isValid(int i, int j, int n, int m)
+bool isValid(int i, int j)
 {
     return i >= 0 && i < n && j >= 0 && j < m;
 }
@@ -42,20 +42,20 @@ void bfs(int si, int sj)
     while (!q.empty())
     {
         {
-            auto p = q.front();
+            pair<int, int> par = q.front();
             q.pop();
-            int a = p.first, b = p.second;
+            int x = par.first, y = par.second;
 
-            for (auto d : dir)
+            for (pair<int, int> d : dir)
             {
-                int ci = a + d.first;
-                int cj = b + d.second;
+                int childi = par.first + d.first;
+                int childj = par.second + d.second;
 
-                if (isValid(ci, cj, n, m) && !vis[ci][cj])
+                if (isValid(childi, childj) && !vis[childi][childj])
                 {
-                    q.push({ci, cj});
-                    vis[ci][cj] = true;
-                    dis[ci][cj] = dis[a][b] + 1;
+                    q.push({childi, childj});
+                    vis[childi][childj] = true;
+                    dis[childi][childj] = dis[x][y] + 1;
                 }
             }
         }
@@ -71,11 +71,11 @@ int main()
             cin >> a[i][j];
         }
     }
-    int si, sj;
-    cin >> si >> sj;
+    int srci, srcj;
+    cin >> srci >> srcj;
     memset(vis, false, sizeof(vis));
     memset(dis, -1, sizeof(dis));
-    bfs(si, sj);
-    cout <<"Min distance([2][3]): "<< dis[2][3];
+    bfs(srci, srcj);
+    cout << "Min distance(2,3): " << dis[2][3];
     return 0;
 }
