@@ -19,6 +19,7 @@ To get from h8 to a1 takes 6 knight moves.
 To get from b1 to c3 takes 1 knight moves.
 To get from f6 to f6 takes 0 knight moves.
 */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -33,7 +34,7 @@ bool isValid(int i, int j)
     return i >= 0 && i < n && j >= 0 && j < m;
 }
 
-void bfs(int r1, int c1, int r2, int c2)
+void bfs(int r1, int c1)
 {
     queue<pair<int, int>> q;
     q.push({r1, c1});
@@ -49,8 +50,8 @@ void bfs(int r1, int c1, int r2, int c2)
         for (pair<int, int> d : dir)
         {
             // move to row2 & col2
-            r2 = node.first + d.first;
-            c2 = node.second + d.second;
+            int r2 = node.first + d.first;
+            int c2 = node.second + d.second;
             if (isValid(r2, c2) && !vis[r2][c2])
             {
                 q.push({r2, c2});
@@ -82,7 +83,7 @@ int main()
         memset(vis, false, sizeof(vis));
         memset(dis, -1, sizeof(dis));
 
-        bfs(row1, col1, row2, col2);
+        bfs(row1, col1);
 
         cout << "To get from " << s1 << " to " << s2 << " takes " << dis[row2][col2] << " knight moves." << endl;
     }
