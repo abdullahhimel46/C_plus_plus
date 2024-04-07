@@ -1,0 +1,48 @@
+// There Are Two Types Of Burgers
+#include <bits/stdc++.h>
+using namespace std;
+/*
+In second query you have to sell one hamburgers and two chicken burgers.
+Your income is 1⋅10+2⋅12=34
+int income = beefPatties*ham_burger_price + chickenPatties*chi_burger_price;
+raw material of ham_burger is beefPatties
+raw material of chi_burger is chickenPatties
+
+N.B: For each query print one integer — the maximum profit you can achieve.
+So, maxProfit can be earned by selling max chicken burger, as chicken
+burger price is higher than hamburger price! That's why, the for loop is
+started by initializing the beefPatties to 0.
+*/
+
+int main()
+{
+    int t;
+    cin >> t;
+
+    while (t--)
+    {
+        int bun, beef, chicken, ham_burger_price, chicken_burger_price;
+        cin >> bun >> beef >> chicken >> ham_burger_price >> chicken_burger_price;
+
+        int needed_bun = 2;
+        int maxProfit = 0;
+
+        for (int beefPatties = 0; beefPatties <= min(bun / needed_bun, beef); beefPatties++)
+        {
+            // the remaining number of buns after using some of them to assemble beef patties
+            int rem_bun = bun - (beefPatties * needed_bun);
+            // Since each hamburger requires two buns, (beefPatties * 2)
+
+            int chickenCutlets = min((rem_bun / needed_bun), chicken);
+
+            // cout << "beefPatties: " << beefPatties << " * " << " ham_burger: " << ham_burger_price << endl;
+            // cout << "chickenCutlets: " << chickenCutlets << " * " << " chicken_burger: " << chicken_burger_price << endl;
+            int income = (beefPatties * ham_burger_price) + (chickenCutlets * chicken_burger_price);
+            maxProfit = max(maxProfit, income);
+        }
+
+        cout << maxProfit << endl;
+    }
+
+    return 0;
+}
