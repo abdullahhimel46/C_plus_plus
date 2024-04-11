@@ -23,14 +23,15 @@ Output:
 */
 #include <bits/stdc++.h>
 using namespace std;
-
+#define N 50
 int n, m;
-char a[20][20];
-bool vis[20][20];
+char a[N][N];
+bool vis[N][N];
+// Store all four possible directions (right, left, up, down)
 vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
 // Check if the given cell coordinates (i, j) are within the grid boundaries
-bool isValid(int i, int j, int n, int m)
+bool isValid(int i, int j)
 {
     return i >= 0 && i < n && j >= 0 && j < m;
 }
@@ -38,20 +39,22 @@ bool isValid(int i, int j, int n, int m)
 // DFS function to explore the grid
 void dfs(int si, int sj)
 {
+    // traversing parent nodes
     cout << si << " " << sj << endl; // Print the current cell coordinates
     vis[si][sj] = true;              // Mark the current cell as visited
 
-    // Explore all four possible directions (right, left, up, down)
-    for (auto d : dir)
+    // traversing child nodes
+    for (pair<int, int> d : dir)
     {
-        int ci = si + d.first;  // New row coordinate
-        int cj = sj + d.second; // New column coordinate
+        // move to next nodes
+        int childi = si + d.first;  // New row coordinate
+        int childj = sj + d.second; // New column coordinate
 
-        // Check if the new cell is within the grid and has not been visited
-        if (isValid(ci, cj, n, m) && !vis[ci][cj])
+        // Check if the new cell is within the grid(valid) and has not been visited
+        if (isValid(childi, childj) && !vis[childi][childj])
         {
             // Recursive call to DFS for the unvisited neighboring cell
-            dfs(ci, cj);
+            dfs(childi, childj);
         }
     }
 }
@@ -67,9 +70,9 @@ int main()
         }
     }
 
-    int si, sj; // Starting cell coordinates
-    cin >> si >> sj;
+    int srci, srcj; // Starting cell coordinates
+    cin >> srci >> srcj;
     memset(vis, false, sizeof(vis)); // Initialize the visited array to false
-    dfs(si, sj);                     // Start DFS from the specified cell
+    dfs(srci, srcj);                 // Start DFS from the specified cell
     return 0;
 }
