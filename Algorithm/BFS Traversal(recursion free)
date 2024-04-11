@@ -1,4 +1,4 @@
-// BFS Traversal
+// BFS Traversal(no need of recursion)
 /*
 Data Structures:
 The algorithm utilizes a queue data structure to keep track of nodes to be visited next.
