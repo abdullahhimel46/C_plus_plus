@@ -20,11 +20,11 @@ Output the minimum distance from the source cell to the destination cell (2, 3).
 */
 #include <bits/stdc++.h>
 using namespace std;
-
+#define N 50
 int n, m;
-char a[20][20];
-bool vis[20][20];
-int dis[20][20];
+char a[N][N];
+bool vis[N][N];
+int dis[N][N];
 vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
 bool isValid(int i, int j)
@@ -35,10 +35,13 @@ bool isValid(int i, int j)
 void bfs(int si, int sj)
 {
     queue<pair<int, int>> q;
+
+    // dealing with parent cells
     q.push({si, sj});
     vis[si][sj] = true;
     dis[si][sj] = 0;
 
+    // dealing with child cells
     while (!q.empty())
     {
         {
@@ -48,9 +51,16 @@ void bfs(int si, int sj)
 
             for (pair<int, int> d : dir)
             {
+                // move to next cells
                 int childi = par.first + d.first;
                 int childj = par.second + d.second;
 
+                /*
+                Condition: Firstly, check either cell position isValid or not, because
+                if cell position is invalid !vis[childi][childj] condition won't be
+                checked. If cell postion isValid, only then !vis[childi][childj] condition
+                will be checked.
+                */
                 if (isValid(childi, childj) && !vis[childi][childj])
                 {
                     q.push({childi, childj});
@@ -71,10 +81,10 @@ int main()
             cin >> a[i][j];
         }
     }
-    int srci, srcj;
-    cin >> srci >> srcj;
     memset(vis, false, sizeof(vis));
     memset(dis, -1, sizeof(dis));
+    int srci, srcj;
+    cin >> srci >> srcj;
     bfs(srci, srcj);
     cout << "Min distance(2,3): " << dis[2][3];
     return 0;
