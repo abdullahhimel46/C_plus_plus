@@ -61,16 +61,20 @@ void bfs(int si, int sj)
                 checked. If cell postion isValid, only then !vis[childi][childj] condition
                 will be checked.
                 */
-                if (isValid(childi, childj) && !vis[childi][childj])
+                if (isValid(childi, childj))
                 {
-                    q.push({childi, childj});
-                    vis[childi][childj] = true;
-                    dis[childi][childj] = dis[x][y] + 1;
+                    if (!vis[childi][childj])
+                    {
+                        q.push({childi, childj});
+                        vis[childi][childj] = true;
+                        dis[childi][childj] = dis[x][y] + 1;
+                    }
                 }
             }
         }
     }
 }
+
 int main()
 {
     cin >> n >> m;
