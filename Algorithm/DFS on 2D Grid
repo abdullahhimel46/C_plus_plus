@@ -50,11 +50,15 @@ void dfs(int si, int sj)
         int childi = si + d.first;  // New row coordinate
         int childj = sj + d.second; // New column coordinate
 
-        // Check if the new cell is within the grid(valid) and has not been visited
-        if (isValid(childi, childj) && !vis[childi][childj])
+        // Check if the new cell is within the grid(valid)
+        if (isValid(childi, childj))
         {
-            // Recursive call to DFS for the unvisited neighboring cell
-            dfs(childi, childj);
+            // new cell has not been visited
+            if (!vis[childi][childj])
+            {
+                // Recursive call to DFS for the unvisited neighboring cell
+                dfs(childi, childj);
+            }
         }
     }
 }
