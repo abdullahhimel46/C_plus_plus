@@ -1,0 +1,92 @@
+//Job Sequencing Problem
+/*
+Problem Statement:
+You are given a set of N jobs where each job comes with a deadline and profit.
+The profit can only be earned upon completing the job within its deadline. Find
+the number of jobs done and the maximum profit that can be obtained. Each job
+takes a single unit of time and only one job can be performed at a time.
+
+Input:
+4
+1 4 20
+2 1 10
+3 1 40
+4 1 30
+Output:
+2 60
+Explanation: The 3rd job with a deadline 1 is performed during the first unit of 
+time. The 1st job is performed during the second unit of time as its deadline is 4.
+Profit = 40 + 20 = 60
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Job
+{
+    int id;
+    int dead;
+    int profit;
+};
+
+bool cmp(Job a, Job b)
+{
+    return (a.profit > b.profit);
+}
+
+pair<int, int> jobScheduling(Job arr[], int n)
+{
+    // Sort the array of Jobs based on their profit in non-increasing order
+    sort(arr, arr + n, cmp);
+
+    // Find the maximum deadline among all the jobs
+    int mxDead = arr[0].dead;
+    for (int i = 1; i < n; i++)
+    {
+        mxDead = max(mxDead, arr[i].dead);
+    }
+
+    // Create an array to represent slots for jobs. Initialize all slots as empty (-1)
+    int slot[mxDead + 1];
+    memset(slot, -1, sizeof(slot));
+
+    // Initialize variables to keep track of the number of jobs scheduled and total profit
+    int cntJob = 0, jobProfit = 0;
+
+    // Iterate over each job in the sorted array
+    for (int i = 0; i < n; i++)
+    {
+        // Iterate over each slot from the job's deadline to 1
+        for (int j = arr[i].dead; j > 0; j--)
+        {
+            // Check if the current slot is empty
+            if (slot[j] == -1)
+            {
+                // If yes, assign the current job to this slot
+                slot[j] = i;
+                // Increment the count of scheduled jobs
+                cntJob++;
+                // Add the profit of the current job to the total profit
+                jobProfit += arr[i].profit;
+                // Break out of the inner loop since the job is scheduled
+                break;
+            }
+        }
+    }
+
+    // Return a pair containing the number of scheduled jobs and the total profit
+    return {cntJob, jobProfit};
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    Job arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i].id >> arr[i].dead >> arr[i].profit;
+    }
+    pair<int, int> ans = jobScheduling(arr, n);
+    cout << ans.first << " " << ans.second << endl;
+    return 0;
+}
