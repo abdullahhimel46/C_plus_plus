@@ -1,0 +1,35 @@
+// F - Game with string
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s;
+    cin >> s;
+
+    stack<char> st;
+    int left_con_pair = 0;
+    for (char c : s)
+    {
+        if (!st.empty() && c == st.top())
+        // Found two consecutive equal letters
+        {
+            st.pop(); // Remove the consecutive character from the stack
+            left_con_pair++;
+        }
+        else
+        {
+            st.push(c); // Push the current character onto the stack
+        }
+    }
+
+    /*
+    if a player leaves an odd number of consecutive equal letters for their opponent,
+    they force their opponent into a losing position.
+    */
+    if (left_con_pair % 2 != 0)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
+
+    return 0;
+}
