@@ -1,0 +1,73 @@
+// E - Vasya and Book
+#include <bits/stdc++.h>
+using namespace std;
+const int inf = INT_MAX;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n, x, y, d;
+        cin >> n >> x >> y >> d;
+
+        // if Vasya can move from page x to page y(desired page) directly
+        if (abs(x - y) % d == 0) // reached to desired page
+        {
+            cout << abs(x - y) / d << endl;
+        }
+        // if Vasya can't move from page x to page y directly
+        else if (abs(x - y) % d != 0)
+        {
+            //// case-1: x->1 then 1->y
+            // Number of presses to reach page 1 directly
+            int min_press_x_to_1 = (x - 1) / d;
+            // x->1
+            if ((x - 1) % d != 0) // page remainig
+                min_press_x_to_1++;
+
+            int min_press_1_to_y;
+            // 1->desired page
+            if ((y - 1) % d == 0) // reached to desired page
+            {
+                // x->1 then 1->y
+                min_press_1_to_y = min_press_x_to_1 + (y - 1) / d;
+            }
+            else
+            {
+                min_press_1_to_y = inf; // not possible to reach desired page
+            }
+
+            //// case-2: x->n then n->y
+            // Number of presses to reach page n directly
+            int min_press_x_to_n = (n - x) / d;
+            // x->n
+            if ((n - x) % d != 0) // page ramining
+                min_press_x_to_n++;
+            // needs an extra button press to reach page n
+
+            // n->desired page
+            int min_press_n_to_y;
+            if ((n - y) % d == 0) // reached to desired page
+            // if it's possible to reach page y from page n directly
+            {
+                // x->n then n->y
+                min_press_n_to_y = min_press_x_to_n + (n - y) / d;
+            }
+            else
+            {
+                min_press_n_to_y = inf; // it's not possible to reach page y from page n
+            }
+
+            int min_press = min(min_press_1_to_y, min_press_n_to_y);
+
+            if (min_press == inf)
+                cout << "-1" << endl;
+            else
+                cout << min_press << endl;
+        }
+    }
+
+    return 0;
+}
