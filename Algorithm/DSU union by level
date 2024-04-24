@@ -8,7 +8,6 @@ Output:
 using namespace std;
 const int N = 1e5 + 10;
 int par[N];
-int grp_size[N];
 int lvl[N];
 
 void dsu_initialize(int n)
@@ -16,7 +15,6 @@ void dsu_initialize(int n)
     for (int i = 0; i < n; i++)
     {
         par[i] = -1;
-        grp_size[i] = 1;
         lvl[i] = 0;
     }
 }
