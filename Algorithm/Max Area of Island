@@ -1,0 +1,46 @@
+//Max Area of Island
+//Link:https://leetcode.com/problems/max-area-of-island/
+class Solution {
+public:
+    bool vis[55][55];
+    int area;
+    int n,m;
+    vector<pair<int,int>> dir = { {0, -1},{0, 1}, {1, 0}, {-1, 0}};
+
+    bool isValid(int i,int j){
+        return i>=0 && i<n && j>=0 && j<m;
+    }
+
+    void dfs(int si,int sj,vector<vector<int>>& grid){
+        vis[si][sj] =true;// found a cell of the island!
+        area++;
+        for(pair<int,int> child: dir){
+            int ci=child.first+si;
+            int cj=child.second+sj;
+            if(isValid(ci,cj)){
+                if(!vis[ci][cj] && grid[ci][cj]==1){
+                dfs(ci,cj,grid);
+                }
+            }
+        }
+    }
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        memset(vis,false,sizeof(vis));
+        n=grid.size();
+        m=grid[0].size();
+        int mx_area=0;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+        //The area of an island is the number of cells with a value 1 in the island.
+                if(!vis[i][j] && grid[i][j]==1){
+                    area=0;// Reset area for each new island
+                    dfs(i,j,grid);
+                    cout<<"ans: "<<area<<endl;
+                    mx_area=max(mx_area,area);
+                    cout<<"mx: "<<mx_area<<endl;
+                }
+            }
+        }
+        return mx_area;
+    }
+};
