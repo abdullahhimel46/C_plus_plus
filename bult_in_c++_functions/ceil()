@@ -1,14 +1,9 @@
-//Link: https://codeforces.com/problemset/problem/1/A
 #include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-    cin.tie(0);
-    long long int n, m, a;
-    cin >> n >> m >> a;
-    n = ceil(1.00 * n / a);
-    m = ceil(1.00 * m / a);
-    cout << n * m<<endl;
-
+    int a = 7, b = 5;
+    cout << a / b << endl;
+    cout << ceil(1.00 * a / b) << endl;
     return 0;
 }
