@@ -1,0 +1,21 @@
+// tolower()
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string str1 = "AbDuLLah";
+    string str2 = "hIMel";
+    // way 1
+    for (int i = 0; i < str1.size(); i++)
+    {
+        str1[i] = tolower(str1[i]);
+    }
+    // way 2
+    for (char &c : str2)
+    {
+        c = tolower(c);
+    }
+    cout << str1 << endl;
+    cout << str2 << endl;
+    return 0;
+}
