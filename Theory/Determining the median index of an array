@@ -1,0 +1,1 @@
+int medianIdx = (n-1)/2; //either n is even or odd for 0 based indexing
