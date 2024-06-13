@@ -1,0 +1,46 @@
+/*
+Given an integer 𝑛, calculate the maximum sum of multiples for any integer 𝑥 such that 2≤x≤n.
+Detailed Description
+For a given integer n, the task is to find the maximum sum of the series x+2x+3x+⋯+kx where kx≤n, across all possible values of x in the range from 2 to n. The output should be this maximum sum.
+Input
+•	A single integer n (2≤n≤100).
+Output
+•	A single integer representing the maximum sum of multiples of any x in the range from 2 to n.
+
+Input: 15
+Output: 56
+Explanation of the Example
+1.	For n=15:
+o	Possible values of x range from 2 to 15.
+o	Sum of multiples of 2 less than or equal to 15: 2+4+6+8+10+12+14=56
+o	Sum of multiples of 3 less than or equal to 15: 3+6+9+12+15=45 
+o	Sum of multiples of 4 less than or equal to 15: 4+8+12=24 
+o	And so on for each x from 2 to 15.
+o	The maximum sum is 56 for x=2 
+
+*/
+//Code
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+    int mx_sum = 0;
+    for (int x = 2; x <= n; x++)
+    {
+        int curr_sum = 0;
+        for (int mul = x; mul <= n; mul += x)
+        {
+            curr_sum += mul;
+        }
+        if (curr_sum > mx_sum)
+        {
+            mx_sum = curr_sum;
+        }
+    }
+    cout << mx_sum << endl;
+
+    return 0;
+}
