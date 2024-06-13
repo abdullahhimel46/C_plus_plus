@@ -5,9 +5,9 @@ Input : a = 4, N = 23
 Output : sum = 60
 [Multiples : 4, 8, 12, 16, 20]
 
-Input :a = 7, N = 49
-Output :sum = 196
-[Multiples: 7, 14, 21, 28, 35, 42, 49]
+Input :a = 3, N = 100
+Output :sum = 1683
+[Multiples: 3, 6, 9, 12,…………, 96, 99]
 */
 
 //Code
