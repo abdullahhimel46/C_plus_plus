@@ -1,0 +1,46 @@
+//Sum of multiples of a number up to N
+/*
+Given a number a and limit N. Find the sum of multiple of a upto N.
+Input : a = 4, N = 23
+Output : sum = 60
+[Multiples : 4, 8, 12, 16, 20]
+
+Input :a = 7, N = 49
+Output :sum = 196
+[Multiples: 7, 14, 21, 28, 35, 42, 49]
+*/
+
+//Code
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a, n;
+    cin >> a >> n;
+    int sum = 0;
+    
+    // way-1: efficient way
+    // for (int i = a; i <= n; i += a)
+    // {
+    //     sum += i;
+    // }
+
+    // way-2:
+    // for (int i = a; i <= n; i++)
+    // {
+    //     if (i % a == 0) // i is a multiple of a
+    //         sum += i;
+    // }
+
+    // way-3:
+    //  multiples of 4: 4,8,12,...,40
+    //               ->4*(1+2+3+....+10)
+    //               ->4*(N*(N+1)/2)
+
+    int N = n / a;
+    cout << N << endl;
+    sum = a * (N * (N + 1) / 2);
+
+    cout << sum << endl;
+    return 0;
+}
