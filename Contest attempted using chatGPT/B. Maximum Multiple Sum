@@ -1,0 +1,30 @@
+Link: https://codeforces.com/contest/1985/problem/B
+Solution:
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        int mx_sum = 0, optimal_x = 2;
+        for (int x = 2; x <= n; x++)
+        {
+            int curr_sum = 0;
+            for (int mul = x; mul <= n; mul += x)
+            {
+                curr_sum += mul;
+            }
+            if (curr_sum > mx_sum)
+            {
+                mx_sum = curr_sum;
+                optimal_x = x;
+            }
+        }
+        cout << optimal_x << endl;
+    }
+    return 0;
+}
