@@ -1,0 +1,44 @@
+//taking input using getline() with newline character
+#include <bits/stdc++.h>
+using namespace std;
+
+int main ()
+{
+  string str;
+  int n;
+  cout<<"enter number of line:";
+  cin>>n;
+  cin.ignore();
+  cout<<"enter string: \n";
+  while (n--)
+	{
+	  getline (cin, str);
+	  
+	  // Keep reading a new line while there is a blank line
+	  while (str.length () == 0)
+		{
+		  getline (cin, str);
+		}
+	  cout << str << " : newline\n";
+	}
+
+  return 0;
+}
+/*
+Input:
+4
+This
+
+is 
+
+Geeks
+
+for
+
+
+Output:
+This : newline
+is  : newline
+Geeks : newline
+for : newlin
+*/
