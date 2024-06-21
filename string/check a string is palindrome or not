@@ -1,0 +1,15 @@
+//check a string is palindrome or not
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    string s,s2; cin>>s;
+    s2=s;
+    reverse(s.begin(),s.end());
+    
+    if(s == s2)
+      cout<<"pal";
+    else  
+      cout<<"not pal";
+
+    return 0; 
+}
