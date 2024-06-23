@@ -1,0 +1,33 @@
+//Link: https://codeforces.com/problemset/problem/1700/B
+// this approach got runtime error on test case 2. But this approach shows how to use string efficiently!!
+
+//code
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+int main(){
+    int t;
+    ll n;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        string num_str;
+        cin>>num_str;
+        
+        char first_digit_char = num_str[0];
+        int first_digit=first_digit_char-'0';
+        ll num = stoll(num_str);
+
+        if(first_digit==9){
+            string target_str(n+1,'1');
+            ll target = stoll(target_str);
+            cout<<target-num<<endl;
+        }
+        else if(first_digit!=9){
+            string target_str(n,'9');
+            ll target=stoll(target_str);
+            cout<<target-num<<endl;    
+        }
+    }
+    return 0; 
+}
