@@ -1,0 +1,42 @@
+//Remove duplicates from a given string
+/*
+Given a string S which may contain lowercase and uppercase characters. The task is to remove all duplicate characters
+from the string and find the resultant string.
+
+Note: The order of remaining characters in the output should be the same as in the original string.
+
+Example:
+
+Input: Str = geeksforgeeks
+Output: geksfor
+Explanation: After removing duplicate characters such as e, k, g, s, we have string as “geksfor”.
+
+Input: Str = HappyNewYear
+Output: HapyNewYr
+Explanation: After removing duplicate characters such as p, e, a, we have string as “HapyNewYr”.
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+string removeDuplicate(string s){
+    vector<bool> found(256,false);
+    string result;
+    for(char ch:s){
+        if(!found[ch]){
+            result.push_back(ch); //result+=ch;
+            found[ch]=true;
+        }
+    }
+    return result;
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    string s; cin>>s;
+    string ans = removeDuplicate(s);
+    cout<<ans;
+    return 0; 
+}
+
