@@ -1,0 +1,30 @@
+//decimal to binary
+/*
+Input: 13 2
+Output: 1101 
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> deciToBinary(int num, int base){
+    vector<int> v;
+    while(num>0){
+        int r = num%2;
+        v.push_back(r);
+        num/=2;
+    }
+    reverse(v.begin(),v.end());
+    return v;
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int num, base;
+    cin>>num>>base;
+    vector<int> ans = deciToBinary(num,base);
+    for(int x:ans)
+        cout<<x;
+    return 0; 
+}
