@@ -1,0 +1,30 @@
+//decimal to octal
+/*
+Input: 85 8
+Output: 125 
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> deciToOctal(int num, int base){
+    vector<int> v;
+    while(num>0){
+        int r = num%8;
+        v.push_back(r);
+        num/=8;
+    }
+    reverse(v.begin(),v.end());
+    return v;
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int num, base;
+    cin>>num>>base;
+    vector<int> ans = deciToOctal(num,base);
+    for(int x:ans)
+        cout<<x;
+    return 0; 
+}
