@@ -72,9 +72,11 @@ int main()
     vector<int> path;
 
     // Reconstruct the path from destination to source using parent information
+    // backtracking
     while (x != -1)
     {
         path.push_back(x);
+        // ask x, which is it's parent
         x = parent[x];
     }
 
