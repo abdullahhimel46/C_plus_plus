@@ -39,8 +39,8 @@ using namespace std;
 
 const int N = 1e5 + 10;
 vector<int> v[N]; // Adjacency list representation of the graph
-bool vis[N];      // Array to mark visited nodes during BFS
-int level[N];     // Array to store the level of each node in the BFS tree
+vector<bool> vis(N, false);     // Array to mark visited nodes during BFS
+vector<int> lvl(m, -1);   // Array to store the level of each node in the BFS tree
 
 // Function to perform BFS on the graph starting from a given source node
 void bfs(int src)
@@ -88,8 +88,8 @@ int main()
 
     int src;
     cin >> src;                       // Input the source node for BFS
-    memset(vis, false, sizeof(vis));  // Initialize the visited array
-    memset(level, -1, sizeof(level)); // Initialize the level array
+    //memset(vis, false, sizeof(vis));  // Initialize the visited array
+    //memset(level, -1, sizeof(level)); // Initialize the level array
     bfs(src);                         // Call the BFS function
 
     cout << "Level: " << endl;
