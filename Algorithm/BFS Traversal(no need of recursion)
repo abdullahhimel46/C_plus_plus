@@ -2,7 +2,7 @@
 /*
 Data Structures:
 The algorithm utilizes a queue data structure to keep track of nodes to be visited next.
-An array v[] of vectors is used to represent the adjacency list of the graph.
+An array adjList[] of vectors is used to represent the adjacency list of the graph.
 vis[] array is used to mark visited nodes.
 level[] array is used to store the level of each node from the source node.
 
@@ -38,9 +38,9 @@ Level:
 using namespace std;
 
 const int N = 1e5 + 10;
-vector<int> v[N]; // Adjacency list representation of the graph
-vector<bool> vis(N, false);     // Array to mark visited nodes during BFS
-vector<int> lvl(m, -1);   // Array to store the level of each node in the BFS tree
+vector<int> adjList[N];     // Adjacency list representation of the graph
+vector<bool> vis(N, false); // Array to mark visited nodes during BFS
+vector<int> level(N, -1);   // Array to store the level of each node in the BFS tree
 
 // Function to perform BFS on the graph starting from a given source node
 void bfs(int src)
@@ -57,7 +57,7 @@ void bfs(int src)
         cout << curNode << " ";  // Output the current node
 
         // Explore neighbors of the current node
-        for (int child : v[curNode])
+        for (int child : adjList[curNode])
         {
             if (!vis[child])
             // If the neighbor hasn't been visited
@@ -82,15 +82,15 @@ int main()
         int x, y;
         cin >> x >> y;
         //(for undirected graph)
-        v[x].push_back(y); // Add y to the adjacency list of x
-        v[y].push_back(x); // Add x to the adjacency list of y
+        adjList[x].push_back(y); // Add y to the adjacency list of x
+        adjList[y].push_back(x); // Add x to the adjacency list of y
     }
 
     int src;
-    cin >> src;                       // Input the source node for BFS
-    //memset(vis, false, sizeof(vis));  // Initialize the visited array
-    //memset(level, -1, sizeof(level)); // Initialize the level array
-    bfs(src);                         // Call the BFS function
+    cin >> src; // Input the source node for BFS
+    // memset(vis, false, sizeof(vis));  // Initialize the visited array
+    // memset(level, -1, sizeof(level)); // Initialize the level array
+    bfs(src); // Call the BFS function
 
     cout << "Level: " << endl;
     for (int i = 0; i < n; i++)
