@@ -15,7 +15,7 @@ Output:
 using namespace std;
 
 const int m = 1e5 + 10;
-vector<int> v[m];
+vector<int> adjList[m];
 vector<bool> vis(m, false);
 
 // Function to perform DFS starting from a given source node.
@@ -27,7 +27,7 @@ void dfs(int src)
     vis[src] = true; // Mark the current node as visited.
 
     // Iterate through all the adjacent nodes (children) of the current node.
-    for (int child : v[src])
+    for (int child : adjList[src])
     {
         // Check if the child node has not been visited yet.
         if (!vis[child])
@@ -46,8 +46,8 @@ int main()
     {
         int a, b;
         cin >> a >> b;
-        v[a].push_back(b);
-        v[b].push_back(a);
+        adjList[a].push_back(b);
+        adjList[b].push_back(a);
     }
 
     dfs(0);
