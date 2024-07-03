@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool isPrime(int n){
+  /*
+  If n is less than or equal to 1, it's not a prime number. This is because 
+  the definition of prime numbers starts from 2.
+  */
+
+  //handelling edge case
+  if(n<=1)
+    return false;
+
+  int cnt=0; 
+  for(int i=2; i<=sqrt(n); i++){
+    if(n%i==0) //n has a divisor
+    {
+      cnt++;
+      break;
+    }
+  }
+  //cout<<cnt<<endl;
+  /*
+  ** n=17
+    Loop from 2 to sqrt(17) (which is approximately 4.12):
+    Check divisibility:
+    17 % 2 != 0 (not divisible)
+    17 % 3 != 0 (not divisible)
+    17 % 4 != 0 (not divisible)
+    No divisors found, so cnt remains 0.
+    Therefore, the function returns true, indicating that 17 is a prime number 
+
+  **n = 100
+    Loop from 2 to sqrt(100) (which is 10):
+    Check divisibility:
+    100 % 2 == 0 (divisible by 2)
+    Since 100 is divisible by 2, cnt is incremented to 1 and the loop breaks immidiately 
+    to save time.
+    Therefore, the function returns false, indicating that 10 is not a prime number.
+
+  */
+
+  if(cnt==0) //no divisors were found
+    return true; //prime number
+  else //a divisor was found
+    return false; //not a prime number
+}
+
+int main() {
+
+int n,t;
+cin>>t;
+while(t--){
+  cin>>n;
+
+  if (isPrime(n))
+    cout << n << " eh primo\n";
+  else
+    cout << n << " nao eh primo\n";
+}
+  return 0;
+}
