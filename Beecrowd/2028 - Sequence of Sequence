@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, cnt = 0, cas = 1;
+    while (cin >> n)
+    {
+        vector<int> seq;
+        for (int i = 0; i <= n; i++)
+        {
+            // cout << i << " ";
+            seq.push_back(i);
+            for (int j = 1; j < i; j++)
+            {
+                seq.push_back(i);
+                // cout << i << " ";
+            }
+        }
+        if (seq.size() <= 1)
+            cout << "Caso " << cas << ": " << seq.size() << " numero\n";
+        else
+            cout << "Caso " << cas << ": " << seq.size() << " numeros\n";
+        for (int i = 0; i < seq.size(); i++)
+        {
+            cout << seq[i];
+            if (i < seq.size() - 1)
+                cout << " ";
+        }
+        cout << endl
+             << endl;
+        cas++;
+    }
+    return 0;
+}
