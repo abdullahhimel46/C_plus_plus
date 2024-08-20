@@ -37,3 +37,9 @@ int main()
     solve();
     return 0;
 }
+/*
+n=3
+  *
+ **
+***
+*/
