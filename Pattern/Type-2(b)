@@ -32,7 +32,7 @@ void solve()
 
     // lower part
     int a = 0, b = 1;
-    for (int i = n; i < 2 * n; i++)
+    for (int i = n; i < 2 * n-1; i++)
     {
         // printing space
         for (int j = 0; j <= a; j++)
