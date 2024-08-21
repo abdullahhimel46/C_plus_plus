@@ -1,0 +1,47 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+
+void solve()
+{
+    int n = 6;
+    int mat[n][n];
+
+    for (int i = 0; i < 1; i++)
+    {
+        // printing space
+        for (int j = 0; j < 2; j++)
+        {
+            cout << "|";
+        }
+
+        //  printing star
+        for (int j = 2; j < 4; j++)
+        {
+            cout << "*";
+        }
+
+        // printing space
+        for (int j = 4; j < n; j++)
+        {
+            cout << "|";
+        }
+
+        cout << nl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    solve();
+    return 0;
+}
+/*
+n=6
+||**||
+
+*/
