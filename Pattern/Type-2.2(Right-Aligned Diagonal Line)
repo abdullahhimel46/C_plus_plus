@@ -9,23 +9,20 @@ void solve()
     int n;
     // cout << "Please enter n: ";
     cin >> n;
-    int mat[n][n];
-
-    int a = 1, b = 1;
+    int mat[n][n], a = 1;
+    // n = 4
     for (int i = 0; i < n; i++)
     {
         // printing space
-        for (int j = 1; j < a; j++)
+        if (i > 0)
         {
-            cout << " ";
+            for (int j = 0; j < a; j++)
+            {
+                cout << " ";
+            }
+            a++;
         }
-        a++;
-        // printing star
-        for (int j = 0; j < b; j++)
-        {
-            cout << "*";
-        }
-
+        cout << "*";
         cout << nl;
     }
 }
@@ -44,5 +41,4 @@ n=5
   *
    *
     *
-
 */
