@@ -1,0 +1,46 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+
+void solve()
+{
+    int n;
+    // cout << "Please enter n: ";
+    cin >> n;
+    int mat[n][n];
+
+    for (int i = 0; i < n; i++)
+    {
+        // printing space
+        for (int j = 0; j < i; j++)
+        {
+            cout << " ";
+        }
+
+        //  printing star
+        for (int j = i; j < n; j++)
+        {
+            cout << "*";
+        }
+
+        cout << nl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    solve();
+    return 0;
+}
+/*
+n=4
+****
+ ***
+  **
+   *
+
+*/
