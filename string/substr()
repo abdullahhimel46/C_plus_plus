@@ -1,0 +1,33 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+
+void solve()
+{
+    string s;
+    cin >> s;
+    string d = s.substr(0, 2); // Extract day (first 2 characters)
+    string m = s.substr(3, 2); // Extract month (next 2 characters after '/')
+    string y = s.substr(6, 2); // Extract year (last 2 characters)
+
+    cout << "Day: " << d << nl << "Month: " << m << nl << "Year: " << y << nl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    solve();
+    return 0;
+}
+
+/*
+Input: 02/08/10
+Output:
+Day: 02
+Month: 08
+Year: 10
+*/
