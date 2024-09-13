@@ -1,6 +1,6 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
 // BFS Traversal(no need of recursion)
-//printing the shortest path from a given src
+// BFS traversal to print all reachable nodes from a source node
 #include <bits/stdc++.h>
 using namespace std;
 
