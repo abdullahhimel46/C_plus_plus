@@ -1,4 +1,5 @@
-// Path Printing using BFS
+// Path Printing from a given src to destination
+//finding and printing the shortest path from a source node (src) to a destination node (des).
 /*
 Input:
 6 7
