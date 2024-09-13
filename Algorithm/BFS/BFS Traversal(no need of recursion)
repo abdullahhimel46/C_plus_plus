@@ -1,0 +1,105 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// BFS Traversal(no need of recursion)
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+const int N = 1000;
+vi adjList[N];
+vi vis(N, false);
+vi lel(N, -1);
+void solve(int src)
+{
+    // declare a queue to store the nodes from the adjList
+    queue<int> q;
+    // push src in the queue
+    q.push(src);
+    // keep track of the visited node
+    vis[src] = true;
+
+    // create a loop to visit the whole queue
+    while (!q.empty())
+    {
+        // store the front node
+        int curNode = q.front();
+
+        ///// Explore neighbors of the current node
+         for (int neighbour : adjList[curNode]){
+            if(!vis[neighbour])
+            // If the neighbor hasn't been visited
+            {
+                // Enqueue the unvisited adjacent node in queue
+                q.push(neighbour);
+                // keep track of the visited neighbour
+                vis[neighbour] = true;
+            }
+         }
+        /*
+        // long cut
+        for (int i = 0; i < adjList[curNode].size(); i++)
+        {
+            int neighbour = adjList[curNode][i];
+            if (!vis[neighbour])
+            {
+                // Enqueue all unvisited adjacent nodes in queue
+                q.push(neighbour);
+                // keep track of the visited neighbour
+                vis[neighbour] = true;
+            }
+        }
+        */
+        // pop the curNode
+        q.pop();
+        // print the current node
+        cout << curNode << " ";
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    // take number of node and edge as input
+    int n, e;
+    cin >> n >> e;
+    // create adjList
+    while (e--)
+    {
+        // take adjacent two nodes as input
+        int a, b;
+        cin >> a >> b;
+        // undirected connection
+        adjList[a].push_back(b);
+        adjList[b].push_back(a);
+    }
+    // take input of the src node
+    int src;
+    cin >> src;
+    // pass src as parameter
+    solve(src);
+    return 0;
+}
+/*
+Input:
+5 6
+0 1
+1 2
+0 4
+1 3
+2 0
+3 4
+0 ->src
+Output:
+0 1 4 2 3
+*/
