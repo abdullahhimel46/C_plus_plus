@@ -1,4 +1,4 @@
-// find a specific level from given src to destination without using pair
+// find the specific level of a node(des) from the src without using pair
 /*
 Question: You will be given an undirected graph as input. Then you will be given a
 query Q. For each query, you will be given source S and destination D. You need to
