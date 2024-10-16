@@ -1,5 +1,5 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
-// find a specific level from given src to destination using pair
+// find the specific level of a node(des) from the src using pair
 #include <bits/stdc++.h>
 using namespace std;
 
