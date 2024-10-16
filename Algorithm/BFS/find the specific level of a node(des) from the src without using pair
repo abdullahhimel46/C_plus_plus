@@ -115,7 +115,7 @@ int main()
         int distance = bfs(src, des);
 
         // Output the distance
-        cout << distance << endl;
+        cout << "From src " << src << ", level of " << des << " is: " << distance << endl;
     }
     return 0;
 }
