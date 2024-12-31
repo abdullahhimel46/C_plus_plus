@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 1e5 + 5;
-int par[N];
+vector<int> par(N);
 
 void parent_init(int n)
 {
@@ -18,6 +18,26 @@ void parent_init(int n)
     par[1] = 3;
     par[2] = 1;
 
+    /*  // now
+    par: -1  3  1 -1
+    node: 0  1  2  3
+    */
+}
+
+void display(int n)
+{
+    cout << "par: " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << par[i] << " ";
+    }
+    cout << endl;
+    cout << "node: " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << i << " ";
+    }
+    cout << endl;
 }
 
 int dsu_find(int node)
@@ -26,7 +46,7 @@ int dsu_find(int node)
     if (par[node] == -1)
         return node; // Return the node itself.
 
-    // Recursive call: Find the leader of the current node's parent.
+    // Recursive call: Find the leader of the current node.
     int leader = dsu_find(par[node]);
     // Path compression: directly connect the current node to its leader
     par[node] = leader; // update leader
@@ -37,6 +57,9 @@ int dsu_find(int node)
 int main()
 {
     parent_init(4);
+    display(4);
+
+    cout<<"Tree: "<<endl;
     cout << dsu_find(0) << endl;
     cout << dsu_find(1) << endl;
     cout << dsu_find(2) << endl;
