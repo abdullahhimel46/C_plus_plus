@@ -1,0 +1,87 @@
+// bismillahir rohmanir rohim
+// cycle detection using dsu in undirected graph
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5 + 5;
+int parent[N];
+int lvl[N];
+
+void dsu_initialize(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        parent[i] = -1;
+        lvl[i] = 0;
+    }
+}
+
+int dsu_find(int node)
+{
+    if (parent[node] == -1)
+        return node;
+    int leader = dsu_find(parent[node]);
+    parent[node] = leader;
+    return leader;
+}
+void dsu_union_by_lvl(int node1, int node2)
+{
+    int leaderA = dsu_find(node1);
+    int leaderB = dsu_find(node2);
+
+    if (leaderA > leaderB)
+        parent[leaderB] = leaderA;
+    else if (leaderA < leaderB)
+        parent[leaderA] = leaderB;
+    else
+    {
+        parent[leaderB] = leaderA;
+        lvl[leaderA]++;
+    }
+}
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    dsu_initialize(n);
+    bool cycle = false;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+
+        if (a > b)
+        {
+            int leaderA = dsu_find(a);
+            int leaderB = dsu_find(b);
+            if (leaderA == leaderB)
+            {
+                cycle = true;
+            }
+            else
+            {
+                dsu_union_by_lvl(a, b);
+            }
+        }
+    }
+    if (cycle)
+    {
+        cout << "Cycle found" << endl;
+    }
+    else
+    {
+        cout << "Cycle not found" << endl;
+    }
+    return 0;
+}
+
+/*
+Input:
+6 5
+0 1
+0 2
+2 3
+2 5
+5 6
+Output: Cycle not found
+
+*/
