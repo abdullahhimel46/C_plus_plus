@@ -1,6 +1,6 @@
 // Adjacency List Implementation for an undirected graph
 /*
-Input: 
+Input:
 6 6
 0 1
 1 5
@@ -9,7 +9,13 @@ Input:
 3 4
 2 4
 Output:
-Adjacency list of vertex 0: 1 4 3
+Adjacency list:
+0 -> 1 4 3
+1 -> 0 5
+2 -> 4
+3 -> 0 4
+4 -> 0 3 2
+5 -> 1
 */
 
 #include <bits/stdc++.h>
@@ -22,7 +28,7 @@ int main()
     cin >> n >> e;
 
     // Create an array of vectors to represent the graph with n vertices
-    vector<int> v[n];
+    vector<vector<int>> v(n);
 
     // Input the edges and construct the adjacency list
     while (e--)
@@ -36,10 +42,15 @@ int main()
     }
 
     // Output the elements in the adjacency list of the first vertex (v[0])
-    cout << "Adjacency list of vertex 0: ";
-    for (int x : v[0])
+    cout << "Adjacency list: \n";
+    for (int i = 0; i < n; i++)
     {
-        cout << x << " ";
+        cout << i << " -> ";
+        for (int x : v[i])
+        {
+            cout << x << " ";
+        }
+        cout << endl;
     }
 
     return 0;
