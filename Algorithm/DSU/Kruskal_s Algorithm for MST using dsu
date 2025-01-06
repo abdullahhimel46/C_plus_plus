@@ -113,16 +113,22 @@ int main()
         int leaderU = find(ed.u);
         int leaderV = find(ed.v);
 
-        // leader same hole ignore
-        if (leaderU == leaderV)
-            continue;
-        else
+        if (leaderU != leaderV)
         {
-            // or eki group e ante hbe
             dsu_union_by_lvl(ed.u, ed.v);
-            // eki group e ante koto cost holo ta update korte hbe
             totalCost += ed.w;
         }
+
+        // leader same hole ignore
+        // if (leaderU == leaderV)
+        //     continue;
+        // else
+        // {
+        //     // or eki group e ante hbe
+        //     dsu_union_by_lvl(ed.u, ed.v);
+        //     // eki group e ante koto cost holo ta update korte hbe
+        //     totalCost += ed.w;
+        // }
     }
 
     cout << totalCost << endl;
