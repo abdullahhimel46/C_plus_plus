@@ -1,0 +1,131 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+
+/*
+// Kruskal_s Algorithm for MST using dsu
+Steps:
+1. push u,v,w to vector edgeLsit by creating an Edge class
+2. sort the edges in ascending order based on smallest weight
+3. For each edge in the sorted list:
+   a) if both leadrs are same, it means adding this edge would create a cycle, so ignore it.
+   b) If the leaders are different, group the nodes into the same set (union operation) and add the weight of the edge to totalCost.
+4. Repeat this process for all edges to get the minimum spanning tree (MST). The totalCost will be the weight of the MST.
+
+Input
+5 7
+0 1 2
+0 2 3
+0 3 3
+3 4 6
+2 4 4
+2 1 7
+1 4 5
+Output: 12
+
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+
+const int N = 100;
+vi par(N);
+vi lvl(N);
+
+void dsu_init(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        par[i] = -1;
+        lvl[i] = 0;
+    }
+}
+
+int find(int node)
+{
+    // base case
+    if (par[node] == -1)
+        return node;
+
+    int leader = find(par[node]);
+    par[node] = leader;
+    return leader;
+}
+
+void dsu_union_by_lvl(int node1, int node2)
+{
+    int leader1 = find(node1);
+    int leader2 = find(node2);
+
+    if (lvl[leader1] > lvl[leader2])
+        par[leader2] = leader1;
+    else if (lvl[leader1] < lvl[leader2])
+        par[leader1] = leader2;
+    else
+    {
+        par[leader1] = leader2;
+        lvl[leader2]++;
+    }
+}
+
+class Edge
+{
+public:
+    int u, v, w;
+    Edge(int u, int v, int w)
+    {
+        this->u = u;
+        this->v = v;
+        this->w = w;
+    }
+};
+
+bool cmp(Edge a, Edge b)
+{
+    return a.w < b.w;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n, e;
+    cin >> n >> e;
+    vector<Edge> edgeList;
+
+    dsu_init(n);
+    int totalCost = 0;
+
+    while (e--)
+    {
+        int u, v, w;
+        cin >> u >> v >> w;
+
+        edgeList.push_back(Edge(u, v, w));
+    }
+
+    // edges ke tader lowest weight er basis e sort koro
+    sort(edgeList.begin(), edgeList.end(), cmp);
+
+    for (Edge ed : edgeList)
+    {
+        int leaderU = find(ed.u);
+        int leaderV = find(ed.v);
+
+        // leader same hole ignore
+        if (leaderU == leaderV)
+            continue;
+        else
+        {
+            // or eki group e ante hbe
+            dsu_union_by_lvl(ed.u, ed.v);
+            // eki group e ante koto cost holo ta update korte hbe
+            totalCost += ed.w;
+        }
+    }
+
+    cout << totalCost << endl;
+
+    return 0;
+}
