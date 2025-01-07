@@ -28,17 +28,24 @@ using namespace std;
 const char nl = '\n';
 typedef vector<int> vi;
 
-const int N = 100;
-vi par(N);
-vi lvl(N);
+vi par;
+vi lvl;
 
 void dsu_init(int n)
 {
-    for (int i = 0; i < n; i++)
-    {
-        par[i] = -1;
-        lvl[i] = 0;
-    }
+    // for multiple test case
+    par.clear();
+    lvl.clear();
+
+    // for 0 based indexing
+    par.resize(n, -1);
+    lvl.resize(n, 0);
+
+    /*
+    // for 1 based indexing
+    par.resize(n + 1, -1);
+    lvl.resize(n + 1, 0);
+    */
 }
 
 int find(int node)
@@ -108,6 +115,8 @@ int main()
     // edges ke tader lowest weight er basis e sort koro
     sort(edgeList.begin(), edgeList.end(), cmp);
 
+    int connected_edges = 0;
+
     for (Edge ed : edgeList)
     {
         int leaderU = find(ed.u);
@@ -117,6 +126,7 @@ int main()
         {
             dsu_union_by_lvl(ed.u, ed.v);
             totalCost += ed.w;
+            connected_edges++;
         }
 
         // leader same hole ignore
@@ -131,6 +141,11 @@ int main()
         // }
     }
 
+    /*
+    // To connect `n` nodes, the MST needs exactly `n-1` edges.
+    if(connected_edges != n-1)
+    cout<<"Impossible"<<nl;
+    */
     cout << totalCost << endl;
 
     return 0;
