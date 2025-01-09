@@ -37,6 +37,10 @@ void convert(int n, vi adj[])
     {
         for (int child : adj[i])
         {
+            /*
+                adj[0]:[1,2,3]
+                    i  [child]
+            */
             mat[i][child] = 1;
         }
     }
