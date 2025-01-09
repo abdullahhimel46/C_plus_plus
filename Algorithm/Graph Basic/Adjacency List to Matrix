@@ -36,8 +36,9 @@ void convert(int n, vi adj[])
         forj(j, n)
         {
             mat[i][j] = 0;
+            // diagonal element
             if (i == j)
-                mat[i][j] = 1;
+                mat[i][j] = 1; // ensure edge from node i to node j
         }
     }
 
