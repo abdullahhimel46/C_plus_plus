@@ -1,0 +1,72 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// Adjacency List to Matrix
+/*
+Input:
+4 4
+1 0
+0 2
+0 3
+2 3
+Output
+0 1 1 1
+1 0 0 0
+1 0 0 1
+1 0 1 0
+
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+void convert(int n, vi adj[])
+{
+    int mat[n][n];
+    memset(mat, 0, sizeof(mat));
+
+    forn(i, n)
+    {
+        for (int child : adj[i])
+        {
+            mat[i][child] = 1;
+        }
+    }
+
+    forn(i, n)
+    {
+        forn(j, n)
+        {
+            cout << mat[i][j] << " ";
+        }
+        cout << nl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n, e;
+    cin >> n >> e;
+    vi adj[n];
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    convert(n, adj);
+    return 0;
+}
