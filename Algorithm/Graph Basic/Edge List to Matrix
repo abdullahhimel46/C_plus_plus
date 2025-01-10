@@ -1,0 +1,67 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// Edge List to Matrix
+
+/*
+Input
+4 4
+0 1 10
+1 2 12
+2 3 20
+3 1 15
+Output
+0 10 -1 -1
+10 0 12 15
+-1 12 0 20
+-1 15 20 0
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n, e;
+    cin >> n >> e;
+    int mat[n][n];
+
+    forn(i, n)
+    {
+        forj(j, n)
+        {
+            mat[i][j] = -1;
+            if (i == j)
+                mat[i][j] = 0;
+        }
+    }
+    while (e--)
+    {
+        int a, b, w;
+        cin >> a >> b >> w;
+        mat[a][b] = w;
+        mat[b][a] = w;
+    }
+    forn(i, n)
+    {
+        forj(j, n)
+        {
+            cout << mat[i][j] << " ";
+        }
+        cout << nl;
+    }
+    return 0;
+}
