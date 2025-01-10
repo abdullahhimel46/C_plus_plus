@@ -1,0 +1,78 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// Adjacency Matrix to Adjacency List in directed graph
+/*
+Input
+4
+0 1 0 0
+0 0 1 0
+0 0 0 1
+0 1 1 0
+Output
+0 => 1
+1 => 2
+2 => 3
+3 => 1 2
+
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+    int mat[n][n];
+
+    forn(i, n)
+    {
+        forj(j, n)
+        {
+            cin >> mat[i][j];
+        }
+    }
+
+    vi adj[n];
+    forn(i, n)
+    {
+        forj(j, n)
+        {
+            if (mat[i][j] == 1 && i != j)
+            {
+                // mat[i][j] = 1 means there is an edge from i to j
+                // i != j -> skip self loop
+                adj[i].push_back(j);
+                /*
+                For i = 0:
+                Check row 0: [0, 1, 1, 0]
+                mat[0][1] = 1: Add 1 to adj[0]. → adj[0] = {1}
+                mat[0][2] = 1: Add 2 to adj[0]. → adj[0] = {1, 2}
+                */
+            }
+        }
+    }
+
+    forn(i, n)
+    {
+        cout << i << " => ";
+        for (int child : adj[i])
+        {
+            cout << child << " ";
+        }
+        cout << nl;
+    }
+    return 0;
+}
