@@ -90,8 +90,8 @@ int main()
     while (x != -1)// iterate until we reach the source node
     {
         path.push_back(x);
-        // ask x, which is it's parent
-        x = parent[x];// Traverse parents to print path
+        // update parent
+        x = parent[x];// ask x, which is it's parent
     }
 
     // Reverse the path to get it from source to destination
