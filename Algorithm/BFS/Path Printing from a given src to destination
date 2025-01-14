@@ -13,7 +13,15 @@ Input:
 0 ->src
 5 ->des
 
-Output: 0 1 2 5
+Output: 
+parent of 0 -> -1
+parent of 1 -> 0
+parent of 2 -> 1
+parent of 3 -> 1
+parent of 4 -> 2
+parent of 5 -> 2
+0 1 2 5 
+
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -72,6 +80,10 @@ int main()
 
     int x = des;
     vector<int> path;
+
+    for(int i=0; i<n; i++){
+        cout<<"parent of " << i << " -> " << parent[i]<<nl;
+    }
 
     // Reconstruct the path from destination to source using parent information
     // backtracking
