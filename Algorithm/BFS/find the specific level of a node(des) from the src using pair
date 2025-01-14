@@ -1,5 +1,11 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
 // find the specific level of a node(des) from the src using pair
+/*
+Problem statement
+You are given an undirected graph represented by n nodes and e edges. Your task is to determine the shortest distance 
+(measured in levels) from a given source node (src) to a specific destination node (des). If there is no valid path 
+between the source and the destination, return -1.
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
