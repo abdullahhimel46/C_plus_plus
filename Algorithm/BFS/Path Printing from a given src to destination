@@ -85,6 +85,12 @@ int main()
         cout<<"parent of " << i << " -> " << parent[i]<<nl;
     }
 
+    /*
+    // in case of unreachable or disconnected components
+    if (!vis[des])
+        cout << "Unreachable" << nl;
+    */
+
     // Reconstruct the path from destination to source using parent information
     // backtracking
     while (x != -1)// iterate until we reach the source node
