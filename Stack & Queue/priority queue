@@ -18,8 +18,10 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(0);
 
+    // Default: max-heap (descending order)
     priority_queue<int> pq; // Uses vector<int> by default
 
+    ////  Min-heap (ascending order)
     // priority_queue<Type, Container, Comparator>
     priority_queue<int, vi, greater<int>> pq1;
 
