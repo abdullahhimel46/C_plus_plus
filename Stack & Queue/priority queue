@@ -1,0 +1,54 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// priority queue
+/*
+Expected output:
+Auto descending sort:
+12 11 10
+Ascending sort:
+10 11 12
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    priority_queue<int> pq; // Uses vector<int> by default
+
+    // priority_queue<Type, Container, Comparator>
+    priority_queue<int, vi, greater<int>> pq1;
+
+    // enqueue pq
+    pq.push(10);
+    pq.push(11);
+    pq.push(12);
+
+    // enqueue pq1
+    pq1.push(10);
+    pq1.push(11);
+    pq1.push(12);
+
+    // priority queue auto sorts elements in descending order
+    // to sort the queue in ascending order, must use a Comparator
+
+    cout << "Auto descending sort: " << nl;
+    while (!pq.empty())
+    {
+        cout << pq.top() << " ";
+        pq.pop();
+    }
+    cout << nl;
+
+    cout << "Ascending sort: " << nl;
+    while (!pq1.empty())
+    {
+        cout << pq1.top() << " ";
+        pq1.pop();
+    }
+    return 0;
+}
