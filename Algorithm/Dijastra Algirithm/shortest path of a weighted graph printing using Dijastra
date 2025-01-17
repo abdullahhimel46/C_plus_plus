@@ -1,5 +1,5 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
-// shortest path printing using Dijastra
+// shortest path of a weighted graph printing using Dijastra
 // problem link: https://codeforces.com/problemset/problem/20/C
 #include <bits/stdc++.h>
 using namespace std;
