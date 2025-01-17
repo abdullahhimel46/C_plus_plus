@@ -1,0 +1,118 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// shortest path printing using Dijastra
+// problem link: https://codeforces.com/problemset/problem/20/C
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+#define ll long long int // int=10e8,ll=10e18
+typedef pair<ll, ll> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+vector<vector<pii>> adj;
+vector<ll> dist;
+vector<ll> par; // track parent to trace the shortest path
+
+// funcTor (class with operator())
+class cmp
+{
+public:
+    bool operator()(pair<int, int> a, pair<int, int> b)
+    {
+        /* {node,cost}
+        a = {2, 1}
+        b = {3, 2}
+        */
+        return a.second > b.second; // sort on the basis of cost
+    }
+};
+
+void solve(ll s)
+{
+    // priority_queue<Type, Container, Comparator>
+    priority_queue<pii, vector<pii>, cmp> pq;
+
+    pq.push({s, 0});
+    dist[s] = 0;
+
+    while (!pq.empty())
+    {
+        pii parent = pq.top();
+        pq.pop();
+        ll curNode = parent.first;
+        ll curNodeCost = parent.second;
+
+        for (auto child : adj[curNode])
+        {
+            ll childNode = child.first;
+            ll childCost = child.second;
+
+            // path relaxation
+            if (curNodeCost + childCost < dist[childNode])
+            {
+                dist[childNode] = curNodeCost + childCost;
+                pq.push({childNode, dist[childNode]});
+                // update parent
+                par[childNode] = curNode;
+            }
+        }
+
+        // print the updated cost along with node
+        // cout << curNodeVal << " " << curNodeCost << nl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    ll n, e;
+    cin >> n >> e;
+
+    // resize & assign with no of nodes(n), to avoid unnecessary memory allocation
+    adj.resize(n + 1);
+    // assign is used to initialize
+    par.assign(n + 1, -1);
+    dist.assign(n + 1, LLONG_MAX);
+
+    while (e--)
+    {
+        ll a, b, c;
+        cin >> a >> b >> c;
+
+        // undirected graph
+        adj[a].push_back({b, c});
+        adj[b].push_back({a, c});
+    }
+
+    solve(1); // pass the starting node as parameter
+
+    if (dist[n] == LLONG_MAX) // in case distance isn't updated
+    {
+        cout << -1 << nl; // no path
+        return 0;
+    }
+
+    ll x = n;
+    vi path;
+    while (x != -1)
+    // loop until baap ka baap(grandfather) isn't found
+    {
+        path.push_back(x);
+        x = par[x]; // update parent
+    }
+    reverse(path.begin(), path.end());
+
+    // print the shortest path
+    for (ll x : path)
+        cout << x << " ";
+
+    return 0;
+}
