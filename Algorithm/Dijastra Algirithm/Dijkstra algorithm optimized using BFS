@@ -29,7 +29,11 @@ class cmp
 public:
     bool operator()(pair<int, int> a, pair<int, int> b)
     {
-        return a.second > b.second; // sort on the basis of second value
+        /*    {node,cost}
+            a = {2, 1}
+            b = {3, 2}
+       */
+        return a.second > b.second; // sort on the basis of cost
     }
 };
 
@@ -44,12 +48,12 @@ void dijastra(int src)
     {
         pair<int, int> parent = pq.top();
         pq.pop();
-        int curNode = parent.first;   // vertex
+        int curNode = parent.first;      // vertex
         int curNodeCost = parent.second; // cost
 
         for (pair<int, int> child : adj[curNode])
         {
-            int newNode = child.first;   //`vertex`
+            int newNode = child.first;      //`vertex`
             int newNodeCost = child.second; // cost
 
             // path relaxation
