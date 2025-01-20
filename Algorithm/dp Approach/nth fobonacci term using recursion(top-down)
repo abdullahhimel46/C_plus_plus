@@ -1,5 +1,5 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
-// nth fobonacci term calculate using memoization
+// nth fobonacci term using recursion(top-down)
 
 /*
 intput: 50
