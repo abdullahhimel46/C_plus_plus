@@ -1,0 +1,52 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// nth fobonacci term calculate using memoization
+
+/*
+intput: 50
+output: 1147430248
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+vector<ll> dp;
+
+int fibo(ll n)
+{
+    // base case
+    if (n == 0 || n == 1)
+        return n;
+
+    //// memoization
+    // check if the value is precalculated
+    if (dp[n] != -1)  // dp[n] == -1 ->not precalculated
+        return dp[n]; // return precalculated value
+
+    // if not, the calculate it and save that val in dp vector
+    ll fib = fibo(n - 1) + fibo(n - 2);
+    dp[n] = fib; // save that val in dp vector
+    return fib;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int n;
+    cin >> n;
+    dp.assign(n, -1);
+    cout << fibo(n) << nl;
+
+    return 0;
+}
