@@ -1,0 +1,56 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// memoization using set
+// link: https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/W
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define forn(i, n) for (int i = 0; i < n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+set<ll> dp;
+
+bool solve(ll val, ll n)
+{
+    if (val > n)
+        return false;
+    if (val == n)
+        return true;
+
+    if (dp.find(val) != dp.end())
+        return false;
+
+    // insert precalculated value in the set
+    dp.insert(val);
+
+    return solve(val * 10, n) || solve(val * 20, n);
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        ll n;
+        cin >> n;
+        dp.clear();
+        bool res = solve(1, n);
+
+        if (res)
+            cout << "YES" << nl;
+        else
+            cout << "NO" << nl;
+    }
+    return 0;
+}
