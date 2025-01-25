@@ -1,0 +1,58 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// The maximum path-sum using recursion
+// link: https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/X
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define fori for (int i = 1; i <= n; i++)
+#define forj(j, n) for (int j = 0; j < n; j++)
+
+int n, m;
+vector<vector<int>> mat;
+
+int mx_sum(int i, int j)
+{
+    // base case
+    if (i == n && j == m) // reached in the last cell
+        return mat[i][j]; // no movement possible
+
+    // Out-of-bounds check
+    if (i > n || j > m)
+        return -10e5;
+    // return a large negative number when you can move only in two directions
+
+    // recursive case
+    int down = mx_sum(i + 1, j);
+    int right = mx_sum(i, j + 1);
+
+    return mat[i][j] + max(right, down);
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    cin >> n >> m;
+    mat.resize(n + 1, vector<int>(m + 1));
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+    int res = mx_sum(1, 1);
+    cout << res << nl;
+
+    return 0;
+}
