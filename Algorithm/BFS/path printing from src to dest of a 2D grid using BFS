@@ -1,0 +1,125 @@
+// path printing from src to dest of a 2D grid using BFS
+/*
+Input
+5 6
+...D.#
+.##..#
+....#.
+.R#...
+.#.##.
+
+Output:
+...D.#
+.##X.#
+.XXX#.
+.R#...
+.#.##.
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e3 + 10;
+int n, m;
+char a[N][N];
+bool vis[N][N];
+pair<int, int> parent[N][N]; // track parent to construct the path
+
+vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+
+bool isValid(int i, int j)
+{
+    return i >= 0 && i < n && j >= 0 && j < m;
+}
+
+bool bfs(int si, int sj, int dx, int dy)
+{
+    queue<pair<int, int>> q;
+
+    q.push({si, sj});
+    vis[si][sj] = true;
+
+    while (!q.empty())
+    {
+        {
+            pair<int, int> par = q.front();
+            q.pop();
+            int x = par.first, y = par.second;
+
+            for (pair<int, int> d : dir)
+            {
+                // move to next cells
+                int di = x + d.first;
+                int dj = y + d.second;
+
+                if (isValid(di, dj))
+                {
+                    if (!vis[di][dj] && a[di][dj] == '.' || a[di][dj] == 'D')
+                    {
+                        q.push({di, dj});
+                        vis[di][dj] = true;
+                        // update parent
+                        parent[di][dj] = {x, y};
+                    }
+                }
+
+                if (di == dx && dj == dy)
+                    return true;
+            }
+        }
+    }
+    return false;
+}
+
+int main()
+{
+    cin >> n >> m;
+
+    memset(vis, false, sizeof(vis));
+    memset(parent, -1, sizeof(parent));
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+
+    int si, sj, di, dj;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (a[i][j] == 'R')
+            {
+                si = i, sj = j;
+            }
+            if (a[i][j] == 'D')
+            {
+                di = i, dj = j;
+            }
+        }
+    }
+
+    if (bfs(si, sj, di, dj))
+    {
+        pair<int, int> x = {di, dj};
+        while (x != make_pair(si, sj))
+        {
+            if (x != make_pair(di, dj))
+                a[x.first][x.second] = 'X';
+            x = parent[x.first][x.second];
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cout << a[i][j];
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
