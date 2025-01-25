@@ -1,4 +1,4 @@
-// path printing from src to dest of a 2D grid using BFS
+// path printing of a 2D grid from src to dest using BFS
 /*
 Input
 5 6
