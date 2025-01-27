@@ -1,0 +1,64 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// subset sum top-down approach
+/*
+Input
+4
+1 2 4 6
+6
+Output
+YES
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define fori for (int i = 0; i < n; i++)
+#define forj for (int j = 0; j < n; j++)
+
+vector<vector<int>> dp;
+bool subset(vi &mSet, int t, int n, int i)
+{
+    // base case
+    if (i >= n)
+        return 0;
+
+    if (dp[i][t] != -1)
+        return dp[i][t];
+
+    if (t == 0)
+        return true;
+    else
+    {
+        // recursive case
+        int include = subset(mSet, t - mSet[i], n, i + 1);
+        int exclude = subset(mSet, t, n, i + 1);
+        return dp[i][t] = (include || exclude);
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+    vi mSet(n);
+    fori
+    {
+        cin >> mSet[i];
+    }
+    int tar;
+    cin >> tar;
+    dp.resize(n, vector<int>(tar + 1, -1));
+    // int ans = subset(mSet, tar, n, 0);
+    if (subset(mSet, tar, n, 0))
+        py;
+    else
+        pn;
+    return 0;
+}
