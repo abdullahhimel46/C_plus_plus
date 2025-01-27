@@ -20,24 +20,22 @@ typedef vector<int> vi;
 #define forj for (int j = 0; j < n; j++)
 
 vector<vector<int>> dp;
-bool subset(vi &mSet, int t, int n, int i)
+bool subset(vi &mSet, int s, int n, int i)
 {
     // base case
-    if (i >= n)
+    if (s == 0)
+        return true;
+        
+    if (i >= n || s < 0)
         return 0;
 
-    if (dp[i][t] != -1)
-        return dp[i][t];
+    if (dp[i][s] != -1)
+        return dp[i][s];
 
-    if (t == 0)
-        return true;
-    else
-    {
-        // recursive case
-        int include = subset(mSet, t - mSet[i], n, i + 1);
-        int exclude = subset(mSet, t, n, i + 1);
-        return dp[i][t] = (include || exclude);
-    }
+    // recursive case
+    int include = subset(mSet, s - mSet[i], n, i + 1);
+    int exclude = subset(mSet, s, n, i + 1);
+    return dp[i][s] = (include || exclude);
 }
 
 int main()
