@@ -2,6 +2,16 @@
 // Equal Sum Partition using Subset Sum(top-down)
 /*
 Input
+3
+1 2 5
+Output: NO
+
+Input
+4
+1 2 4 6
+Output: NO
+
+Input
 4
 1 4 9 4
 Output: YES
@@ -21,7 +31,7 @@ typedef pair<int, int> pii;
 #define forj for (int j = 0; j < n; j++) // Macro for nested loop
 
 // Declaring a global 2D vector for memoization
-vector<vector<bool>> dp;
+vector<vector<int>> dp;
 
 // Recursive function to solve the subset sum problem
 bool subSet(vi mSet, int n, int s, int i)
@@ -65,14 +75,20 @@ int main()
     int sum = 0;
     for (int x : mSet)
         sum += x;
-    // Resize and initialize the dp table with -1 (unvisited state)
-    dp.resize(n, vector<bool>(sum + 1, -1));
 
-    if (sum % 2 == 0) // sum can be devided into two parts
+    // early termination
+    if (sum % 2 != 0) // sum can't be devided into two parts
     {
-        if (subSet(mSet, n, sum / 2, 0))
-            py;
+        pn;
+        return 0;
     }
+
+    int tar = sum / 2;
+    // Resize and initialize the dp table with -1 (unvisited state)
+    dp.resize(n, vector<int>(tar + 1, -1));
+
+    if (subSet(mSet, n, tar, 0))
+        py;
     else
         pn;
 
