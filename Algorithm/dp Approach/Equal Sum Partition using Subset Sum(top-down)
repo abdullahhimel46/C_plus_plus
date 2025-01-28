@@ -1,0 +1,80 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// Equal Sum Partition using Subset Sum(top-down)
+/*
+Input
+4
+1 4 9 4
+Output: YES
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int                 // int=10e8, ll=10e18
+#define py cout << "YES" << endl         // Macro to print "YES"
+#define pn cout << "NO" << endl          // Macro to print "NO"
+#define fori for (int i = 0; i < n; i++) // Macro for loop from 0 to n-1
+#define forj for (int j = 0; j < n; j++) // Macro for nested loop
+
+// Declaring a global 2D vector for memoization
+vector<vector<bool>> dp;
+
+// Recursive function to solve the subset sum problem
+bool subSet(vi mSet, int n, int s, int i)
+{
+    // Base case 1: If the target sum becomes 0, we found a subset, return true
+    if (s == 0)
+    {
+        return 1;
+    }
+
+    // Base case 2: If we have traversed all elements or the sum becomes negative, return false
+    if (i >= n || s < 0)
+        return 0;
+
+    // Check if the result is already calculated (memoized)
+    if (dp[i][s] != -1)
+        return dp[i][s];
+
+    // Recursive case: Try both including and excluding the current element
+    bool include = subSet(mSet, n, s - mSet[i], i + 1); // Include the current element
+    bool exclude = subSet(mSet, n, s, i + 1);           // Exclude the current element
+
+    // Store the result in the memoization table and return it
+    return dp[i][s] = include || exclude;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false); // Speeds up input/output
+    cin.tie(0);                  // Unties cin from cout for faster I/O
+
+    int n; // Number of elements in the set
+    cin >> n;
+
+    vi mSet(n); // Vector to store the set elements
+    fori
+    {
+        cin >> mSet[i]; // Input each element into the vector
+    }
+
+    int sum = 0;
+    for (int x : mSet)
+        sum += x;
+    // Resize and initialize the dp table with -1 (unvisited state)
+    dp.resize(n, vector<bool>(sum + 1, -1));
+
+    if (sum % 2 == 0) // sum can be devided into two parts
+    {
+        if (subSet(mSet, n, sum / 2, 0))
+            py;
+    }
+    else
+        pn;
+
+    return 0;
+}
