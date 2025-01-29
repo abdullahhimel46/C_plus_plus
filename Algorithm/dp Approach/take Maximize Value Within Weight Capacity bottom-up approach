@@ -1,5 +1,5 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
-// 0-1 knapsack using bottom-up approach
+// take Maximize Value Within Weight Capacity bottom-up approach
 
 #include <bits/stdc++.h>
 using namespace std;
