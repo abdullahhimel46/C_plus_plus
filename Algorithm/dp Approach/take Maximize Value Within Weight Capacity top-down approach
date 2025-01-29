@@ -1,6 +1,19 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
+// take Maximize Value Within Weight Capacity top-down approach 
+// Link: https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/U
+/*
+Input
+6 15
+6 5
+5 6
+6 4
+6 6
+3 5
+7 2
+Output: 17
+*/
 #include <bits/stdc++.h>
-using namespace std;
+    using namespace std;
 
 const char nl = '\n';
 typedef vector<int> vi;
@@ -24,20 +37,18 @@ int knapsak(int n, int w, vi weights, vi values)
     if (dp[n][w] != -1)
         return dp[n][w];
 
-    if (weights[n] <= w) // bag e jaiga ase
+    // If weight[n] is greater than w, we **must** skip it
+    if (weights[n] > w)
     {
-        int take = knapsak(n - 1, w - weights[n], weights, values) + values[n];
-        // values[n] -> value of the taken(n'th) element
-        int notTake = knapsak(n - 1, w, weights, values);
-        // n-1 => move back to the previous element
-        return dp[n][w] = max(take, notTake);
-    }
-    else
-    {
-        // weights[n] > w: skip it
         int notTake = knapsak(n - 1, w, weights, values);
         return dp[n][w] = notTake;
     }
+
+    int take = knapsak(n - 1, w - weights[n], weights, values) + values[n];
+    // values[n] -> value of the taken(n'th) element
+    int notTake = knapsak(n - 1, w, weights, values);
+    // n-1 => move back to the previous element
+    return dp[n][w] = max(take, notTake);
 
     /*
     Visualization:
