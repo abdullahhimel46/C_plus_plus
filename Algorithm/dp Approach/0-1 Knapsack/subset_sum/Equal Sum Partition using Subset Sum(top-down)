@@ -37,28 +37,35 @@ typedef pair<int, int> pii;
 vector<vector<int>> dp;
 
 // Recursive function to solve the subset sum problem
-bool subSet(vi mSet, int n, int s, int i)
+bool subSet(vector<int> &mSet, int n, int s)
 {
-    // Base case 1: If the target sum becomes 0, we found a subset, return true
-    if (s == 0)
+    // Base case
+    if (n == 0) // no elements left
     {
-        return 1;
+        // the target sum becomes 0, we found a subset, return true
+        if (s == 0)
+            return 1;
+        else
+            return 0;
     }
 
-    // Base case 2: If we have traversed all elements or the sum becomes negative, return false
-    if (i >= n || s < 0)
-        return 0;
-
     // Check if the result is already calculated (memoized)
-    if (dp[i][s] != -1)
-        return dp[i][s];
+    if (dp[n][s] != -1)
+        return dp[n][s];
+
+    // current element is larger than the remaining sum, exclude it and immediately return that result
+    if (mSet[n - 1] > s) // mSet[n - 1] = 5 > 4
+    {
+        bool exclude = subSet(mSet, n - 1, s); // Exclude the current element
+        return dp[n][s] = exclude;             // early termination
+    }
 
     // Recursive case: Try both including and excluding the current element
-    bool include = subSet(mSet, n, s - mSet[i], i + 1); // Include the current element
-    bool exclude = subSet(mSet, n, s, i + 1);           // Exclude the current element
+    bool include = subSet(mSet, n - 1, s - mSet[n - 1]); // Include the current element
+    bool exclude = subSet(mSet, n - 1, s);               // Exclude the current element
 
     // Store the result in the memoization table and return it
-    return dp[i][s] = include || exclude;
+    return dp[n][s] = include || exclude;
 }
 
 int main()
@@ -88,9 +95,9 @@ int main()
 
     int tar = sum / 2;
     // Resize and initialize the dp table with -1 (unvisited state)
-    dp.resize(n, vector<int>(tar + 1, -1));
+    dp.resize(n + 1, vector<int>(tar + 1, -1));
 
-    if (subSet(mSet, n, tar, 0))
+    if (subSet(mSet, n, tar))
         py;
     else
         pn;
