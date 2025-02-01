@@ -72,13 +72,19 @@ int main()
             // j -> sum
             // prevent any negative index access
             if (j >= nums[i - 1])
-                dp[i][j] = dp[i - 1][j - nums[i - 1]] || dp[i - 1][j];
+            {
+                bool include = dp[i - 1][j - nums[i - 1]];
+                bool exclude = dp[i - 1][j];
+                dp[i][j] = include || exclude;
+
+                /// short-cut:
+                //   dp[i][j] = dp[i - 1][j - nums[i - 1]] || dp[i - 1][j];
+            }
             else
+            {
+                // must exclude too large numbers, i.e. nums[i - 1]>j
                 dp[i][j] = dp[i - 1][j];
-            /// explanation:
-            // bool include = dp[i - 1][j - nums[i - 1]];
-            // bool exclude = dp[i - 1][j];
-            // dp[i][j] = include || exclude;
+            }
         }
     }
 
