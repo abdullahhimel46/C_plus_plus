@@ -1,0 +1,103 @@
+//** BISMILLAHIR ROHMANIR ROHIM **
+// Minimum sum Difference bottom-up approach
+/*
+Input
+4
+1 5 11 5
+Output: 0
+
+Input
+4
+1 5 4 11
+Output: 1
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const char nl = '\n';
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+#define elif else if
+#define all(x) x.begin(), x.end()
+#define ll long long int // int=10e8,ll=10e18
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define fori for (int i = 0; i < n; i++)
+#define forj for (int j = 0; j < n; j++)
+
+bool subsum(int n, int s, int nums[])
+{
+    if (n == 0)
+    {
+        if (s == 0)
+            return true;
+        else
+            return false;
+    }
+
+    bool include = subsum(n - 1, s - nums[n - 1], nums);
+    bool exclude = subsum(n - 1, s, nums);
+    return include || exclude;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n;
+    cin >> n;
+    int nums[n];
+
+    int s = 0;
+    fori
+    {
+        cin >> nums[i];
+        s += nums[i];
+    }
+
+    bool dp[n + 1][s + 1];
+
+    // mark the 1st cell(0,0) 'T'
+    dp[0][0] = true;
+
+    // mark the 1st row(1,s) 'F'
+    for (int j = 1; j < s + 1; j++)
+        dp[0][j] = false;
+
+    // row,col 1ta kore besi lagbe, karon 1st row te age theki 'F' thakbe
+    // ar, 1st col e auto 'T' chole asbe, karon iteration will start from the    (1,0) cell
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 0; j < s + 1; j++)
+        {
+            if (nums[i - 1] > j)
+                dp[i][j] = dp[i - 1][j];
+            else
+                dp[i][j] = dp[i - 1][j - nums[i - 1]] || dp[i - 1][j];
+        }
+    }
+
+    vi val;
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 0; j < s + 1; j++)
+        {
+            if (dp[i][j] == 1)
+                val.push_back(j);
+        }
+    }
+
+    int ans = INT_MAX;
+    for (int x : val)
+    {
+        int s1 = x;
+        int s2 = s - s1;
+        ans = min(ans, abs(s1 - s2));
+    }
+
+    cout << ans << nl;
+
+    return 0;
+}
