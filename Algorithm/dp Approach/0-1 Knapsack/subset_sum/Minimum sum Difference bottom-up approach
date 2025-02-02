@@ -78,21 +78,10 @@ int main()
         }
     }
 
-    vi val;
-
-    for (int i = 1; i < n + 1; i++)
-    {
-        for (int j = 0; j < s + 1; j++)
-        {
-            if (dp[i][j] == 1)
-                val.push_back(j);
-        }
-    }
-
     int ans = INT_MAX;
-    for (int x : val)
+    for (int j = 0; j < s + 1; j++)
     {
-        int s1 = x;
+        int s1 = j;
         int s2 = s - s1;
         ans = min(ans, abs(s1 - s2));
     }
