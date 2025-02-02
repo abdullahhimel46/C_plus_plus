@@ -1,6 +1,20 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
 // take Maximize Value Within Weight Capacity bottom-up approach
 
+/*
+Input
+4 7
+2 3 4 5
+4 7 6 5
+Output: 13
+
+Input
+4 17
+10 1 6 9
+6 10 10 8
+Output: 28
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,16 +33,22 @@ int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
-
+    
     int n, w;
     cin >> n >> w;
-    vi weights(n + 1);
-    vi values(n + 1);
+    vi weights(n);
+    vi values(n);
     vector<vector<int>> dp;
     dp.resize(n + 1, vector<int>(w + 1, -1));
 
-    for (int i = 1; i <= n; i++)
-        cin >> weights[i] >> values[i];
+    forn(i, n)
+    {
+        cin >> weights[i];
+    }
+    forn(i, n)
+    {
+        cin >> values[i];
+    }
 
     // set 1st row & col to 0
     for (int i = 0; i <= n; i++)
@@ -36,7 +56,6 @@ int main()
         for (int j = 0; j <= w; j++)
             // base case
             if (i == 0 || j == 0)
-                // no items left(n = 0) || no weights to carry(w=0)
                 dp[i][j] = 0;
     }
 
@@ -44,16 +63,16 @@ int main()
     {
         for (int j = 1; j <= w; j++)
         {
-            if (weights[i] <= j)
-            {
-                int take = dp[i - 1][j - weights[i]] + values[i];
-                int notTake = dp[i - 1][j];
-                dp[i][j] = max(take, notTake);
-            }
-            else
+            if (weights[i - 1] > j)
             {
                 int notTake = dp[i - 1][j];
                 dp[i][j] = notTake;
+            }
+            else
+            {
+                int take = dp[i - 1][j - weights[i - 1]] + values[i - 1];
+                int notTake = dp[i - 1][j];
+                dp[i][j] = max(take, notTake);
             }
         }
     }
