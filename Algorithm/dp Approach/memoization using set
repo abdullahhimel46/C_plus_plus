@@ -1,6 +1,7 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
 // memoization using set
 // link: https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/W
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -15,9 +16,9 @@ typedef pair<int, int> pii;
 #define forn(i, n) for (int i = 0; i < n; i++)
 #define forj(j, n) for (int j = 0; j < n; j++)
 
-set<ll> dp;
+unordered_map<int, bool> dp;
 
-bool solve(ll val, ll n)
+bool solve(int val, int n)
 {
     if (val > n)
         return false;
@@ -25,12 +26,9 @@ bool solve(ll val, ll n)
         return true;
 
     if (dp.find(val) != dp.end())
-        return false;
+        return dp[val];
 
-    // insert precalculated value in the set
-    dp.insert(val);
-
-    return solve(val * 10, n) || solve(val * 20, n);
+    return dp[val] = solve(val * 2, n) || solve(val + 3, n);
 }
 
 int main()
@@ -42,7 +40,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        ll n;
+        int n;
         cin >> n;
         dp.clear();
         bool res = solve(1, n);
