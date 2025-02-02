@@ -1,5 +1,5 @@
 //** BISMILLAHIR ROHMANIR ROHIM **
-// memoization using set
+// memoization using unordered_map
 // link: https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/W
 
 #include <bits/stdc++.h>
